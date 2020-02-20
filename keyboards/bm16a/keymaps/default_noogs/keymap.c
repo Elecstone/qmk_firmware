@@ -259,7 +259,7 @@ void eeconfig_init_user(void)	{
 	// Using deprecated versions to stop overloading EEPROM
 
 	rgblight_enable(); // Enable RGB by default
-	rgblight_sethsv_turquoise(); // Set it to turquoise by default
+	rgblight_sethsv_white(); // Set it to white by default
 	rgblight_mode(RGBLIGHT_MODE_BREATHING); // Set to breathing by default
 }
 
@@ -267,22 +267,22 @@ layer_state_t layer_state_set_user(layer_state_t state)	{
 	rgblight_config_t rgblight_config;
 		switch(biton32(state))	{
 			case 1:
-				// Goldenrod
+				// Turquoise
 				rgblight_enable_noeeprom();
-				rgblight_sethsv_noeeprom(HSV_GOLDENROD);
+				rgblight_sethsv_noeeprom(HSV_TURQUOISE);
 				break;
 			case 2:
-				// Magenta
+				// Purple
 				rgblight_enable_noeeprom();
-				rgblight_sethsv_noeeprom(HSV_MAGENTA);
+				rgblight_sethsv_noeeprom(HSV_PURPLE);
 				break;
-			case 3: // Spring Green
+			case 3: // Coral
 				rgblight_enable_noeeprom();
-				rgblight_sethsv_noeeprom(HSV_SPRINGGREEN);
-			default: // Turquoise
+				rgblight_sethsv_noeeprom(HSV_CORAL);
+			default: // White
 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
 				if (rgblight_config.enable) {
-					rgblight_sethsv_noeeprom(HSV_TURQUOISE);
+					rgblight_sethsv_noeeprom(HSV_WHITE);
 				} else {
 					rgblight_disable_noeeprom(); // Otherwise returns to disabled state
 				}
