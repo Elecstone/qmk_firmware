@@ -1,0 +1,855 @@
+   1               		.file	"backlight_avr.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.text
+   8               	.Ltext0:
+   9               		.cfi_sections	.debug_frame
+  10               		.section	.text.backlight_on,"ax",@progbits
+  11               	.global	backlight_on
+  13               	backlight_on:
+  14               	.LVL0:
+  15               	.LFB112:
+  16               		.file 1 "quantum/backlight/backlight_avr.c"
+   1:quantum/backlight/backlight_avr.c **** #include "quantum.h"
+   2:quantum/backlight/backlight_avr.c **** #include "backlight.h"
+   3:quantum/backlight/backlight_avr.c **** #include "debug.h"
+   4:quantum/backlight/backlight_avr.c **** 
+   5:quantum/backlight/backlight_avr.c **** #if defined(BACKLIGHT_ENABLE) && (defined(BACKLIGHT_PIN) || defined(BACKLIGHT_PINS))
+   6:quantum/backlight/backlight_avr.c **** 
+   7:quantum/backlight/backlight_avr.c **** // This logic is a bit complex, we support 3 setups:
+   8:quantum/backlight/backlight_avr.c **** //
+   9:quantum/backlight/backlight_avr.c **** //   1. Hardware PWM when backlight is wired to a PWM pin.
+  10:quantum/backlight/backlight_avr.c **** //      Depending on this pin, we use a different output compare unit.
+  11:quantum/backlight/backlight_avr.c **** //   2. Software PWM with hardware timers, but the used timer
+  12:quantum/backlight/backlight_avr.c **** //      depends on the Audio setup (Audio wins over Backlight).
+  13:quantum/backlight/backlight_avr.c **** //   3. Full software PWM, driven by the matrix scan, if both timers are used by Audio.
+  14:quantum/backlight/backlight_avr.c **** 
+  15:quantum/backlight/backlight_avr.c **** #    if (defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB647__) || defined(__AVR_AT90USB1286__)
+  16:quantum/backlight/backlight_avr.c **** #        define HARDWARE_PWM
+  17:quantum/backlight/backlight_avr.c **** #        define ICRx ICR1
+  18:quantum/backlight/backlight_avr.c **** #        define TCCRxA TCCR1A
+  19:quantum/backlight/backlight_avr.c **** #        define TCCRxB TCCR1B
+  20:quantum/backlight/backlight_avr.c **** #        define TIMERx_OVF_vect TIMER1_OVF_vect
+  21:quantum/backlight/backlight_avr.c **** #        define TIMSKx TIMSK1
+  22:quantum/backlight/backlight_avr.c **** #        define TOIEx TOIE1
+  23:quantum/backlight/backlight_avr.c **** 
+  24:quantum/backlight/backlight_avr.c **** #        if BACKLIGHT_PIN == B5
+  25:quantum/backlight/backlight_avr.c **** #            define COMxx1 COM1A1
+  26:quantum/backlight/backlight_avr.c **** #            define OCRxx OCR1A
+  27:quantum/backlight/backlight_avr.c **** #        elif BACKLIGHT_PIN == B6
+  28:quantum/backlight/backlight_avr.c **** #            define COMxx1 COM1B1
+  29:quantum/backlight/backlight_avr.c **** #            define OCRxx OCR1B
+  30:quantum/backlight/backlight_avr.c **** #        elif BACKLIGHT_PIN == B7
+  31:quantum/backlight/backlight_avr.c **** #            define COMxx1 COM1C1
+  32:quantum/backlight/backlight_avr.c **** #            define OCRxx OCR1C
+  33:quantum/backlight/backlight_avr.c **** #        endif
+  34:quantum/backlight/backlight_avr.c **** #    elif (defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB647__) || defined(__AVR_AT90USB1286_
+  35:quantum/backlight/backlight_avr.c **** #        define HARDWARE_PWM
+  36:quantum/backlight/backlight_avr.c **** #        define ICRx ICR3
+  37:quantum/backlight/backlight_avr.c **** #        define TCCRxA TCCR3A
+  38:quantum/backlight/backlight_avr.c **** #        define TCCRxB TCCR3B
+  39:quantum/backlight/backlight_avr.c **** #        define TIMERx_OVF_vect TIMER3_OVF_vect
+  40:quantum/backlight/backlight_avr.c **** #        define TIMSKx TIMSK3
+  41:quantum/backlight/backlight_avr.c **** #        define TOIEx TOIE3
+  42:quantum/backlight/backlight_avr.c **** 
+  43:quantum/backlight/backlight_avr.c **** #        if BACKLIGHT_PIN == C4
+  44:quantum/backlight/backlight_avr.c **** #            if (defined(__AVR_ATmega16U4__) || defined(__AVR_ATmega32U4__))
+  45:quantum/backlight/backlight_avr.c **** #                error This MCU has no C4 pin!
+  46:quantum/backlight/backlight_avr.c **** #            else
+  47:quantum/backlight/backlight_avr.c **** #                define COMxx1 COM3C1
+  48:quantum/backlight/backlight_avr.c **** #                define OCRxx OCR3C
+  49:quantum/backlight/backlight_avr.c **** #            endif
+  50:quantum/backlight/backlight_avr.c **** #        elif BACKLIGHT_PIN == C5
+  51:quantum/backlight/backlight_avr.c **** #            if (defined(__AVR_ATmega16U4__) || defined(__AVR_ATmega32U4__))
+  52:quantum/backlight/backlight_avr.c **** #                error This MCU has no C5 pin!
+  53:quantum/backlight/backlight_avr.c **** #            else
+  54:quantum/backlight/backlight_avr.c **** #                define COMxx1 COM3B1
+  55:quantum/backlight/backlight_avr.c **** #                define OCRxx OCR3B
+  56:quantum/backlight/backlight_avr.c **** #            endif
+  57:quantum/backlight/backlight_avr.c **** #        elif BACKLIGHT_PIN == C6
+  58:quantum/backlight/backlight_avr.c **** #            define COMxx1 COM3A1
+  59:quantum/backlight/backlight_avr.c **** #            define OCRxx OCR3A
+  60:quantum/backlight/backlight_avr.c **** #        endif
+  61:quantum/backlight/backlight_avr.c **** #    elif (defined(__AVR_ATmega16U2__) || defined(__AVR_ATmega32U2__)) && (BACKLIGHT_PIN == B7 || B
+  62:quantum/backlight/backlight_avr.c **** #        define HARDWARE_PWM
+  63:quantum/backlight/backlight_avr.c **** #        define ICRx ICR1
+  64:quantum/backlight/backlight_avr.c **** #        define TCCRxA TCCR1A
+  65:quantum/backlight/backlight_avr.c **** #        define TCCRxB TCCR1B
+  66:quantum/backlight/backlight_avr.c **** #        define TIMERx_OVF_vect TIMER1_OVF_vect
+  67:quantum/backlight/backlight_avr.c **** #        define TIMSKx TIMSK1
+  68:quantum/backlight/backlight_avr.c **** #        define TOIEx TOIE1
+  69:quantum/backlight/backlight_avr.c **** 
+  70:quantum/backlight/backlight_avr.c **** #        if BACKLIGHT_PIN == B7
+  71:quantum/backlight/backlight_avr.c **** #            define COMxx1 COM1C1
+  72:quantum/backlight/backlight_avr.c **** #            define OCRxx OCR1C
+  73:quantum/backlight/backlight_avr.c **** #        elif BACKLIGHT_PIN == C5
+  74:quantum/backlight/backlight_avr.c **** #            define COMxx1 COM1B1
+  75:quantum/backlight/backlight_avr.c **** #            define OCRxx OCR1B
+  76:quantum/backlight/backlight_avr.c **** #        elif BACKLIGHT_PIN == C6
+  77:quantum/backlight/backlight_avr.c **** #            define COMxx1 COM1A1
+  78:quantum/backlight/backlight_avr.c **** #            define OCRxx OCR1A
+  79:quantum/backlight/backlight_avr.c **** #        endif
+  80:quantum/backlight/backlight_avr.c **** #    elif defined(__AVR_ATmega32A__) && (BACKLIGHT_PIN == D4 || BACKLIGHT_PIN == D5)
+  81:quantum/backlight/backlight_avr.c **** #        define HARDWARE_PWM
+  82:quantum/backlight/backlight_avr.c **** #        define ICRx ICR1
+  83:quantum/backlight/backlight_avr.c **** #        define TCCRxA TCCR1A
+  84:quantum/backlight/backlight_avr.c **** #        define TCCRxB TCCR1B
+  85:quantum/backlight/backlight_avr.c **** #        define TIMERx_OVF_vect TIMER1_OVF_vect
+  86:quantum/backlight/backlight_avr.c **** #        define TIMSKx TIMSK
+  87:quantum/backlight/backlight_avr.c **** #        define TOIEx TOIE1
+  88:quantum/backlight/backlight_avr.c **** 
+  89:quantum/backlight/backlight_avr.c **** #        if BACKLIGHT_PIN == D4
+  90:quantum/backlight/backlight_avr.c **** #            define COMxx1 COM1B1
+  91:quantum/backlight/backlight_avr.c **** #            define OCRxx OCR1B
+  92:quantum/backlight/backlight_avr.c **** #        elif BACKLIGHT_PIN == D5
+  93:quantum/backlight/backlight_avr.c **** #            define COMxx1 COM1A1
+  94:quantum/backlight/backlight_avr.c **** #            define OCRxx OCR1A
+  95:quantum/backlight/backlight_avr.c **** #        endif
+  96:quantum/backlight/backlight_avr.c **** #    elif defined(__AVR_ATmega328P__) && (BACKLIGHT_PIN == B1 || BACKLIGHT_PIN == B2)
+  97:quantum/backlight/backlight_avr.c **** #        define HARDWARE_PWM
+  98:quantum/backlight/backlight_avr.c **** #        define ICRx ICR1
+  99:quantum/backlight/backlight_avr.c **** #        define TCCRxA TCCR1A
+ 100:quantum/backlight/backlight_avr.c **** #        define TCCRxB TCCR1B
+ 101:quantum/backlight/backlight_avr.c **** #        define TIMERx_OVF_vect TIMER1_OVF_vect
+ 102:quantum/backlight/backlight_avr.c **** #        define TIMSKx TIMSK1
+ 103:quantum/backlight/backlight_avr.c **** #        define TOIEx TOIE1
+ 104:quantum/backlight/backlight_avr.c **** 
+ 105:quantum/backlight/backlight_avr.c **** #        if BACKLIGHT_PIN == B1
+ 106:quantum/backlight/backlight_avr.c **** #            define COMxx1 COM1A1
+ 107:quantum/backlight/backlight_avr.c **** #            define OCRxx OCR1A
+ 108:quantum/backlight/backlight_avr.c **** #        elif BACKLIGHT_PIN == B2
+ 109:quantum/backlight/backlight_avr.c **** #            define COMxx1 COM1B1
+ 110:quantum/backlight/backlight_avr.c **** #            define OCRxx OCR1B
+ 111:quantum/backlight/backlight_avr.c **** #        endif
+ 112:quantum/backlight/backlight_avr.c **** #    else
+ 113:quantum/backlight/backlight_avr.c **** #        if !defined(BACKLIGHT_CUSTOM_DRIVER)
+ 114:quantum/backlight/backlight_avr.c **** #            if !defined(B5_AUDIO) && !defined(B6_AUDIO) && !defined(B7_AUDIO)
+ 115:quantum/backlight/backlight_avr.c **** // Timer 1 is not in use by Audio feature, Backlight can use it
+ 116:quantum/backlight/backlight_avr.c **** #                pragma message "Using hardware timer 1 with software PWM"
+ 117:quantum/backlight/backlight_avr.c **** #                define HARDWARE_PWM
+ 118:quantum/backlight/backlight_avr.c **** #                define BACKLIGHT_PWM_TIMER
+ 119:quantum/backlight/backlight_avr.c **** #                define ICRx ICR1
+ 120:quantum/backlight/backlight_avr.c **** #                define TCCRxA TCCR1A
+ 121:quantum/backlight/backlight_avr.c **** #                define TCCRxB TCCR1B
+ 122:quantum/backlight/backlight_avr.c **** #                define TIMERx_COMPA_vect TIMER1_COMPA_vect
+ 123:quantum/backlight/backlight_avr.c **** #                define TIMERx_OVF_vect TIMER1_OVF_vect
+ 124:quantum/backlight/backlight_avr.c **** #                if defined(__AVR_ATmega32A__)  // This MCU has only one TIMSK register
+ 125:quantum/backlight/backlight_avr.c **** #                    define TIMSKx TIMSK
+ 126:quantum/backlight/backlight_avr.c **** #                else
+ 127:quantum/backlight/backlight_avr.c **** #                    define TIMSKx TIMSK1
+ 128:quantum/backlight/backlight_avr.c **** #                endif
+ 129:quantum/backlight/backlight_avr.c **** #                define TOIEx TOIE1
+ 130:quantum/backlight/backlight_avr.c **** 
+ 131:quantum/backlight/backlight_avr.c **** #                define OCIExA OCIE1A
+ 132:quantum/backlight/backlight_avr.c **** #                define OCRxx OCR1A
+ 133:quantum/backlight/backlight_avr.c **** #            elif !defined(C6_AUDIO) && !defined(C5_AUDIO) && !defined(C4_AUDIO)
+ 134:quantum/backlight/backlight_avr.c **** #                pragma message "Using hardware timer 3 with software PWM"
+ 135:quantum/backlight/backlight_avr.c **** // Timer 3 is not in use by Audio feature, Backlight can use it
+ 136:quantum/backlight/backlight_avr.c **** #                define HARDWARE_PWM
+ 137:quantum/backlight/backlight_avr.c **** #                define BACKLIGHT_PWM_TIMER
+ 138:quantum/backlight/backlight_avr.c **** #                define ICRx ICR1
+ 139:quantum/backlight/backlight_avr.c **** #                define TCCRxA TCCR3A
+ 140:quantum/backlight/backlight_avr.c **** #                define TCCRxB TCCR3B
+ 141:quantum/backlight/backlight_avr.c **** #                define TIMERx_COMPA_vect TIMER3_COMPA_vect
+ 142:quantum/backlight/backlight_avr.c **** #                define TIMERx_OVF_vect TIMER3_OVF_vect
+ 143:quantum/backlight/backlight_avr.c **** #                define TIMSKx TIMSK3
+ 144:quantum/backlight/backlight_avr.c **** #                define TOIEx TOIE3
+ 145:quantum/backlight/backlight_avr.c **** 
+ 146:quantum/backlight/backlight_avr.c **** #                define OCIExA OCIE3A
+ 147:quantum/backlight/backlight_avr.c **** #                define OCRxx OCR3A
+ 148:quantum/backlight/backlight_avr.c **** #            else
+ 149:quantum/backlight/backlight_avr.c **** #                pragma message "Audio in use - using pure software PWM"
+ 150:quantum/backlight/backlight_avr.c **** #                define NO_HARDWARE_PWM
+ 151:quantum/backlight/backlight_avr.c **** #            endif
+ 152:quantum/backlight/backlight_avr.c **** #        else
+ 153:quantum/backlight/backlight_avr.c **** #            pragma message "Custom driver defined - using pure software PWM"
+ 154:quantum/backlight/backlight_avr.c **** #            define NO_HARDWARE_PWM
+ 155:quantum/backlight/backlight_avr.c **** #        endif
+ 156:quantum/backlight/backlight_avr.c **** #    endif
+ 157:quantum/backlight/backlight_avr.c **** 
+ 158:quantum/backlight/backlight_avr.c **** #    ifndef BACKLIGHT_ON_STATE
+ 159:quantum/backlight/backlight_avr.c **** #        define BACKLIGHT_ON_STATE 0
+ 160:quantum/backlight/backlight_avr.c **** #    endif
+ 161:quantum/backlight/backlight_avr.c **** 
+ 162:quantum/backlight/backlight_avr.c **** void backlight_on(pin_t backlight_pin) {
+  17               		.loc 1 162 40 view -0
+  18               		.cfi_startproc
+  19               	/* prologue: function */
+  20               	/* frame size = 0 */
+  21               	/* stack size = 0 */
+  22               	.L__stack_usage = 0
+ 163:quantum/backlight/backlight_avr.c **** #    if BACKLIGHT_ON_STATE == 0
+ 164:quantum/backlight/backlight_avr.c ****     writePinLow(backlight_pin);
+  23               		.loc 1 164 5 view .LVU1
+  24 0000 E82F      		mov r30,r24
+  25 0002 E295      		swap r30
+  26 0004 EF70      		andi r30,lo8(15)
+  27 0006 F0E0      		ldi r31,0
+  28 0008 32A1      		ldd r19,Z+34
+  29 000a 282F      		mov r18,r24
+  30 000c 2F70      		andi r18,lo8(15)
+  31 000e 81E0      		ldi r24,lo8(1)
+  32 0010 90E0      		ldi r25,0
+  33               	.LVL1:
+  34               		.loc 1 164 5 is_stmt 0 view .LVU2
+  35 0012 00C0      		rjmp 2f
+  36               		1:
+  37 0014 880F      		lsl r24
+  38               		2:
+  39 0016 2A95      		dec r18
+  40 0018 02F4      		brpl 1b
+  41 001a 8095      		com r24
+  42 001c 8323      		and r24,r19
+  43 001e 82A3      		std Z+34,r24
+  44               	/* epilogue start */
+ 165:quantum/backlight/backlight_avr.c **** #    else
+ 166:quantum/backlight/backlight_avr.c ****     writePinHigh(backlight_pin);
+ 167:quantum/backlight/backlight_avr.c **** #    endif
+ 168:quantum/backlight/backlight_avr.c **** }
+  45               		.loc 1 168 1 view .LVU3
+  46 0020 0895      		ret
+  47               		.cfi_endproc
+  48               	.LFE112:
+  50               		.section	.text.backlight_off,"ax",@progbits
+  51               	.global	backlight_off
+  53               	backlight_off:
+  54               	.LVL2:
+  55               	.LFB113:
+ 169:quantum/backlight/backlight_avr.c **** 
+ 170:quantum/backlight/backlight_avr.c **** void backlight_off(pin_t backlight_pin) {
+  56               		.loc 1 170 41 is_stmt 1 view -0
+  57               		.cfi_startproc
+  58               	/* prologue: function */
+  59               	/* frame size = 0 */
+  60               	/* stack size = 0 */
+  61               	.L__stack_usage = 0
+ 171:quantum/backlight/backlight_avr.c **** #    if BACKLIGHT_ON_STATE == 0
+ 172:quantum/backlight/backlight_avr.c ****     writePinHigh(backlight_pin);
+  62               		.loc 1 172 5 view .LVU5
+  63 0000 E82F      		mov r30,r24
+  64 0002 E295      		swap r30
+  65 0004 EF70      		andi r30,lo8(15)
+  66 0006 F0E0      		ldi r31,0
+  67 0008 92A1      		ldd r25,Z+34
+  68 000a 8F70      		andi r24,lo8(15)
+  69               	.LVL3:
+  70               		.loc 1 172 5 is_stmt 0 view .LVU6
+  71 000c 21E0      		ldi r18,lo8(1)
+  72 000e 30E0      		ldi r19,0
+  73 0010 00C0      		rjmp 2f
+  74               		1:
+  75 0012 220F      		lsl r18
+  76               		2:
+  77 0014 8A95      		dec r24
+  78 0016 02F4      		brpl 1b
+  79 0018 922B      		or r25,r18
+  80 001a 92A3      		std Z+34,r25
+  81               	/* epilogue start */
+ 173:quantum/backlight/backlight_avr.c **** #    else
+ 174:quantum/backlight/backlight_avr.c ****     writePinLow(backlight_pin);
+ 175:quantum/backlight/backlight_avr.c **** #    endif
+ 176:quantum/backlight/backlight_avr.c **** }
+  82               		.loc 1 176 1 view .LVU7
+  83 001c 0895      		ret
+  84               		.cfi_endproc
+  85               	.LFE113:
+  87               		.section	.text.backlight_set,"ax",@progbits
+  88               	.global	backlight_set
+  90               	backlight_set:
+  91               	.LVL4:
+  92               	.LFB116:
+ 177:quantum/backlight/backlight_avr.c **** 
+ 178:quantum/backlight/backlight_avr.c **** #    if defined(NO_HARDWARE_PWM) || defined(BACKLIGHT_PWM_TIMER)  // pwm through software
+ 179:quantum/backlight/backlight_avr.c **** 
+ 180:quantum/backlight/backlight_avr.c **** // we support multiple backlight pins
+ 181:quantum/backlight/backlight_avr.c **** #        ifndef BACKLIGHT_LED_COUNT
+ 182:quantum/backlight/backlight_avr.c **** #            define BACKLIGHT_LED_COUNT 1
+ 183:quantum/backlight/backlight_avr.c **** #        endif
+ 184:quantum/backlight/backlight_avr.c **** 
+ 185:quantum/backlight/backlight_avr.c **** #        if BACKLIGHT_LED_COUNT == 1
+ 186:quantum/backlight/backlight_avr.c **** #            define BACKLIGHT_PIN_INIT \
+ 187:quantum/backlight/backlight_avr.c ****                 { BACKLIGHT_PIN }
+ 188:quantum/backlight/backlight_avr.c **** #        else
+ 189:quantum/backlight/backlight_avr.c **** #            define BACKLIGHT_PIN_INIT BACKLIGHT_PINS
+ 190:quantum/backlight/backlight_avr.c **** #        endif
+ 191:quantum/backlight/backlight_avr.c **** 
+ 192:quantum/backlight/backlight_avr.c **** #        define FOR_EACH_LED(x)                                 \
+ 193:quantum/backlight/backlight_avr.c ****             for (uint8_t i = 0; i < BACKLIGHT_LED_COUNT; i++) { \
+ 194:quantum/backlight/backlight_avr.c ****                 pin_t backlight_pin = backlight_pins[i];        \
+ 195:quantum/backlight/backlight_avr.c ****                 { x }                                           \
+ 196:quantum/backlight/backlight_avr.c ****             }
+ 197:quantum/backlight/backlight_avr.c **** 
+ 198:quantum/backlight/backlight_avr.c **** static const pin_t backlight_pins[BACKLIGHT_LED_COUNT] = BACKLIGHT_PIN_INIT;
+ 199:quantum/backlight/backlight_avr.c **** 
+ 200:quantum/backlight/backlight_avr.c **** #    else  // full hardware PWM
+ 201:quantum/backlight/backlight_avr.c **** 
+ 202:quantum/backlight/backlight_avr.c **** // we support only one backlight pin
+ 203:quantum/backlight/backlight_avr.c **** static const pin_t backlight_pin = BACKLIGHT_PIN;
+ 204:quantum/backlight/backlight_avr.c **** #        define FOR_EACH_LED(x) x
+ 205:quantum/backlight/backlight_avr.c **** 
+ 206:quantum/backlight/backlight_avr.c **** #    endif
+ 207:quantum/backlight/backlight_avr.c **** 
+ 208:quantum/backlight/backlight_avr.c **** #    ifdef NO_HARDWARE_PWM
+ 209:quantum/backlight/backlight_avr.c **** void backlight_init_ports(void) {
+ 210:quantum/backlight/backlight_avr.c ****     // Setup backlight pin as output and output to on state.
+ 211:quantum/backlight/backlight_avr.c ****     FOR_EACH_LED(setPinOutput(backlight_pin); backlight_on(backlight_pin);)
+ 212:quantum/backlight/backlight_avr.c **** 
+ 213:quantum/backlight/backlight_avr.c **** #        ifdef BACKLIGHT_BREATHING
+ 214:quantum/backlight/backlight_avr.c ****     if (is_backlight_breathing()) {
+ 215:quantum/backlight/backlight_avr.c ****         breathing_enable();
+ 216:quantum/backlight/backlight_avr.c ****     }
+ 217:quantum/backlight/backlight_avr.c **** #        endif
+ 218:quantum/backlight/backlight_avr.c **** }
+ 219:quantum/backlight/backlight_avr.c **** 
+ 220:quantum/backlight/backlight_avr.c **** uint8_t backlight_tick = 0;
+ 221:quantum/backlight/backlight_avr.c **** 
+ 222:quantum/backlight/backlight_avr.c **** #        ifndef BACKLIGHT_CUSTOM_DRIVER
+ 223:quantum/backlight/backlight_avr.c **** void backlight_task(void) {
+ 224:quantum/backlight/backlight_avr.c ****     if ((0xFFFF >> ((BACKLIGHT_LEVELS - get_backlight_level()) * ((BACKLIGHT_LEVELS + 1) / 2))) & (
+ 225:quantum/backlight/backlight_avr.c ****         FOR_EACH_LED(backlight_on(backlight_pin);)
+ 226:quantum/backlight/backlight_avr.c ****     } else {
+ 227:quantum/backlight/backlight_avr.c ****         FOR_EACH_LED(backlight_off(backlight_pin);)
+ 228:quantum/backlight/backlight_avr.c ****     }
+ 229:quantum/backlight/backlight_avr.c ****     backlight_tick = (backlight_tick + 1) % 16;
+ 230:quantum/backlight/backlight_avr.c **** }
+ 231:quantum/backlight/backlight_avr.c **** #        endif
+ 232:quantum/backlight/backlight_avr.c **** 
+ 233:quantum/backlight/backlight_avr.c **** #        ifdef BACKLIGHT_BREATHING
+ 234:quantum/backlight/backlight_avr.c **** #            ifndef BACKLIGHT_CUSTOM_DRIVER
+ 235:quantum/backlight/backlight_avr.c **** #                error "Backlight breathing only available with hardware PWM. Please disable."
+ 236:quantum/backlight/backlight_avr.c **** #            endif
+ 237:quantum/backlight/backlight_avr.c **** #        endif
+ 238:quantum/backlight/backlight_avr.c **** 
+ 239:quantum/backlight/backlight_avr.c **** #    else  // hardware pwm through timer
+ 240:quantum/backlight/backlight_avr.c **** 
+ 241:quantum/backlight/backlight_avr.c **** #        ifdef BACKLIGHT_PWM_TIMER
+ 242:quantum/backlight/backlight_avr.c **** 
+ 243:quantum/backlight/backlight_avr.c **** // The idea of software PWM assisted by hardware timers is the following
+ 244:quantum/backlight/backlight_avr.c **** // we use the hardware timer in fast PWM mode like for hardware PWM, but
+ 245:quantum/backlight/backlight_avr.c **** // instead of letting the Output Match Comparator control the led pin
+ 246:quantum/backlight/backlight_avr.c **** // (which is not possible since the backlight is not wired to PWM pins on the
+ 247:quantum/backlight/backlight_avr.c **** // CPU), we do the LED on/off by oursleves.
+ 248:quantum/backlight/backlight_avr.c **** // The timer is setup to count up to 0xFFFF, and we set the Output Compare
+ 249:quantum/backlight/backlight_avr.c **** // register to the current 16bits backlight level (after CIE correction).
+ 250:quantum/backlight/backlight_avr.c **** // This means the CPU will trigger a compare match interrupt when the counter
+ 251:quantum/backlight/backlight_avr.c **** // reaches the backlight level, where we turn off the LEDs,
+ 252:quantum/backlight/backlight_avr.c **** // but also an overflow interrupt when the counter rolls back to 0,
+ 253:quantum/backlight/backlight_avr.c **** // in which we're going to turn on the LEDs.
+ 254:quantum/backlight/backlight_avr.c **** // The LED will then be on for OCRxx/0xFFFF time, adjusted every 244Hz.
+ 255:quantum/backlight/backlight_avr.c **** 
+ 256:quantum/backlight/backlight_avr.c **** // Triggered when the counter reaches the OCRx value
+ 257:quantum/backlight/backlight_avr.c **** ISR(TIMERx_COMPA_vect) { FOR_EACH_LED(backlight_off(backlight_pin);) }
+ 258:quantum/backlight/backlight_avr.c **** 
+ 259:quantum/backlight/backlight_avr.c **** // Triggered when the counter reaches the TOP value
+ 260:quantum/backlight/backlight_avr.c **** // this one triggers at F_CPU/65536 =~ 244 Hz
+ 261:quantum/backlight/backlight_avr.c **** ISR(TIMERx_OVF_vect) {
+ 262:quantum/backlight/backlight_avr.c **** #            ifdef BACKLIGHT_BREATHING
+ 263:quantum/backlight/backlight_avr.c ****     if (is_breathing()) {
+ 264:quantum/backlight/backlight_avr.c ****         breathing_task();
+ 265:quantum/backlight/backlight_avr.c ****     }
+ 266:quantum/backlight/backlight_avr.c **** #            endif
+ 267:quantum/backlight/backlight_avr.c ****     // for very small values of OCRxx (or backlight level)
+ 268:quantum/backlight/backlight_avr.c ****     // we can't guarantee this whole code won't execute
+ 269:quantum/backlight/backlight_avr.c ****     // at the same time as the compare match interrupt
+ 270:quantum/backlight/backlight_avr.c ****     // which means that we might turn on the leds while
+ 271:quantum/backlight/backlight_avr.c ****     // trying to turn them off, leading to flickering
+ 272:quantum/backlight/backlight_avr.c ****     // artifacts (especially while breathing, because breathing_task
+ 273:quantum/backlight/backlight_avr.c ****     // takes many computation cycles).
+ 274:quantum/backlight/backlight_avr.c ****     // so better not turn them on while the counter TOP is very low.
+ 275:quantum/backlight/backlight_avr.c ****     if (OCRxx > 256) {
+ 276:quantum/backlight/backlight_avr.c ****         FOR_EACH_LED(backlight_on(backlight_pin);)
+ 277:quantum/backlight/backlight_avr.c ****     }
+ 278:quantum/backlight/backlight_avr.c **** }
+ 279:quantum/backlight/backlight_avr.c **** 
+ 280:quantum/backlight/backlight_avr.c **** #        endif
+ 281:quantum/backlight/backlight_avr.c **** 
+ 282:quantum/backlight/backlight_avr.c **** #        define TIMER_TOP 0xFFFFU
+ 283:quantum/backlight/backlight_avr.c **** 
+ 284:quantum/backlight/backlight_avr.c **** // See http://jared.geek.nz/2013/feb/linear-led-pwm
+ 285:quantum/backlight/backlight_avr.c **** static uint16_t cie_lightness(uint16_t v) {
+ 286:quantum/backlight/backlight_avr.c ****     if (v <= 5243)     // if below 8% of max
+ 287:quantum/backlight/backlight_avr.c ****         return v / 9;  // same as dividing by 900%
+ 288:quantum/backlight/backlight_avr.c ****     else {
+ 289:quantum/backlight/backlight_avr.c ****         uint32_t y = (((uint32_t)v + 10486) << 8) / (10486 + 0xFFFFUL);  // add 16% of max and comp
+ 290:quantum/backlight/backlight_avr.c ****         // to get a useful result with integer division, we shift left in the expression above
+ 291:quantum/backlight/backlight_avr.c ****         // and revert what we've done again after squaring.
+ 292:quantum/backlight/backlight_avr.c ****         y = y * y * y >> 8;
+ 293:quantum/backlight/backlight_avr.c ****         if (y > 0xFFFFUL)  // prevent overflow
+ 294:quantum/backlight/backlight_avr.c ****             return 0xFFFFU;
+ 295:quantum/backlight/backlight_avr.c ****         else
+ 296:quantum/backlight/backlight_avr.c ****             return (uint16_t)y;
+ 297:quantum/backlight/backlight_avr.c ****     }
+ 298:quantum/backlight/backlight_avr.c **** }
+ 299:quantum/backlight/backlight_avr.c **** 
+ 300:quantum/backlight/backlight_avr.c **** // range for val is [0..TIMER_TOP]. PWM pin is high while the timer count is below val.
+ 301:quantum/backlight/backlight_avr.c **** static inline void set_pwm(uint16_t val) { OCRxx = val; }
+ 302:quantum/backlight/backlight_avr.c **** 
+ 303:quantum/backlight/backlight_avr.c **** #        ifndef BACKLIGHT_CUSTOM_DRIVER
+ 304:quantum/backlight/backlight_avr.c **** void backlight_set(uint8_t level) {
+  93               		.loc 1 304 35 is_stmt 1 view -0
+  94               		.cfi_startproc
+  95               		.loc 1 304 35 is_stmt 0 view .LVU9
+  96 0000 CF92      		push r12
+  97               	.LCFI0:
+  98               		.cfi_def_cfa_offset 3
+  99               		.cfi_offset 12, -2
+ 100 0002 DF92      		push r13
+ 101               	.LCFI1:
+ 102               		.cfi_def_cfa_offset 4
+ 103               		.cfi_offset 13, -3
+ 104 0004 EF92      		push r14
+ 105               	.LCFI2:
+ 106               		.cfi_def_cfa_offset 5
+ 107               		.cfi_offset 14, -4
+ 108 0006 FF92      		push r15
+ 109               	.LCFI3:
+ 110               		.cfi_def_cfa_offset 6
+ 111               		.cfi_offset 15, -5
+ 112               	/* prologue: function */
+ 113               	/* frame size = 0 */
+ 114               	/* stack size = 4 */
+ 115               	.L__stack_usage = 4
+ 305:quantum/backlight/backlight_avr.c ****     if (level > BACKLIGHT_LEVELS) level = BACKLIGHT_LEVELS;
+ 116               		.loc 1 305 5 is_stmt 1 view .LVU10
+ 117               		.loc 1 305 8 is_stmt 0 view .LVU11
+ 118 0008 8630      		cpi r24,lo8(6)
+ 119 000a 00F4      		brsh .L8
+ 306:quantum/backlight/backlight_avr.c **** 
+ 307:quantum/backlight/backlight_avr.c ****     if (level == 0) {
+ 120               		.loc 1 307 5 is_stmt 1 view .LVU12
+ 121               		.loc 1 307 8 is_stmt 0 view .LVU13
+ 122 000c 8111      		cpse r24,__zero_reg__
+ 123 000e 00C0      		rjmp .L4
+ 308:quantum/backlight/backlight_avr.c **** #            ifdef BACKLIGHT_PWM_TIMER
+ 309:quantum/backlight/backlight_avr.c ****         if (OCRxx) {
+ 310:quantum/backlight/backlight_avr.c ****             TIMSKx &= ~(_BV(OCIExA));
+ 311:quantum/backlight/backlight_avr.c ****             TIMSKx &= ~(_BV(TOIEx));
+ 312:quantum/backlight/backlight_avr.c ****             FOR_EACH_LED(backlight_off(backlight_pin);)
+ 313:quantum/backlight/backlight_avr.c ****         }
+ 314:quantum/backlight/backlight_avr.c **** #            else
+ 315:quantum/backlight/backlight_avr.c ****         // Turn off PWM control on backlight pin
+ 316:quantum/backlight/backlight_avr.c ****         TCCRxA &= ~(_BV(COMxx1));
+ 124               		.loc 1 316 9 is_stmt 1 view .LVU14
+ 125               		.loc 1 316 16 is_stmt 0 view .LVU15
+ 126 0010 9091 8000 		lds r25,128
+ 127 0014 9F7D      		andi r25,lo8(-33)
+ 128               	.LVL5:
+ 129               	.L10:
+ 317:quantum/backlight/backlight_avr.c **** #            endif
+ 318:quantum/backlight/backlight_avr.c ****     } else {
+ 319:quantum/backlight/backlight_avr.c **** #            ifdef BACKLIGHT_PWM_TIMER
+ 320:quantum/backlight/backlight_avr.c ****         if (!OCRxx) {
+ 321:quantum/backlight/backlight_avr.c ****             TIMSKx |= _BV(OCIExA);
+ 322:quantum/backlight/backlight_avr.c ****             TIMSKx |= _BV(TOIEx);
+ 323:quantum/backlight/backlight_avr.c ****         }
+ 324:quantum/backlight/backlight_avr.c **** #            else
+ 325:quantum/backlight/backlight_avr.c ****         // Turn on PWM control of backlight pin
+ 326:quantum/backlight/backlight_avr.c ****         TCCRxA |= _BV(COMxx1);
+ 130               		.loc 1 326 16 view .LVU16
+ 131 0016 9093 8000 		sts 128,r25
+ 327:quantum/backlight/backlight_avr.c **** #            endif
+ 328:quantum/backlight/backlight_avr.c ****     }
+ 329:quantum/backlight/backlight_avr.c ****     // Set the brightness
+ 330:quantum/backlight/backlight_avr.c ****     set_pwm(cie_lightness(TIMER_TOP * (uint32_t)level / BACKLIGHT_LEVELS));
+ 132               		.loc 1 330 5 is_stmt 1 view .LVU17
+ 133               		.loc 1 330 37 is_stmt 0 view .LVU18
+ 134 001a 282F      		mov r18,r24
+ 135 001c 30E0      		ldi r19,0
+ 136 001e AFEF      		ldi r26,lo8(-1)
+ 137 0020 BFEF      		ldi r27,lo8(-1)
+ 138 0022 0E94 0000 		call __umulhisi3
+ 139               		.loc 1 330 55 view .LVU19
+ 140 0026 25E0      		ldi r18,lo8(5)
+ 141 0028 30E0      		ldi r19,0
+ 142 002a 40E0      		ldi r20,0
+ 143 002c 50E0      		ldi r21,0
+ 144 002e 0E94 0000 		call __udivmodsi4
+ 145               		.loc 1 330 5 view .LVU20
+ 146 0032 C901      		movw r24,r18
+ 147               	.LVL6:
+ 148               	.LBB9:
+ 149               	.LBI9:
+ 285:quantum/backlight/backlight_avr.c ****     if (v <= 5243)     // if below 8% of max
+ 150               		.loc 1 285 17 is_stmt 1 view .LVU21
+ 151               	.LBB10:
+ 286:quantum/backlight/backlight_avr.c ****         return v / 9;  // same as dividing by 900%
+ 152               		.loc 1 286 5 view .LVU22
+ 286:quantum/backlight/backlight_avr.c ****         return v / 9;  // same as dividing by 900%
+ 153               		.loc 1 286 8 is_stmt 0 view .LVU23
+ 154 0034 2C37      		cpi r18,124
+ 155 0036 64E1      		ldi r22,20
+ 156 0038 3607      		cpc r19,r22
+ 157 003a 00F4      		brsh .L6
+ 287:quantum/backlight/backlight_avr.c ****     else {
+ 158               		.loc 1 287 9 is_stmt 1 view .LVU24
+ 287:quantum/backlight/backlight_avr.c ****     else {
+ 159               		.loc 1 287 18 is_stmt 0 view .LVU25
+ 160 003c 69E0      		ldi r22,lo8(9)
+ 161 003e 70E0      		ldi r23,0
+ 162 0040 0E94 0000 		call __udivmodhi4
+ 163               	.LVL7:
+ 164               	.L7:
+ 287:quantum/backlight/backlight_avr.c ****     else {
+ 165               		.loc 1 287 18 view .LVU26
+ 166               	.LBE10:
+ 167               	.LBE9:
+ 168               	.LBB13:
+ 169               	.LBI13:
+ 301:quantum/backlight/backlight_avr.c **** 
+ 170               		.loc 1 301 20 is_stmt 1 view .LVU27
+ 171               	.LBB14:
+ 301:quantum/backlight/backlight_avr.c **** 
+ 172               		.loc 1 301 44 view .LVU28
+ 301:quantum/backlight/backlight_avr.c **** 
+ 173               		.loc 1 301 50 is_stmt 0 view .LVU29
+ 174 0044 7093 8B00 		sts 138+1,r23
+ 175 0048 6093 8A00 		sts 138,r22
+ 176               	.LVL8:
+ 177               	/* epilogue start */
+ 301:quantum/backlight/backlight_avr.c **** 
+ 178               		.loc 1 301 50 view .LVU30
+ 179               	.LBE14:
+ 180               	.LBE13:
+ 331:quantum/backlight/backlight_avr.c **** }
+ 181               		.loc 1 331 1 view .LVU31
+ 182 004c FF90      		pop r15
+ 183 004e EF90      		pop r14
+ 184 0050 DF90      		pop r13
+ 185 0052 CF90      		pop r12
+ 186 0054 0895      		ret
+ 187               	.LVL9:
+ 188               	.L8:
+ 305:quantum/backlight/backlight_avr.c **** 
+ 189               		.loc 1 305 41 view .LVU32
+ 190 0056 85E0      		ldi r24,lo8(5)
+ 191               	.LVL10:
+ 192               	.L4:
+ 326:quantum/backlight/backlight_avr.c **** #            endif
+ 193               		.loc 1 326 9 is_stmt 1 view .LVU33
+ 326:quantum/backlight/backlight_avr.c **** #            endif
+ 194               		.loc 1 326 16 is_stmt 0 view .LVU34
+ 195 0058 9091 8000 		lds r25,128
+ 196 005c 9062      		ori r25,lo8(32)
+ 197 005e 00C0      		rjmp .L10
+ 198               	.LVL11:
+ 199               	.L6:
+ 200               	.LBB15:
+ 201               	.LBB12:
+ 202               	.LBB11:
+ 289:quantum/backlight/backlight_avr.c ****         // to get a useful result with integer division, we shift left in the expression above
+ 203               		.loc 1 289 9 is_stmt 1 view .LVU35
+ 289:quantum/backlight/backlight_avr.c ****         // to get a useful result with integer division, we shift left in the expression above
+ 204               		.loc 1 289 36 is_stmt 0 view .LVU36
+ 205 0060 2A50      		subi r18,10
+ 206 0062 374D      		sbci r19,-41
+ 207 0064 4F4F      		sbci r20,-1
+ 208 0066 5F4F      		sbci r21,-1
+ 209               	.LVL12:
+ 289:quantum/backlight/backlight_avr.c ****         // to get a useful result with integer division, we shift left in the expression above
+ 210               		.loc 1 289 45 view .LVU37
+ 211 0068 942F      		mov r25,r20
+ 212 006a 832F      		mov r24,r19
+ 213 006c 722F      		mov r23,r18
+ 214 006e 6627      		clr r22
+ 289:quantum/backlight/backlight_avr.c ****         // to get a useful result with integer division, we shift left in the expression above
+ 215               		.loc 1 289 18 view .LVU38
+ 216 0070 25EF      		ldi r18,lo8(-11)
+ 217 0072 38E2      		ldi r19,lo8(40)
+ 218 0074 41E0      		ldi r20,lo8(1)
+ 219 0076 50E0      		ldi r21,0
+ 220               	.LVL13:
+ 289:quantum/backlight/backlight_avr.c ****         // to get a useful result with integer division, we shift left in the expression above
+ 221               		.loc 1 289 18 view .LVU39
+ 222 0078 0E94 0000 		call __udivmodsi4
+ 223 007c 6901      		movw r12,r18
+ 224 007e 7A01      		movw r14,r20
+ 225               	.LVL14:
+ 292:quantum/backlight/backlight_avr.c ****         if (y > 0xFFFFUL)  // prevent overflow
+ 226               		.loc 1 292 9 is_stmt 1 view .LVU40
+ 292:quantum/backlight/backlight_avr.c ****         if (y > 0xFFFFUL)  // prevent overflow
+ 227               		.loc 1 292 15 is_stmt 0 view .LVU41
+ 228 0080 CA01      		movw r24,r20
+ 229 0082 B901      		movw r22,r18
+ 230 0084 0E94 0000 		call __mulsi3
+ 231 0088 9B01      		movw r18,r22
+ 232 008a AC01      		movw r20,r24
+ 292:quantum/backlight/backlight_avr.c ****         if (y > 0xFFFFUL)  // prevent overflow
+ 233               		.loc 1 292 19 view .LVU42
+ 234 008c C701      		movw r24,r14
+ 235 008e B601      		movw r22,r12
+ 236 0090 0E94 0000 		call __mulsi3
+ 292:quantum/backlight/backlight_avr.c ****         if (y > 0xFFFFUL)  // prevent overflow
+ 237               		.loc 1 292 11 view .LVU43
+ 238 0094 672F      		mov r22,r23
+ 239 0096 782F      		mov r23,r24
+ 240 0098 892F      		mov r24,r25
+ 241 009a 9927      		clr r25
+ 242               	.LVL15:
+ 293:quantum/backlight/backlight_avr.c ****             return 0xFFFFU;
+ 243               		.loc 1 293 9 is_stmt 1 view .LVU44
+ 293:quantum/backlight/backlight_avr.c ****             return 0xFFFFU;
+ 244               		.loc 1 293 12 is_stmt 0 view .LVU45
+ 245 009c 6115      		cp r22,__zero_reg__
+ 246 009e 7105      		cpc r23,__zero_reg__
+ 247 00a0 21E0      		ldi r18,1
+ 248 00a2 8207      		cpc r24,r18
+ 249 00a4 9105      		cpc r25,__zero_reg__
+ 250 00a6 01F4      		brne .L7
+ 294:quantum/backlight/backlight_avr.c ****         else
+ 251               		.loc 1 294 20 view .LVU46
+ 252 00a8 6FEF      		ldi r22,lo8(-1)
+ 253 00aa 7FEF      		ldi r23,lo8(-1)
+ 254               	.LVL16:
+ 294:quantum/backlight/backlight_avr.c ****         else
+ 255               		.loc 1 294 20 view .LVU47
+ 256 00ac 00C0      		rjmp .L7
+ 257               	.LBE11:
+ 258               	.LBE12:
+ 259               	.LBE15:
+ 260               		.cfi_endproc
+ 261               	.LFE116:
+ 263               		.section	.text.backlight_task,"ax",@progbits
+ 264               	.global	backlight_task
+ 266               	backlight_task:
+ 267               	.LFB117:
+ 332:quantum/backlight/backlight_avr.c **** 
+ 333:quantum/backlight/backlight_avr.c **** void backlight_task(void) {}
+ 268               		.loc 1 333 27 is_stmt 1 view -0
+ 269               		.cfi_startproc
+ 270               	/* prologue: function */
+ 271               	/* frame size = 0 */
+ 272               	/* stack size = 0 */
+ 273               	.L__stack_usage = 0
+ 274               		.loc 1 333 28 view .LVU49
+ 275               	/* epilogue start */
+ 276               		.loc 1 333 1 is_stmt 0 view .LVU50
+ 277 0000 0895      		ret
+ 278               		.cfi_endproc
+ 279               	.LFE117:
+ 281               		.section	.text.backlight_init_ports,"ax",@progbits
+ 282               	.global	backlight_init_ports
+ 284               	backlight_init_ports:
+ 285               	.LFB118:
+ 334:quantum/backlight/backlight_avr.c **** #        endif  // BACKLIGHT_CUSTOM_DRIVER
+ 335:quantum/backlight/backlight_avr.c **** 
+ 336:quantum/backlight/backlight_avr.c **** #        ifdef BACKLIGHT_BREATHING
+ 337:quantum/backlight/backlight_avr.c **** 
+ 338:quantum/backlight/backlight_avr.c **** #            define BREATHING_NO_HALT 0
+ 339:quantum/backlight/backlight_avr.c **** #            define BREATHING_HALT_OFF 1
+ 340:quantum/backlight/backlight_avr.c **** #            define BREATHING_HALT_ON 2
+ 341:quantum/backlight/backlight_avr.c **** #            define BREATHING_STEPS 128
+ 342:quantum/backlight/backlight_avr.c **** 
+ 343:quantum/backlight/backlight_avr.c **** static uint8_t breathing_halt = BREATHING_NO_HALT;
+ 344:quantum/backlight/backlight_avr.c **** static uint16_t breathing_counter = 0;
+ 345:quantum/backlight/backlight_avr.c **** 
+ 346:quantum/backlight/backlight_avr.c **** #            ifdef BACKLIGHT_PWM_TIMER
+ 347:quantum/backlight/backlight_avr.c **** static bool breathing = false;
+ 348:quantum/backlight/backlight_avr.c **** 
+ 349:quantum/backlight/backlight_avr.c **** bool is_breathing(void) { return breathing; }
+ 350:quantum/backlight/backlight_avr.c **** 
+ 351:quantum/backlight/backlight_avr.c **** #                define breathing_interrupt_enable() \
+ 352:quantum/backlight/backlight_avr.c ****                     do {                             \
+ 353:quantum/backlight/backlight_avr.c ****                         breathing = true;            \
+ 354:quantum/backlight/backlight_avr.c ****                     } while (0)
+ 355:quantum/backlight/backlight_avr.c **** #                define breathing_interrupt_disable() \
+ 356:quantum/backlight/backlight_avr.c ****                     do {                              \
+ 357:quantum/backlight/backlight_avr.c ****                         breathing = false;            \
+ 358:quantum/backlight/backlight_avr.c ****                     } while (0)
+ 359:quantum/backlight/backlight_avr.c **** #            else
+ 360:quantum/backlight/backlight_avr.c **** 
+ 361:quantum/backlight/backlight_avr.c **** bool is_breathing(void) { return !!(TIMSKx & _BV(TOIEx)); }
+ 362:quantum/backlight/backlight_avr.c **** 
+ 363:quantum/backlight/backlight_avr.c **** #                define breathing_interrupt_enable() \
+ 364:quantum/backlight/backlight_avr.c ****                     do {                             \
+ 365:quantum/backlight/backlight_avr.c ****                         TIMSKx |= _BV(TOIEx);        \
+ 366:quantum/backlight/backlight_avr.c ****                     } while (0)
+ 367:quantum/backlight/backlight_avr.c **** #                define breathing_interrupt_disable() \
+ 368:quantum/backlight/backlight_avr.c ****                     do {                              \
+ 369:quantum/backlight/backlight_avr.c ****                         TIMSKx &= ~_BV(TOIEx);        \
+ 370:quantum/backlight/backlight_avr.c ****                     } while (0)
+ 371:quantum/backlight/backlight_avr.c **** #            endif
+ 372:quantum/backlight/backlight_avr.c **** 
+ 373:quantum/backlight/backlight_avr.c **** #            define breathing_min()        \
+ 374:quantum/backlight/backlight_avr.c ****                 do {                       \
+ 375:quantum/backlight/backlight_avr.c ****                     breathing_counter = 0; \
+ 376:quantum/backlight/backlight_avr.c ****                 } while (0)
+ 377:quantum/backlight/backlight_avr.c **** #            define breathing_max()                                       \
+ 378:quantum/backlight/backlight_avr.c ****                 do {                                                      \
+ 379:quantum/backlight/backlight_avr.c ****                     breathing_counter = get_breathing_period() * 244 / 2; \
+ 380:quantum/backlight/backlight_avr.c ****                 } while (0)
+ 381:quantum/backlight/backlight_avr.c **** 
+ 382:quantum/backlight/backlight_avr.c **** void breathing_enable(void) {
+ 383:quantum/backlight/backlight_avr.c ****     breathing_counter = 0;
+ 384:quantum/backlight/backlight_avr.c ****     breathing_halt = BREATHING_NO_HALT;
+ 385:quantum/backlight/backlight_avr.c ****     breathing_interrupt_enable();
+ 386:quantum/backlight/backlight_avr.c **** }
+ 387:quantum/backlight/backlight_avr.c **** 
+ 388:quantum/backlight/backlight_avr.c **** void breathing_pulse(void) {
+ 389:quantum/backlight/backlight_avr.c ****     if (get_backlight_level() == 0)
+ 390:quantum/backlight/backlight_avr.c ****         breathing_min();
+ 391:quantum/backlight/backlight_avr.c ****     else
+ 392:quantum/backlight/backlight_avr.c ****         breathing_max();
+ 393:quantum/backlight/backlight_avr.c ****     breathing_halt = BREATHING_HALT_ON;
+ 394:quantum/backlight/backlight_avr.c ****     breathing_interrupt_enable();
+ 395:quantum/backlight/backlight_avr.c **** }
+ 396:quantum/backlight/backlight_avr.c **** 
+ 397:quantum/backlight/backlight_avr.c **** void breathing_disable(void) {
+ 398:quantum/backlight/backlight_avr.c ****     breathing_interrupt_disable();
+ 399:quantum/backlight/backlight_avr.c ****     // Restore backlight level
+ 400:quantum/backlight/backlight_avr.c ****     backlight_set(get_backlight_level());
+ 401:quantum/backlight/backlight_avr.c **** }
+ 402:quantum/backlight/backlight_avr.c **** 
+ 403:quantum/backlight/backlight_avr.c **** void breathing_self_disable(void) {
+ 404:quantum/backlight/backlight_avr.c ****     if (get_backlight_level() == 0)
+ 405:quantum/backlight/backlight_avr.c ****         breathing_halt = BREATHING_HALT_OFF;
+ 406:quantum/backlight/backlight_avr.c ****     else
+ 407:quantum/backlight/backlight_avr.c ****         breathing_halt = BREATHING_HALT_ON;
+ 408:quantum/backlight/backlight_avr.c **** }
+ 409:quantum/backlight/backlight_avr.c **** 
+ 410:quantum/backlight/backlight_avr.c **** void breathing_toggle(void) {
+ 411:quantum/backlight/backlight_avr.c ****     if (is_breathing())
+ 412:quantum/backlight/backlight_avr.c ****         breathing_disable();
+ 413:quantum/backlight/backlight_avr.c ****     else
+ 414:quantum/backlight/backlight_avr.c ****         breathing_enable();
+ 415:quantum/backlight/backlight_avr.c **** }
+ 416:quantum/backlight/backlight_avr.c **** 
+ 417:quantum/backlight/backlight_avr.c **** /* To generate breathing curve in python:
+ 418:quantum/backlight/backlight_avr.c ****  * from math import sin, pi; [int(sin(x/128.0*pi)**4*255) for x in range(128)]
+ 419:quantum/backlight/backlight_avr.c ****  */
+ 420:quantum/backlight/backlight_avr.c **** static const uint8_t breathing_table[BREATHING_STEPS] PROGMEM = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+ 421:quantum/backlight/backlight_avr.c **** 
+ 422:quantum/backlight/backlight_avr.c **** // Use this before the cie_lightness function.
+ 423:quantum/backlight/backlight_avr.c **** static inline uint16_t scale_backlight(uint16_t v) { return v / BACKLIGHT_LEVELS * get_backlight_le
+ 424:quantum/backlight/backlight_avr.c **** 
+ 425:quantum/backlight/backlight_avr.c **** #            ifdef BACKLIGHT_PWM_TIMER
+ 426:quantum/backlight/backlight_avr.c **** void breathing_task(void)
+ 427:quantum/backlight/backlight_avr.c **** #            else
+ 428:quantum/backlight/backlight_avr.c **** /* Assuming a 16MHz CPU clock and a timer that resets at 64k (ICR1), the following interrupt handle
+ 429:quantum/backlight/backlight_avr.c ****  * about 244 times per second.
+ 430:quantum/backlight/backlight_avr.c ****  */
+ 431:quantum/backlight/backlight_avr.c **** ISR(TIMERx_OVF_vect)
+ 432:quantum/backlight/backlight_avr.c **** #            endif
+ 433:quantum/backlight/backlight_avr.c **** {
+ 434:quantum/backlight/backlight_avr.c ****     uint8_t breathing_period = get_breathing_period();
+ 435:quantum/backlight/backlight_avr.c ****     uint16_t interval = (uint16_t)breathing_period * 244 / BREATHING_STEPS;
+ 436:quantum/backlight/backlight_avr.c ****     // resetting after one period to prevent ugly reset at overflow.
+ 437:quantum/backlight/backlight_avr.c ****     breathing_counter = (breathing_counter + 1) % (breathing_period * 244);
+ 438:quantum/backlight/backlight_avr.c ****     uint8_t index = breathing_counter / interval % BREATHING_STEPS;
+ 439:quantum/backlight/backlight_avr.c **** 
+ 440:quantum/backlight/backlight_avr.c ****     if (((breathing_halt == BREATHING_HALT_ON) && (index == BREATHING_STEPS / 2)) || ((breathing_ha
+ 441:quantum/backlight/backlight_avr.c ****         breathing_interrupt_disable();
+ 442:quantum/backlight/backlight_avr.c ****     }
+ 443:quantum/backlight/backlight_avr.c **** 
+ 444:quantum/backlight/backlight_avr.c ****     set_pwm(cie_lightness(scale_backlight((uint16_t)pgm_read_byte(&breathing_table[index]) * 0x0101
+ 445:quantum/backlight/backlight_avr.c **** }
+ 446:quantum/backlight/backlight_avr.c **** 
+ 447:quantum/backlight/backlight_avr.c **** #        endif  // BACKLIGHT_BREATHING
+ 448:quantum/backlight/backlight_avr.c **** 
+ 449:quantum/backlight/backlight_avr.c **** void backlight_init_ports(void) {
+ 286               		.loc 1 449 33 is_stmt 1 view -0
+ 287               		.cfi_startproc
+ 288               	/* prologue: function */
+ 289               	/* frame size = 0 */
+ 290               	/* stack size = 0 */
+ 291               	.L__stack_usage = 0
+ 450:quantum/backlight/backlight_avr.c ****     // Setup backlight pin as output and output to on state.
+ 451:quantum/backlight/backlight_avr.c ****     FOR_EACH_LED(setPinOutput(backlight_pin); backlight_on(backlight_pin);)
+ 292               		.loc 1 451 5 view .LVU52
+ 293 0000 269A      		sbi 0x4,6
+ 294               		.loc 1 451 5 view .LVU53
+ 295 0002 86E3      		ldi r24,lo8(54)
+ 296 0004 0E94 0000 		call backlight_on
+ 297               	.LVL17:
+ 452:quantum/backlight/backlight_avr.c **** 
+ 453:quantum/backlight/backlight_avr.c ****     // I could write a wall of text here to explain... but TL;DW
+ 454:quantum/backlight/backlight_avr.c ****     // Go read the ATmega32u4 datasheet.
+ 455:quantum/backlight/backlight_avr.c ****     // And this: http://blog.saikoled.com/post/43165849837/secret-konami-cheat-code-to-high-resolut
+ 456:quantum/backlight/backlight_avr.c **** 
+ 457:quantum/backlight/backlight_avr.c **** #        ifdef BACKLIGHT_PWM_TIMER
+ 458:quantum/backlight/backlight_avr.c ****     // TimerX setup, Fast PWM mode count to TOP set in ICRx
+ 459:quantum/backlight/backlight_avr.c ****     TCCRxA = _BV(WGM11);  // = 0b00000010;
+ 460:quantum/backlight/backlight_avr.c ****     // clock select clk/1
+ 461:quantum/backlight/backlight_avr.c ****     TCCRxB = _BV(WGM13) | _BV(WGM12) | _BV(CS10);  // = 0b00011001;
+ 462:quantum/backlight/backlight_avr.c **** #        else  // hardware PWM
+ 463:quantum/backlight/backlight_avr.c ****     // Pin PB7 = OCR1C (Timer 1, Channel C)
+ 464:quantum/backlight/backlight_avr.c ****     // Compare Output Mode = Clear on compare match, Channel C = COM1C1=1 COM1C0=0
+ 465:quantum/backlight/backlight_avr.c ****     // (i.e. start high, go low when counter matches.)
+ 466:quantum/backlight/backlight_avr.c ****     // WGM Mode 14 (Fast PWM) = WGM13=1 WGM12=1 WGM11=1 WGM10=0
+ 467:quantum/backlight/backlight_avr.c ****     // Clock Select = clk/1 (no prescaling) = CS12=0 CS11=0 CS10=1
+ 468:quantum/backlight/backlight_avr.c **** 
+ 469:quantum/backlight/backlight_avr.c ****     /*
+ 470:quantum/backlight/backlight_avr.c ****     14.8.3:
+ 471:quantum/backlight/backlight_avr.c ****     "In fast PWM mode, the compare units allow generation of PWM waveforms on the OCnx pins. Settin
+ 472:quantum/backlight/backlight_avr.c ****     "In fast PWM mode the counter is incremented until the counter value matches either one of the 
+ 473:quantum/backlight/backlight_avr.c ****     */
+ 474:quantum/backlight/backlight_avr.c ****     TCCRxA = _BV(COMxx1) | _BV(WGM11);             // = 0b00001010;
+ 298               		.loc 1 474 5 view .LVU54
+ 299               		.loc 1 474 12 is_stmt 0 view .LVU55
+ 300 0008 82E2      		ldi r24,lo8(34)
+ 301 000a 8093 8000 		sts 128,r24
+ 475:quantum/backlight/backlight_avr.c ****     TCCRxB = _BV(WGM13) | _BV(WGM12) | _BV(CS10);  // = 0b00011001;
+ 302               		.loc 1 475 5 is_stmt 1 view .LVU56
+ 303               		.loc 1 475 12 is_stmt 0 view .LVU57
+ 304 000e 89E1      		ldi r24,lo8(25)
+ 305 0010 8093 8100 		sts 129,r24
+ 476:quantum/backlight/backlight_avr.c **** #        endif
+ 477:quantum/backlight/backlight_avr.c ****     // Use full 16-bit resolution. Counter counts to ICR1 before reset to 0.
+ 478:quantum/backlight/backlight_avr.c ****     ICRx = TIMER_TOP;
+ 306               		.loc 1 478 5 is_stmt 1 view .LVU58
+ 307               		.loc 1 478 10 is_stmt 0 view .LVU59
+ 308 0014 8FEF      		ldi r24,lo8(-1)
+ 309 0016 9FEF      		ldi r25,lo8(-1)
+ 310 0018 9093 8700 		sts 134+1,r25
+ 311 001c 8093 8600 		sts 134,r24
+ 479:quantum/backlight/backlight_avr.c **** 
+ 480:quantum/backlight/backlight_avr.c ****     backlight_init();
+ 312               		.loc 1 480 5 is_stmt 1 view .LVU60
+ 313 0020 0C94 0000 		jmp backlight_init
+ 314               	.LVL18:
+ 315               		.cfi_endproc
+ 316               	.LFE118:
+ 318               		.text
+ 319               	.Letext0:
+ 320               		.file 2 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/avr/include/stdint.h"
+ 321               		.file 3 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/lib/avr-gcc/8/gcc/avr/8.3.0/include/stddef.h"
+ 322               		.file 4 "lib/lufa/LUFA/Drivers/USB/Core/AVR8/../StdRequestType.h"
+ 323               		.file 5 "tmk_core/common/action.h"
+ 324               		.file 6 "lib/lufa/LUFA/Drivers/USB/Core/AVR8/../DeviceStandardReq.h"
+ 325               		.file 7 "lib/lufa/LUFA/Drivers/USB/Core/USBTask.h"
+ 326               		.file 8 "lib/lufa/LUFA/Drivers/USB/Core/HostStandardReq.h"
+ 327               		.file 9 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/avr/include/stdio.h"
+ 328               		.file 10 "tmk_core/common/report.h"
+ 329               		.file 11 "tmk_core/common/host.h"
+ 330               		.file 12 "tmk_core/common/debug.h"
+ 331               		.file 13 "quantum/keycode_config.h"
+ 332               		.file 14 "quantum/keymap.h"
+ 333               		.file 15 "./quantum/color.h"
+ 334               		.file 16 "quantum/rgblight.h"
+ 335               		.file 17 "tmk_core/common/action_layer.h"
+ 336               		.file 18 "tmk_core/common/timer.h"
+ 337               		.file 19 "tmk_core/common/action_util.h"
+ 338               		.file 20 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/avr/include/stdlib.h"
+ 339               		.file 21 "quantum/quantum.h"
+ 340               		.file 22 "quantum/backlight/backlight.h"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 backlight_avr.c
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:13     .text.backlight_on:0000000000000000 backlight_on
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:53     .text.backlight_off:0000000000000000 backlight_off
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:90     .text.backlight_set:0000000000000000 backlight_set
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:266    .text.backlight_task:0000000000000000 backlight_task
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:284    .text.backlight_init_ports:0000000000000000 backlight_init_ports
+
+UNDEFINED SYMBOLS
+__umulhisi3
+__udivmodsi4
+__udivmodhi4
+__mulsi3
+backlight_init

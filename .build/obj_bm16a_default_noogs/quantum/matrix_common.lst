@@ -1,0 +1,594 @@
+   1               		.file	"matrix_common.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.text
+   8               	.Ltext0:
+   9               		.cfi_sections	.debug_frame
+  10               		.section	.text.matrix_init_user,"ax",@progbits
+  11               		.weak	matrix_init_user
+  13               	matrix_init_user:
+  14               	.LFB2:
+  15               		.file 1 "quantum/matrix_common.c"
+   1:quantum/matrix_common.c **** #include "matrix.h"
+   2:quantum/matrix_common.c **** #include "debounce.h"
+   3:quantum/matrix_common.c **** #include "print.h"
+   4:quantum/matrix_common.c **** #include "debug.h"
+   5:quantum/matrix_common.c **** 
+   6:quantum/matrix_common.c **** /* matrix state(1:on, 0:off) */
+   7:quantum/matrix_common.c **** matrix_row_t raw_matrix[MATRIX_ROWS];
+   8:quantum/matrix_common.c **** matrix_row_t matrix[MATRIX_ROWS];
+   9:quantum/matrix_common.c **** 
+  10:quantum/matrix_common.c **** #ifdef MATRIX_MASKED
+  11:quantum/matrix_common.c **** extern const matrix_row_t matrix_mask[];
+  12:quantum/matrix_common.c **** #endif
+  13:quantum/matrix_common.c **** 
+  14:quantum/matrix_common.c **** // user-defined overridable functions
+  15:quantum/matrix_common.c **** 
+  16:quantum/matrix_common.c **** __attribute__((weak)) void matrix_init_kb(void) { matrix_init_user(); }
+  17:quantum/matrix_common.c **** 
+  18:quantum/matrix_common.c **** __attribute__((weak)) void matrix_scan_kb(void) { matrix_scan_user(); }
+  19:quantum/matrix_common.c **** 
+  20:quantum/matrix_common.c **** __attribute__((weak)) void matrix_init_user(void) {}
+  16               		.loc 1 20 51 view -0
+  17               		.cfi_startproc
+  18               	/* prologue: function */
+  19               	/* frame size = 0 */
+  20               	/* stack size = 0 */
+  21               	.L__stack_usage = 0
+  22               		.loc 1 20 52 view .LVU1
+  23               	/* epilogue start */
+  24               		.loc 1 20 1 is_stmt 0 view .LVU2
+  25 0000 0895      		ret
+  26               		.cfi_endproc
+  27               	.LFE2:
+  29               		.set	matrix_init_user.localalias.0,matrix_init_user
+  30               		.section	.text.matrix_init_kb,"ax",@progbits
+  31               		.weak	matrix_init_kb
+  33               	matrix_init_kb:
+  34               	.LFB0:
+  16:quantum/matrix_common.c **** 
+  35               		.loc 1 16 49 is_stmt 1 view -0
+  36               		.cfi_startproc
+  37               	/* prologue: function */
+  38               	/* frame size = 0 */
+  39               	/* stack size = 0 */
+  40               	.L__stack_usage = 0
+  16:quantum/matrix_common.c **** 
+  41               		.loc 1 16 51 view .LVU4
+  42 0000 0C94 0000 		jmp matrix_init_user
+  43               	.LVL0:
+  44               		.cfi_endproc
+  45               	.LFE0:
+  47               		.section	.text.matrix_scan_user,"ax",@progbits
+  48               		.weak	matrix_scan_user
+  50               	matrix_scan_user:
+  51               	.LFB18:
+  52               		.cfi_startproc
+  53               	/* prologue: function */
+  54               	/* frame size = 0 */
+  55               	/* stack size = 0 */
+  56               	.L__stack_usage = 0
+  57               	/* epilogue start */
+  58 0000 0895      		ret
+  59               		.cfi_endproc
+  60               	.LFE18:
+  62               		.section	.text.matrix_scan_kb,"ax",@progbits
+  63               		.weak	matrix_scan_kb
+  65               	matrix_scan_kb:
+  66               	.LFB1:
+  18:quantum/matrix_common.c **** 
+  67               		.loc 1 18 49 view -0
+  68               		.cfi_startproc
+  69               	/* prologue: function */
+  70               	/* frame size = 0 */
+  71               	/* stack size = 0 */
+  72               	.L__stack_usage = 0
+  18:quantum/matrix_common.c **** 
+  73               		.loc 1 18 51 view .LVU6
+  74 0000 0C94 0000 		jmp matrix_scan_user
+  75               	.LVL1:
+  76               		.cfi_endproc
+  77               	.LFE1:
+  79               		.section	.text.matrix_rows,"ax",@progbits
+  80               	.global	matrix_rows
+  82               	matrix_rows:
+  83               	.LFB4:
+  21:quantum/matrix_common.c **** 
+  22:quantum/matrix_common.c **** __attribute__((weak)) void matrix_scan_user(void) {}
+  23:quantum/matrix_common.c **** 
+  24:quantum/matrix_common.c **** // helper functions
+  25:quantum/matrix_common.c **** 
+  26:quantum/matrix_common.c **** inline uint8_t matrix_rows(void) { return MATRIX_ROWS; }
+  84               		.loc 1 26 34 view -0
+  85               		.cfi_startproc
+  86               	/* prologue: function */
+  87               	/* frame size = 0 */
+  88               	/* stack size = 0 */
+  89               	.L__stack_usage = 0
+  90               		.loc 1 26 36 view .LVU8
+  91               		.loc 1 26 1 is_stmt 0 view .LVU9
+  92 0000 84E0      		ldi r24,lo8(4)
+  93               	/* epilogue start */
+  94 0002 0895      		ret
+  95               		.cfi_endproc
+  96               	.LFE4:
+  98               		.section	.text.matrix_cols,"ax",@progbits
+  99               	.global	matrix_cols
+ 101               	matrix_cols:
+ 102               	.LFB16:
+ 103               		.cfi_startproc
+ 104               	/* prologue: function */
+ 105               	/* frame size = 0 */
+ 106               	/* stack size = 0 */
+ 107               	.L__stack_usage = 0
+ 108 0000 84E0      		ldi r24,lo8(4)
+ 109               	/* epilogue start */
+ 110 0002 0895      		ret
+ 111               		.cfi_endproc
+ 112               	.LFE16:
+ 114               		.section	.text.matrix_is_on,"ax",@progbits
+ 115               	.global	matrix_is_on
+ 117               	matrix_is_on:
+ 118               	.LVL2:
+ 119               	.LFB6:
+  27:quantum/matrix_common.c **** 
+  28:quantum/matrix_common.c **** inline uint8_t matrix_cols(void) { return MATRIX_COLS; }
+  29:quantum/matrix_common.c **** 
+  30:quantum/matrix_common.c **** inline bool matrix_is_on(uint8_t row, uint8_t col) { return (matrix[row] & ((matrix_row_t)1 << col)
+ 120               		.loc 1 30 52 is_stmt 1 view -0
+ 121               		.cfi_startproc
+ 122               	/* prologue: function */
+ 123               	/* frame size = 0 */
+ 124               	/* stack size = 0 */
+ 125               	.L__stack_usage = 0
+ 126               		.loc 1 30 54 view .LVU11
+ 127               		.loc 1 30 68 is_stmt 0 view .LVU12
+ 128 0000 E82F      		mov r30,r24
+ 129 0002 F0E0      		ldi r31,0
+ 130 0004 E050      		subi r30,lo8(-(matrix))
+ 131 0006 F040      		sbci r31,hi8(-(matrix))
+ 132 0008 2081      		ld r18,Z
+ 133 000a 30E0      		ldi r19,0
+ 134               		.loc 1 30 93 view .LVU13
+ 135 000c 81E0      		ldi r24,lo8(1)
+ 136 000e 90E0      		ldi r25,0
+ 137               	.LVL3:
+ 138               		.loc 1 30 93 view .LVU14
+ 139 0010 00C0      		rjmp 2f
+ 140               		1:
+ 141 0012 880F      		lsl r24
+ 142 0014 991F      		rol r25
+ 143               		2:
+ 144 0016 6A95      		dec r22
+ 145 0018 02F4      		brpl 1b
+ 146               		.loc 1 30 74 view .LVU15
+ 147 001a 2823      		and r18,r24
+ 148 001c 3923      		and r19,r25
+ 149 001e 81E0      		ldi r24,lo8(1)
+ 150 0020 232B      		or r18,r19
+ 151 0022 01F4      		brne .L8
+ 152 0024 80E0      		ldi r24,0
+ 153               	.L8:
+ 154               	/* epilogue start */
+ 155               		.loc 1 30 1 view .LVU16
+ 156 0026 0895      		ret
+ 157               		.cfi_endproc
+ 158               	.LFE6:
+ 160               		.section	.text.matrix_get_row,"ax",@progbits
+ 161               	.global	matrix_get_row
+ 163               	matrix_get_row:
+ 164               	.LVL4:
+ 165               	.LFB7:
+  31:quantum/matrix_common.c **** 
+  32:quantum/matrix_common.c **** inline matrix_row_t matrix_get_row(uint8_t row) {
+ 166               		.loc 1 32 49 is_stmt 1 view -0
+ 167               		.cfi_startproc
+ 168               	/* prologue: function */
+ 169               	/* frame size = 0 */
+ 170               	/* stack size = 0 */
+ 171               	.L__stack_usage = 0
+  33:quantum/matrix_common.c ****     // Matrix mask lets you disable switches in the returned matrix data. For example, if you have 
+  34:quantum/matrix_common.c ****     // switch blocker installed and the switch is always pressed.
+  35:quantum/matrix_common.c **** #ifdef MATRIX_MASKED
+  36:quantum/matrix_common.c ****     return matrix[row] & matrix_mask[row];
+  37:quantum/matrix_common.c **** #else
+  38:quantum/matrix_common.c ****     return matrix[row];
+ 172               		.loc 1 38 5 view .LVU18
+ 173               		.loc 1 38 18 is_stmt 0 view .LVU19
+ 174 0000 E82F      		mov r30,r24
+ 175 0002 F0E0      		ldi r31,0
+ 176 0004 E050      		subi r30,lo8(-(matrix))
+ 177 0006 F040      		sbci r31,hi8(-(matrix))
+  39:quantum/matrix_common.c **** #endif
+  40:quantum/matrix_common.c **** }
+ 178               		.loc 1 40 1 view .LVU20
+ 179 0008 8081      		ld r24,Z
+ 180               	.LVL5:
+ 181               	/* epilogue start */
+ 182               		.loc 1 40 1 view .LVU21
+ 183 000a 0895      		ret
+ 184               		.cfi_endproc
+ 185               	.LFE7:
+ 187               		.section	.text.matrix_is_modified,"ax",@progbits
+ 188               	.global	matrix_is_modified
+ 190               	matrix_is_modified:
+ 191               	.LFB8:
+  41:quantum/matrix_common.c **** 
+  42:quantum/matrix_common.c **** // Deprecated.
+  43:quantum/matrix_common.c **** bool matrix_is_modified(void) {
+ 192               		.loc 1 43 31 is_stmt 1 view -0
+ 193               		.cfi_startproc
+ 194               	/* prologue: function */
+ 195               	/* frame size = 0 */
+ 196               	/* stack size = 0 */
+ 197               	.L__stack_usage = 0
+  44:quantum/matrix_common.c ****     if (debounce_active()) return false;
+ 198               		.loc 1 44 5 view .LVU23
+ 199               		.loc 1 44 9 is_stmt 0 view .LVU24
+ 200 0000 0E94 0000 		call debounce_active
+ 201               	.LVL6:
+  45:quantum/matrix_common.c ****     return true;
+  46:quantum/matrix_common.c **** }
+ 202               		.loc 1 46 1 view .LVU25
+ 203 0004 91E0      		ldi r25,lo8(1)
+ 204 0006 8927      		eor r24,r25
+ 205               	/* epilogue start */
+ 206 0008 0895      		ret
+ 207               		.cfi_endproc
+ 208               	.LFE8:
+ 210               		.section	.text.matrix_print,"ax",@progbits
+ 211               	.global	matrix_print
+ 213               	matrix_print:
+ 214               	.LFB9:
+  47:quantum/matrix_common.c **** 
+  48:quantum/matrix_common.c **** #if (MATRIX_COLS <= 8)
+  49:quantum/matrix_common.c **** #    define print_matrix_header() print("\nr/c 01234567\n")
+  50:quantum/matrix_common.c **** #    define print_matrix_row(row) print_bin_reverse8(matrix_get_row(row))
+  51:quantum/matrix_common.c **** #    define matrix_bitpop(row) bitpop(matrix_get_row(row))
+  52:quantum/matrix_common.c **** #elif (MATRIX_COLS <= 16)
+  53:quantum/matrix_common.c **** #    define print_matrix_header() print("\nr/c 0123456789ABCDEF\n")
+  54:quantum/matrix_common.c **** #    define print_matrix_row(row) print_bin_reverse16(matrix_get_row(row))
+  55:quantum/matrix_common.c **** #    define matrix_bitpop(row) bitpop16(matrix_get_row(row))
+  56:quantum/matrix_common.c **** #elif (MATRIX_COLS <= 32)
+  57:quantum/matrix_common.c **** #    define print_matrix_header() print("\nr/c 0123456789ABCDEF0123456789ABCDEF\n")
+  58:quantum/matrix_common.c **** #    define print_matrix_row(row) print_bin_reverse32(matrix_get_row(row))
+  59:quantum/matrix_common.c **** #    define matrix_bitpop(row) bitpop32(matrix_get_row(row))
+  60:quantum/matrix_common.c **** #endif
+  61:quantum/matrix_common.c **** 
+  62:quantum/matrix_common.c **** void matrix_print(void) {
+ 215               		.loc 1 62 25 is_stmt 1 view -0
+ 216               		.cfi_startproc
+ 217               	/* prologue: function */
+ 218               	/* frame size = 0 */
+ 219               	/* stack size = 0 */
+ 220               	.L__stack_usage = 0
+  63:quantum/matrix_common.c ****     print_matrix_header();
+ 221               		.loc 1 63 26 view .LVU27
+  64:quantum/matrix_common.c **** 
+  65:quantum/matrix_common.c ****     for (uint8_t row = 0; row < MATRIX_ROWS; row++) {
+ 222               		.loc 1 65 5 view .LVU28
+ 223               		.loc 1 65 10 view .LVU29
+ 224               	.LVL7:
+ 225               	/* epilogue start */
+  66:quantum/matrix_common.c ****         phex(row);
+  67:quantum/matrix_common.c ****         print(": ");
+  68:quantum/matrix_common.c ****         print_matrix_row(row);
+  69:quantum/matrix_common.c ****         print("\n");
+  70:quantum/matrix_common.c ****     }
+  71:quantum/matrix_common.c **** }
+ 226               		.loc 1 71 1 is_stmt 0 view .LVU30
+ 227 0000 0895      		ret
+ 228               		.cfi_endproc
+ 229               	.LFE9:
+ 231               		.section	.text.matrix_key_count,"ax",@progbits
+ 232               	.global	matrix_key_count
+ 234               	matrix_key_count:
+ 235               	.LFB10:
+  72:quantum/matrix_common.c **** 
+  73:quantum/matrix_common.c **** uint8_t matrix_key_count(void) {
+ 236               		.loc 1 73 32 is_stmt 1 view -0
+ 237               		.cfi_startproc
+ 238 0000 0F93      		push r16
+ 239               	.LCFI0:
+ 240               		.cfi_def_cfa_offset 3
+ 241               		.cfi_offset 16, -2
+ 242 0002 1F93      		push r17
+ 243               	.LCFI1:
+ 244               		.cfi_def_cfa_offset 4
+ 245               		.cfi_offset 17, -3
+ 246 0004 CF93      		push r28
+ 247               	.LCFI2:
+ 248               		.cfi_def_cfa_offset 5
+ 249               		.cfi_offset 28, -4
+ 250               	/* prologue: function */
+ 251               	/* frame size = 0 */
+ 252               	/* stack size = 3 */
+ 253               	.L__stack_usage = 3
+  74:quantum/matrix_common.c ****     uint8_t count = 0;
+ 254               		.loc 1 74 5 view .LVU32
+ 255               	.LVL8:
+  75:quantum/matrix_common.c ****     for (uint8_t i = 0; i < MATRIX_ROWS; i++) {
+ 256               		.loc 1 75 5 view .LVU33
+ 257               	.LBB5:
+ 258               		.loc 1 75 10 view .LVU34
+ 259               		.loc 1 75 10 is_stmt 0 view .LVU35
+ 260 0006 00E0      		ldi r16,lo8(matrix)
+ 261 0008 10E0      		ldi r17,hi8(matrix)
+ 262               	.LBE5:
+  74:quantum/matrix_common.c ****     uint8_t count = 0;
+ 263               		.loc 1 74 13 view .LVU36
+ 264 000a C0E0      		ldi r28,0
+ 265               	.LVL9:
+ 266               	.L13:
+ 267               	.LBB8:
+  76:quantum/matrix_common.c ****         count += matrix_bitpop(i);
+ 268               		.loc 1 76 9 is_stmt 1 view .LVU37
+ 269               	.LBB6:
+ 270               	.LBI6:
+  32:quantum/matrix_common.c ****     // Matrix mask lets you disable switches in the returned matrix data. For example, if you have 
+ 271               		.loc 1 32 21 view .LVU38
+ 272               	.LBB7:
+  38:quantum/matrix_common.c **** #endif
+ 273               		.loc 1 38 5 view .LVU39
+  38:quantum/matrix_common.c **** #endif
+ 274               		.loc 1 38 5 is_stmt 0 view .LVU40
+ 275               	.LBE7:
+ 276               	.LBE6:
+ 277               		.loc 1 76 18 view .LVU41
+ 278 000c F801      		movw r30,r16
+ 279 000e 8191      		ld r24,Z+
+ 280 0010 8F01      		movw r16,r30
+ 281               	.LVL10:
+ 282               		.loc 1 76 18 view .LVU42
+ 283 0012 0E94 0000 		call bitpop
+ 284               	.LVL11:
+ 285               		.loc 1 76 15 view .LVU43
+ 286 0016 C80F      		add r28,r24
+ 287               	.LVL12:
+  75:quantum/matrix_common.c ****         count += matrix_bitpop(i);
+ 288               		.loc 1 75 5 view .LVU44
+ 289 0018 F0E0      		ldi r31,hi8(matrix+4)
+ 290 001a 0030      		cpi r16,lo8(matrix+4)
+ 291 001c 1F07      		cpc r17,r31
+ 292 001e 01F4      		brne .L13
+ 293               	.LBE8:
+  77:quantum/matrix_common.c ****     }
+  78:quantum/matrix_common.c ****     return count;
+ 294               		.loc 1 78 5 is_stmt 1 view .LVU45
+  79:quantum/matrix_common.c **** }
+ 295               		.loc 1 79 1 is_stmt 0 view .LVU46
+ 296 0020 8C2F      		mov r24,r28
+ 297               	/* epilogue start */
+ 298 0022 CF91      		pop r28
+ 299               	.LVL13:
+ 300               		.loc 1 79 1 view .LVU47
+ 301 0024 1F91      		pop r17
+ 302 0026 0F91      		pop r16
+ 303               	.LVL14:
+ 304               		.loc 1 79 1 view .LVU48
+ 305 0028 0895      		ret
+ 306               		.cfi_endproc
+ 307               	.LFE10:
+ 309               		.section	.text.matrix_init_custom,"ax",@progbits
+ 310               		.weak	matrix_init_custom
+ 312               	matrix_init_custom:
+ 313               	.LFB20:
+ 314               		.cfi_startproc
+ 315               	/* prologue: function */
+ 316               	/* frame size = 0 */
+ 317               	/* stack size = 0 */
+ 318               	.L__stack_usage = 0
+ 319               	/* epilogue start */
+ 320 0000 0895      		ret
+ 321               		.cfi_endproc
+ 322               	.LFE20:
+ 324               		.section	.text.matrix_scan_custom,"ax",@progbits
+ 325               		.weak	matrix_scan_custom
+ 327               	matrix_scan_custom:
+ 328               	.LVL15:
+ 329               	.LFB12:
+  80:quantum/matrix_common.c **** 
+  81:quantum/matrix_common.c **** // CUSTOM MATRIX 'LITE'
+  82:quantum/matrix_common.c **** __attribute__((weak)) void matrix_init_custom(void) {}
+  83:quantum/matrix_common.c **** 
+  84:quantum/matrix_common.c **** __attribute__((weak)) bool matrix_scan_custom(matrix_row_t current_matrix[]) { return true; }
+ 330               		.loc 1 84 78 is_stmt 1 view -0
+ 331               		.cfi_startproc
+ 332               	/* prologue: function */
+ 333               	/* frame size = 0 */
+ 334               	/* stack size = 0 */
+ 335               	.L__stack_usage = 0
+ 336               		.loc 1 84 80 view .LVU50
+ 337               		.loc 1 84 1 is_stmt 0 view .LVU51
+ 338 0000 81E0      		ldi r24,lo8(1)
+ 339               	.LVL16:
+ 340               	/* epilogue start */
+ 341               		.loc 1 84 1 view .LVU52
+ 342 0002 0895      		ret
+ 343               		.cfi_endproc
+ 344               	.LFE12:
+ 346               		.section	.text.matrix_init,"ax",@progbits
+ 347               		.weak	matrix_init
+ 349               	matrix_init:
+ 350               	.LFB13:
+  85:quantum/matrix_common.c **** 
+  86:quantum/matrix_common.c **** __attribute__((weak)) void matrix_init(void) {
+ 351               		.loc 1 86 46 is_stmt 1 view -0
+ 352               		.cfi_startproc
+ 353               	/* prologue: function */
+ 354               	/* frame size = 0 */
+ 355               	/* stack size = 0 */
+ 356               	.L__stack_usage = 0
+  87:quantum/matrix_common.c ****     matrix_init_custom();
+ 357               		.loc 1 87 5 view .LVU54
+ 358 0000 0E94 0000 		call matrix_init_custom
+ 359               	.LVL17:
+  88:quantum/matrix_common.c **** 
+  89:quantum/matrix_common.c ****     // initialize matrix state: all keys off
+  90:quantum/matrix_common.c ****     for (uint8_t i = 0; i < MATRIX_ROWS; i++) {
+ 360               		.loc 1 90 5 view .LVU55
+ 361               	.LBB9:
+ 362               		.loc 1 90 10 view .LVU56
+  91:quantum/matrix_common.c ****         raw_matrix[i] = 0;
+ 363               		.loc 1 91 9 view .LVU57
+ 364               		.loc 1 91 23 is_stmt 0 view .LVU58
+ 365 0004 A0E0      		ldi r26,lo8(raw_matrix)
+ 366 0006 B0E0      		ldi r27,hi8(raw_matrix)
+ 367 0008 1C92      		st X,__zero_reg__
+  92:quantum/matrix_common.c ****         matrix[i]     = 0;
+ 368               		.loc 1 92 9 is_stmt 1 view .LVU59
+ 369               		.loc 1 92 23 is_stmt 0 view .LVU60
+ 370 000a E0E0      		ldi r30,lo8(matrix)
+ 371 000c F0E0      		ldi r31,hi8(matrix)
+ 372 000e 1082      		st Z,__zero_reg__
+ 373               	.LVL18:
+  91:quantum/matrix_common.c ****         raw_matrix[i] = 0;
+ 374               		.loc 1 91 9 is_stmt 1 view .LVU61
+  91:quantum/matrix_common.c ****         raw_matrix[i] = 0;
+ 375               		.loc 1 91 23 is_stmt 0 view .LVU62
+ 376 0010 1196      		adiw r26,1
+ 377 0012 1C92      		st X,__zero_reg__
+ 378 0014 1197      		sbiw r26,1
+ 379               		.loc 1 92 9 is_stmt 1 view .LVU63
+ 380               		.loc 1 92 23 is_stmt 0 view .LVU64
+ 381 0016 1182      		std Z+1,__zero_reg__
+ 382               	.LVL19:
+  91:quantum/matrix_common.c ****         raw_matrix[i] = 0;
+ 383               		.loc 1 91 9 is_stmt 1 view .LVU65
+  91:quantum/matrix_common.c ****         raw_matrix[i] = 0;
+ 384               		.loc 1 91 23 is_stmt 0 view .LVU66
+ 385 0018 1296      		adiw r26,2
+ 386 001a 1C92      		st X,__zero_reg__
+ 387 001c 1297      		sbiw r26,2
+ 388               		.loc 1 92 9 is_stmt 1 view .LVU67
+ 389               		.loc 1 92 23 is_stmt 0 view .LVU68
+ 390 001e 1282      		std Z+2,__zero_reg__
+ 391               	.LVL20:
+  91:quantum/matrix_common.c ****         raw_matrix[i] = 0;
+ 392               		.loc 1 91 9 is_stmt 1 view .LVU69
+  91:quantum/matrix_common.c ****         raw_matrix[i] = 0;
+ 393               		.loc 1 91 23 is_stmt 0 view .LVU70
+ 394 0020 1396      		adiw r26,3
+ 395 0022 1C92      		st X,__zero_reg__
+ 396               		.loc 1 92 9 is_stmt 1 view .LVU71
+ 397               		.loc 1 92 23 is_stmt 0 view .LVU72
+ 398 0024 1382      		std Z+3,__zero_reg__
+ 399               	.LVL21:
+ 400               		.loc 1 92 23 view .LVU73
+ 401               	.LBE9:
+  93:quantum/matrix_common.c ****     }
+  94:quantum/matrix_common.c **** 
+  95:quantum/matrix_common.c ****     debounce_init(MATRIX_ROWS);
+ 402               		.loc 1 95 5 is_stmt 1 view .LVU74
+ 403 0026 84E0      		ldi r24,lo8(4)
+ 404 0028 0E94 0000 		call debounce_init
+ 405               	.LVL22:
+  96:quantum/matrix_common.c **** 
+  97:quantum/matrix_common.c ****     matrix_init_quantum();
+ 406               		.loc 1 97 5 view .LVU75
+ 407 002c 0C94 0000 		jmp matrix_init_quantum
+ 408               	.LVL23:
+ 409               		.cfi_endproc
+ 410               	.LFE13:
+ 412               		.section	.text.matrix_scan,"ax",@progbits
+ 413               		.weak	matrix_scan
+ 415               	matrix_scan:
+ 416               	.LFB14:
+  98:quantum/matrix_common.c **** }
+  99:quantum/matrix_common.c **** 
+ 100:quantum/matrix_common.c **** __attribute__((weak)) uint8_t matrix_scan(void) {
+ 417               		.loc 1 100 49 view -0
+ 418               		.cfi_startproc
+ 419 0000 CF93      		push r28
+ 420               	.LCFI3:
+ 421               		.cfi_def_cfa_offset 3
+ 422               		.cfi_offset 28, -2
+ 423               	/* prologue: function */
+ 424               	/* frame size = 0 */
+ 425               	/* stack size = 1 */
+ 426               	.L__stack_usage = 1
+ 101:quantum/matrix_common.c ****     bool changed = matrix_scan_custom(raw_matrix);
+ 427               		.loc 1 101 5 view .LVU77
+ 428               		.loc 1 101 20 is_stmt 0 view .LVU78
+ 429 0002 80E0      		ldi r24,lo8(raw_matrix)
+ 430 0004 90E0      		ldi r25,hi8(raw_matrix)
+ 431 0006 0E94 0000 		call matrix_scan_custom
+ 432               	.LVL24:
+ 433 000a C82F      		mov r28,r24
+ 434               	.LVL25:
+ 102:quantum/matrix_common.c **** 
+ 103:quantum/matrix_common.c ****     debounce(raw_matrix, matrix, MATRIX_ROWS, changed);
+ 435               		.loc 1 103 5 is_stmt 1 view .LVU79
+ 436 000c 282F      		mov r18,r24
+ 437 000e 44E0      		ldi r20,lo8(4)
+ 438 0010 60E0      		ldi r22,lo8(matrix)
+ 439 0012 70E0      		ldi r23,hi8(matrix)
+ 440 0014 80E0      		ldi r24,lo8(raw_matrix)
+ 441 0016 90E0      		ldi r25,hi8(raw_matrix)
+ 442               	.LVL26:
+ 443               		.loc 1 103 5 is_stmt 0 view .LVU80
+ 444 0018 0E94 0000 		call debounce
+ 445               	.LVL27:
+ 104:quantum/matrix_common.c **** 
+ 105:quantum/matrix_common.c ****     matrix_scan_quantum();
+ 446               		.loc 1 105 5 is_stmt 1 view .LVU81
+ 447 001c 0E94 0000 		call matrix_scan_quantum
+ 448               	.LVL28:
+ 106:quantum/matrix_common.c ****     return changed;
+ 449               		.loc 1 106 5 view .LVU82
+ 107:quantum/matrix_common.c **** }
+ 450               		.loc 1 107 1 is_stmt 0 view .LVU83
+ 451 0020 8C2F      		mov r24,r28
+ 452               	/* epilogue start */
+ 453 0022 CF91      		pop r28
+ 454               	.LVL29:
+ 455               		.loc 1 107 1 view .LVU84
+ 456 0024 0895      		ret
+ 457               		.cfi_endproc
+ 458               	.LFE14:
+ 460               		.comm	matrix,4,1
+ 461               		.comm	raw_matrix,4,1
+ 462               		.text
+ 463               	.Letext0:
+ 464               		.file 2 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/avr/include/stdint.h"
+ 465               		.file 3 "tmk_core/common/matrix.h"
+ 466               		.file 4 "tmk_core/common/debug.h"
+ 467               		.file 5 "quantum/debounce.h"
+ 468               		.file 6 "tmk_core/common/util.h"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 matrix_common.c
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:13     .text.matrix_init_user:0000000000000000 matrix_init_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:13     .text.matrix_init_user:0000000000000000 matrix_init_user.localalias.0
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:33     .text.matrix_init_kb:0000000000000000 matrix_init_kb
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:50     .text.matrix_scan_user:0000000000000000 matrix_scan_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:65     .text.matrix_scan_kb:0000000000000000 matrix_scan_kb
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:82     .text.matrix_rows:0000000000000000 matrix_rows
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:101    .text.matrix_cols:0000000000000000 matrix_cols
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:117    .text.matrix_is_on:0000000000000000 matrix_is_on
+                            *COM*:0000000000000004 matrix
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:163    .text.matrix_get_row:0000000000000000 matrix_get_row
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:190    .text.matrix_is_modified:0000000000000000 matrix_is_modified
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:213    .text.matrix_print:0000000000000000 matrix_print
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:234    .text.matrix_key_count:0000000000000000 matrix_key_count
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:312    .text.matrix_init_custom:0000000000000000 matrix_init_custom
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:327    .text.matrix_scan_custom:0000000000000000 matrix_scan_custom
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:349    .text.matrix_init:0000000000000000 matrix_init
+                            *COM*:0000000000000004 raw_matrix
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8X8VoJ.s:415    .text.matrix_scan:0000000000000000 matrix_scan
+
+UNDEFINED SYMBOLS
+debounce_active
+bitpop
+debounce_init
+matrix_init_quantum
+debounce
+matrix_scan_quantum
+__do_clear_bss
