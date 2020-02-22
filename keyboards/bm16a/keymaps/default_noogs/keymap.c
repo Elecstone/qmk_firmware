@@ -267,18 +267,18 @@ layer_state_t layer_state_set_user(layer_state_t state)	{
 	rgblight_config_t rgblight_config;
 		switch(biton32(state))	{
 			case 1:
-				// Turquoise
+				// Azure
 				rgblight_enable_noeeprom();
-				rgblight_sethsv_noeeprom(HSV_TURQUOISE);
+				rgblight_sethsv_noeeprom(HSV_AZURE);
 				break;
 			case 2:
 				// Purple
 				rgblight_enable_noeeprom();
 				rgblight_sethsv_noeeprom(HSV_PURPLE);
 				break;
-			case 3: // Coral
+			case 3: // Magenta
 				rgblight_enable_noeeprom();
-				rgblight_sethsv_noeeprom(HSV_CORAL);
+				rgblight_sethsv_noeeprom(HSV_MAGENTA);
 			default: // White
 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
 				if (rgblight_config.enable) {
