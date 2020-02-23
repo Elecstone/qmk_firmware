@@ -1040,7 +1040,7 @@
  244:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		KC_F14, KC_F13, GUIDES, TO(0) 
  245:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	),
  246:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	
- 247:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	// Layer 2 - RGB Controls and Browser Functions
+ 247:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	// Layer 3 - RGB Controls and Browser Functions
  248:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	[3] = LAYOUT_ortho_4x4(
  249:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		KC_ESC, NEW_WINDOW, RGB_VAI, RGB_TOG, 
  250:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		KC_TAB, NEW_TAB, RGB_VAD, RGB_MOD, 
@@ -1071,7 +1071,7 @@
  625 0008 80E0      		ldi r24,0
  626 000a 0E94 0000 		call rgblight_sethsv
  627               	.LVL6:
- 263:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	rgblight_mode(RGBLIGHT_MODE_BREATHING); // Set to breathing by default
+ 263:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	rgblight_mode(RGBLIGHT_MODE_BREATHING); // Set to breating by default
  628               		.loc 1 263 2 view .LVU201
  629 000e 82E0      		ldi r24,lo8(2)
  630 0010 0C94 0000 		jmp rgblight_mode
@@ -1126,16 +1126,16 @@
  676 0018 8130      		cpi r24,lo8(1)
  677 001a 01F4      		brne .L57
  269:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			case 1:
- 270:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				// Turquoise
+ 270:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				// Teal
  271:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
  678               		.loc 1 271 5 is_stmt 1 view .LVU208
  679 001c 0E94 0000 		call rgblight_enable_noeeprom
  680               	.LVL10:
- 272:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_TURQUOISE);
+ 272:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_TEAL);
  681               		.loc 1 272 5 view .LVU209
- 682 0020 40E7      		ldi r20,lo8(112)
- 683 0022 6AE5      		ldi r22,lo8(90)
- 684 0024 8BE7      		ldi r24,lo8(123)
+ 682 0020 40E8      		ldi r20,lo8(-128)
+ 683 0022 6FEF      		ldi r22,lo8(-1)
+ 684 0024 80E8      		ldi r24,lo8(-128)
  685               	.L60:
  273:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				break;
  274:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			case 2:
@@ -1143,26 +1143,27 @@
  276:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
  277:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_PURPLE);
  278:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				break;
- 279:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			case 3: // Coral
+ 279:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			case 3: // Chartreuse
  280:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
- 281:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_CORAL);
- 282:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			default: // White
- 283:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
- 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
- 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
- 686               		.loc 1 285 6 is_stmt 0 view .LVU210
+ 281:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_CHARTREUSE);
+ 282:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				break;
+ 283:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			default: // White
+ 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
+ 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
+ 286:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
+ 686               		.loc 1 286 6 is_stmt 0 view .LVU210
  687 0026 0E94 0000 		call rgblight_sethsv_noeeprom
  688               	.LVL11:
  689               	.L58:
- 286:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				} else {
- 287:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_disable_noeeprom(); // Otherwise returns to disabled state
- 288:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				}
- 289:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
- 290:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		}
- 291:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	return state;
- 690               		.loc 1 291 2 is_stmt 1 view .LVU211
- 292:keyboards/bm16a/keymaps/default_noogs/keymap.c **** }
- 691               		.loc 1 292 1 is_stmt 0 view .LVU212
+ 287:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				} else {
+ 288:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_disable_noeeprom(); // Otherwise returns to disabled state
+ 289:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				}
+ 290:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 291:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		}
+ 292:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	return state;
+ 690               		.loc 1 292 2 is_stmt 1 view .LVU211
+ 293:keyboards/bm16a/keymaps/default_noogs/keymap.c **** }
+ 691               		.loc 1 293 1 is_stmt 0 view .LVU212
  692 002a C701      		movw r24,r14
  693 002c B601      		movw r22,r12
  694               	/* epilogue start */
@@ -1183,399 +1184,398 @@
  707 0040 8FEB      		ldi r24,lo8(-65)
  708 0042 00C0      		rjmp .L60
  709               	.L56:
- 280:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_CORAL);
+ 280:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_CHARTREUSE);
  710               		.loc 1 280 5 view .LVU215
  711 0044 0E94 0000 		call rgblight_enable_noeeprom
  712               	.LVL13:
- 281:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			default: // White
+ 281:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				break;
  713               		.loc 1 281 5 view .LVU216
  714 0048 4FEF      		ldi r20,lo8(-1)
- 715 004a 60EB      		ldi r22,lo8(-80)
- 716 004c 8BE0      		ldi r24,lo8(11)
- 717 004e 0E94 0000 		call rgblight_sethsv_noeeprom
- 718               	.LVL14:
- 719               	.L57:
- 283:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
- 720               		.loc 1 283 5 view .LVU217
- 283:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
- 721               		.loc 1 283 27 is_stmt 0 view .LVU218
- 722 0052 0E94 0000 		call eeconfig_read_rgblight
- 723               	.LVL15:
- 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
- 724               		.loc 1 284 5 is_stmt 1 view .LVU219
- 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
- 725               		.loc 1 284 8 is_stmt 0 view .LVU220
- 726 0056 60FF      		sbrs r22,0
- 727 0058 00C0      		rjmp .L59
- 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				} else {
- 728               		.loc 1 285 6 is_stmt 1 view .LVU221
- 729 005a 4FEF      		ldi r20,lo8(-1)
- 730 005c 60E0      		ldi r22,0
- 731               	.LVL16:
- 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				} else {
- 732               		.loc 1 285 6 is_stmt 0 view .LVU222
- 733 005e 80E0      		ldi r24,0
- 734 0060 00C0      		rjmp .L60
- 735               	.LVL17:
- 736               	.L59:
- 287:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				}
- 737               		.loc 1 287 6 is_stmt 1 view .LVU223
- 738 0062 0E94 0000 		call rgblight_disable_noeeprom
- 739               	.LVL18:
- 287:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				}
- 740               		.loc 1 287 6 is_stmt 0 view .LVU224
- 741 0066 00C0      		rjmp .L58
- 742               		.cfi_endproc
- 743               	.LFE114:
- 745               		.section	.progmem.data.__c.6348,"a"
- 748               	__c.6348:
- 749 0000 03E3 0309 		.string	"\003\343\003\t"
- 749      00
- 750               		.section	.progmem.data.__c.6346,"a"
- 753               	__c.6346:
- 754 0000 02E3 0209 		.string	"\002\343\002\t"
- 754      00
- 755               		.section	.progmem.data.__c.6343,"a"
- 758               	__c.6343:
- 759 0000 03E3 0313 		.string	"\003\343\003\023"
- 759      00
- 760               		.section	.progmem.data.__c.6341,"a"
- 763               	__c.6341:
- 764 0000 02E3 0213 		.string	"\002\343\002\023"
- 764      00
- 765               		.section	.progmem.data.__c.6338,"a"
- 768               	__c.6338:
- 769 0000 03E3 0314 		.string	"\003\343\003\024"
- 769      00
- 770               		.section	.progmem.data.__c.6336,"a"
- 773               	__c.6336:
- 774 0000 02E3 0214 		.string	"\002\343\002\024"
- 774      00
- 775               		.section	.progmem.data.__c.6333,"a"
- 778               	__c.6333:
- 779 0000 03E3 03E1 		.string	"\003\343\003\341\003\026"
- 779      0316 00
- 780               		.section	.progmem.data.__c.6331,"a"
- 783               	__c.6331:
- 784 0000 02E3 02E1 		.string	"\002\343\002\341\002\026"
- 784      0216 00
- 785               		.section	.progmem.data.__c.6328,"a"
- 788               	__c.6328:
- 789 0000 03E3 03E1 		.string	"\003\343\003\341\003\027"
- 789      0317 00
- 790               		.section	.progmem.data.__c.6326,"a"
- 793               	__c.6326:
- 794 0000 02E3 02E1 		.string	"\002\343\002\341\002\027"
- 794      0217 00
- 795               		.section	.progmem.data.__c.6323,"a"
- 798               	__c.6323:
- 799 0000 03E3 0311 		.string	"\003\343\003\021"
- 799      00
- 800               		.section	.progmem.data.__c.6321,"a"
- 803               	__c.6321:
- 804 0000 02E3 0211 		.string	"\002\343\002\021"
- 804      00
- 805               		.section	.progmem.data.__c.6318,"a"
- 808               	__c.6318:
- 809 0000 03E3 0333 		.string	"\003\343\0033"
- 809      00
- 810               		.section	.progmem.data.__c.6316,"a"
- 813               	__c.6316:
- 814 0000 02E3 0233 		.string	"\002\343\0023"
- 814      00
- 815               		.section	.progmem.data.__c.6313,"a"
- 818               	__c.6313:
- 819 0000 03E1 033E 		.string	"\003\341\003>"
- 819      00
- 820               		.section	.progmem.data.__c.6311,"a"
- 823               	__c.6311:
- 824 0000 02E1 023E 		.string	"\002\341\002>"
- 824      00
- 825               		.section	.progmem.data.__c.6308,"a"
- 828               	__c.6308:
- 829 0000 03E3 0317 		.string	"\003\343\003\027"
- 829      00
- 830               		.section	.progmem.data.__c.6306,"a"
- 833               	__c.6306:
- 834 0000 02E3 0217 		.string	"\002\343\002\027"
- 834      00
- 835               		.section	.progmem.data.__c.6303,"a"
- 838               	__c.6303:
- 839 0000 03E3 0307 		.string	"\003\343\003\007"
- 839      00
- 840               		.section	.progmem.data.__c.6301,"a"
- 843               	__c.6301:
- 844 0000 02E3 0207 		.string	"\002\343\002\007"
- 844      00
- 845               		.section	.progmem.data.__c.6298,"a"
- 848               	__c.6298:
- 849 0000 03E3 0304 		.string	"\003\343\003\004"
- 849      00
- 850               		.section	.progmem.data.__c.6296,"a"
- 853               	__c.6296:
- 854 0000 02E3 0204 		.string	"\002\343\002\004"
- 854      00
- 855               		.section	.progmem.data.__c.6293,"a"
- 858               	__c.6293:
- 859 0000 03E3 03E2 		.string	"\003\343\003\342\003\341\003\b"
- 859      03E1 0308 
- 859      00
- 860               		.section	.progmem.data.__c.6291,"a"
- 863               	__c.6291:
- 864 0000 02E3 02E2 		.string	"\002\343\002\342\002\341\002\b"
- 864      02E1 0208 
- 864      00
- 865               		.section	.progmem.data.__c.6288,"a"
- 868               	__c.6288:
- 869 0000 03E3 030F 		.string	"\003\343\003\017"
- 869      00
- 870               		.section	.progmem.data.__c.6286,"a"
- 873               	__c.6286:
- 874 0000 02E3 020F 		.string	"\002\343\002\017"
- 874      00
- 875               		.section	.progmem.data.__c.6283,"a"
- 878               	__c.6283:
- 879 0000 03E3 0316 		.string	"\003\343\003\026"
- 879      00
- 880               		.section	.progmem.data.__c.6281,"a"
- 883               	__c.6281:
- 884 0000 02E3 0216 		.string	"\002\343\002\026"
- 884      00
- 885               		.section	.progmem.data.__c.6278,"a"
- 888               	__c.6278:
- 889 0000 03E1 03E2 		.string	"\003\341\003\342\003\343\003\026"
- 889      03E3 0316 
- 889      00
- 890               		.section	.progmem.data.__c.6276,"a"
- 893               	__c.6276:
- 894 0000 02E1 02E2 		.string	"\002\341\002\342\002\343\002\026"
- 894      02E3 0216 
- 894      00
- 895               		.section	.progmem.data.__c.6273,"a"
- 898               	__c.6273:
- 899 0000 03E3 0319 		.string	"\003\343\003\031"
- 899      00
- 900               		.section	.progmem.data.__c.6271,"a"
- 903               	__c.6271:
- 904 0000 02E3 0219 		.string	"\002\343\002\031"
- 904      00
- 905               		.section	.progmem.data.__c.6268,"a"
- 908               	__c.6268:
- 909 0000 03E3 031A 		.string	"\003\343\003\032"
- 909      00
- 910               		.section	.progmem.data.__c.6266,"a"
- 913               	__c.6266:
- 914 0000 02E3 021A 		.string	"\002\343\002\032"
- 914      00
- 915               		.section	.progmem.data.__c.6263,"a"
- 918               	__c.6263:
- 919 0000 03E3 0327 		.string	"\003\343\003'"
- 919      00
- 920               		.section	.progmem.data.__c.6261,"a"
- 923               	__c.6261:
- 924 0000 02E3 0227 		.string	"\002\343\002'"
- 924      00
- 925               		.section	.progmem.data.__c.6258,"a"
- 928               	__c.6258:
- 929 0000 03E3 0306 		.string	"\003\343\003\006"
- 929      00
- 930               		.section	.progmem.data.__c.6256,"a"
- 933               	__c.6256:
- 934 0000 02E3 0206 		.string	"\002\343\002\006"
- 934      00
- 935               		.section	.progmem.data.__c.6253,"a"
- 938               	__c.6253:
- 939 0000 03E3 0312 		.string	"\003\343\003\022"
- 939      00
- 940               		.section	.progmem.data.__c.6251,"a"
- 943               	__c.6251:
- 944 0000 02E3 0212 		.string	"\002\343\002\022"
- 944      00
- 945               		.section	.progmem.data.__c.6248,"a"
- 948               	__c.6248:
- 949 0000 03E3 0357 		.string	"\003\343\003W"
- 949      00
- 950               		.section	.progmem.data.__c.6246,"a"
- 953               	__c.6246:
- 954 0000 02E3 0257 		.string	"\002\343\002W"
- 954      00
- 955               		.section	.progmem.data.__c.6243,"a"
- 958               	__c.6243:
- 959 0000 03E3 0356 		.string	"\003\343\003V"
- 959      00
- 960               		.section	.progmem.data.__c.6241,"a"
- 963               	__c.6241:
- 964 0000 02E3 0256 		.string	"\002\343\002V"
- 964      00
- 965               		.section	.progmem.data.__c.6238,"a"
- 968               	__c.6238:
- 969 0000 03E3 031D 		.string	"\003\343\003\035"
- 969      00
- 970               		.section	.progmem.data.__c.6236,"a"
- 973               	__c.6236:
- 974 0000 02E3 021D 		.string	"\002\343\002\035"
- 974      00
- 975               		.section	.progmem.data.__c.6232,"a"
- 978               	__c.6232:
- 979 0000 03E1 03E3 		.string	"\003\341\003\343\003\035"
- 979      031D 00
- 980               		.section	.progmem.data.__c.6230,"a"
- 983               	__c.6230:
- 984 0000 02E1 02E3 		.string	"\002\341\002\343\002\035"
- 984      021D 00
- 985               	.global	keymaps
- 986               		.section	.progmem.data.keymaps,"a"
- 989               	keymaps:
- 990 0000 085D      		.word	23816
- 991 0002 095D      		.word	23817
- 992 0004 0A5D      		.word	23818
- 993 0006 0B5D      		.word	23819
- 994 0008 0C5D      		.word	23820
- 995 000a 0D5D      		.word	23821
- 996 000c 0E5D      		.word	23822
- 997 000e 2C00      		.word	44
- 998 0010 0F5D      		.word	23823
- 999 0012 105D      		.word	23824
- 1000 0014 E200      		.word	226
- 1001 0016 E100      		.word	225
- 1002 0018 1350      		.word	20499
- 1003 001a 1250      		.word	20498
- 1004 001c 1150      		.word	20497
- 1005 001e 1050      		.word	20496
- 1006 0020 1000      		.word	16
- 1007 0022 1900      		.word	25
- 1008 0024 2F00      		.word	47
- 1009 0026 3000      		.word	48
- 1010 0028 1A00      		.word	26
- 1011 002a 1200      		.word	18
- 1012 002c 1B00      		.word	27
- 1013 002e 0500      		.word	5
- 1014 0030 0D00      		.word	13
- 1015 0032 0F00      		.word	15
- 1016 0034 0800      		.word	8
- 1017 0036 0600      		.word	6
- 1018 0038 1600      		.word	22
- 1019 003a 0900      		.word	9
- 1020 003c 0100      		.word	1
- 1021 003e 1050      		.word	20496
- 1022 0040 2900      		.word	41
- 1023 0042 115D      		.word	23825
- 1024 0044 125D      		.word	23826
- 1025 0046 135D      		.word	23827
- 1026 0048 2B00      		.word	43
- 1027 004a 145D      		.word	23828
- 1028 004c 155D      		.word	23829
- 1029 004e 165D      		.word	23830
- 1030 0050 6A00      		.word	106
- 1031 0052 0100      		.word	1
- 1032 0054 175D      		.word	23831
- 1033 0056 185D      		.word	23832
- 1034 0058 6900      		.word	105
- 1035 005a 6800      		.word	104
- 1036 005c 195D      		.word	23833
- 1037 005e 1050      		.word	20496
- 1038 0060 2900      		.word	41
- 1039 0062 1A5D      		.word	23834
- 1040 0064 C95C      		.word	23753
- 1041 0066 C25C      		.word	23746
- 1042 0068 2B00      		.word	43
- 1043 006a 1B5D      		.word	23835
- 1044 006c CA5C      		.word	23754
- 1045 006e C35C      		.word	23747
- 1046 0070 1C5D      		.word	23836
- 1047 0072 0100      		.word	1
- 1048 0074 1D5D      		.word	23837
- 1049 0076 005C      		.word	23552
- 1050 0078 1E5D      		.word	23838
- 1051 007a 1F5D      		.word	23839
- 1052 007c 0100      		.word	1
- 1053 007e 1050      		.word	20496
- 1054               		.text
- 1055               	.Letext0:
- 1056               		.file 2 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/avr/include/stdint.h"
- 1057               		.file 3 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/lib/avr-gcc/8/gcc/avr/8.3.0/include/stddef.h"
- 1058               		.file 4 "tmk_core/common/keyboard.h"
- 1059               		.file 5 "tmk_core/common/keycode.h"
- 1060               		.file 6 "tmk_core/common/action_code.h"
- 1061               		.file 7 "tmk_core/common/action.h"
- 1062               		.file 8 "lib/lufa/LUFA/Drivers/USB/Core/AVR8/../StdRequestType.h"
- 1063               		.file 9 "lib/lufa/LUFA/Drivers/USB/Core/AVR8/../DeviceStandardReq.h"
- 1064               		.file 10 "lib/lufa/LUFA/Drivers/USB/Core/USBTask.h"
- 1065               		.file 11 "lib/lufa/LUFA/Drivers/USB/Core/HostStandardReq.h"
- 1066               		.file 12 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/avr/include/stdio.h"
- 1067               		.file 13 "tmk_core/common/report.h"
- 1068               		.file 14 "tmk_core/common/host.h"
- 1069               		.file 15 "tmk_core/common/debug.h"
- 1070               		.file 16 "quantum/keycode_config.h"
- 1071               		.file 17 "quantum/quantum_keycodes.h"
- 1072               		.file 18 "quantum/keymap.h"
- 1073               		.file 19 "quantum/rgblight.h"
- 1074               		.file 20 "./quantum/color.h"
- 1075               		.file 21 "tmk_core/common/action_layer.h"
- 1076               		.file 22 "tmk_core/common/timer.h"
- 1077               		.file 23 "tmk_core/common/action_util.h"
- 1078               		.file 24 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/avr/include/stdlib.h"
- 1079               		.file 25 "quantum/quantum.h"
- 1080               		.file 26 "tmk_core/common/util.h"
+ 715 004a 6FEF      		ldi r22,lo8(-1)
+ 716 004c 80E4      		ldi r24,lo8(64)
+ 717 004e 00C0      		rjmp .L60
+ 718               	.L57:
+ 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
+ 719               		.loc 1 284 5 view .LVU217
+ 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
+ 720               		.loc 1 284 27 is_stmt 0 view .LVU218
+ 721 0050 0E94 0000 		call eeconfig_read_rgblight
+ 722               	.LVL14:
+ 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
+ 723               		.loc 1 285 5 is_stmt 1 view .LVU219
+ 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
+ 724               		.loc 1 285 8 is_stmt 0 view .LVU220
+ 725 0054 60FF      		sbrs r22,0
+ 726 0056 00C0      		rjmp .L59
+ 286:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				} else {
+ 727               		.loc 1 286 6 is_stmt 1 view .LVU221
+ 728 0058 4FEF      		ldi r20,lo8(-1)
+ 729 005a 60E0      		ldi r22,0
+ 730               	.LVL15:
+ 286:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				} else {
+ 731               		.loc 1 286 6 is_stmt 0 view .LVU222
+ 732 005c 80E0      		ldi r24,0
+ 733 005e 00C0      		rjmp .L60
+ 734               	.LVL16:
+ 735               	.L59:
+ 288:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				}
+ 736               		.loc 1 288 6 is_stmt 1 view .LVU223
+ 737 0060 0E94 0000 		call rgblight_disable_noeeprom
+ 738               	.LVL17:
+ 288:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				}
+ 739               		.loc 1 288 6 is_stmt 0 view .LVU224
+ 740 0064 00C0      		rjmp .L58
+ 741               		.cfi_endproc
+ 742               	.LFE114:
+ 744               		.section	.progmem.data.__c.6348,"a"
+ 747               	__c.6348:
+ 748 0000 03E3 0309 		.string	"\003\343\003\t"
+ 748      00
+ 749               		.section	.progmem.data.__c.6346,"a"
+ 752               	__c.6346:
+ 753 0000 02E3 0209 		.string	"\002\343\002\t"
+ 753      00
+ 754               		.section	.progmem.data.__c.6343,"a"
+ 757               	__c.6343:
+ 758 0000 03E3 0313 		.string	"\003\343\003\023"
+ 758      00
+ 759               		.section	.progmem.data.__c.6341,"a"
+ 762               	__c.6341:
+ 763 0000 02E3 0213 		.string	"\002\343\002\023"
+ 763      00
+ 764               		.section	.progmem.data.__c.6338,"a"
+ 767               	__c.6338:
+ 768 0000 03E3 0314 		.string	"\003\343\003\024"
+ 768      00
+ 769               		.section	.progmem.data.__c.6336,"a"
+ 772               	__c.6336:
+ 773 0000 02E3 0214 		.string	"\002\343\002\024"
+ 773      00
+ 774               		.section	.progmem.data.__c.6333,"a"
+ 777               	__c.6333:
+ 778 0000 03E3 03E1 		.string	"\003\343\003\341\003\026"
+ 778      0316 00
+ 779               		.section	.progmem.data.__c.6331,"a"
+ 782               	__c.6331:
+ 783 0000 02E3 02E1 		.string	"\002\343\002\341\002\026"
+ 783      0216 00
+ 784               		.section	.progmem.data.__c.6328,"a"
+ 787               	__c.6328:
+ 788 0000 03E3 03E1 		.string	"\003\343\003\341\003\027"
+ 788      0317 00
+ 789               		.section	.progmem.data.__c.6326,"a"
+ 792               	__c.6326:
+ 793 0000 02E3 02E1 		.string	"\002\343\002\341\002\027"
+ 793      0217 00
+ 794               		.section	.progmem.data.__c.6323,"a"
+ 797               	__c.6323:
+ 798 0000 03E3 0311 		.string	"\003\343\003\021"
+ 798      00
+ 799               		.section	.progmem.data.__c.6321,"a"
+ 802               	__c.6321:
+ 803 0000 02E3 0211 		.string	"\002\343\002\021"
+ 803      00
+ 804               		.section	.progmem.data.__c.6318,"a"
+ 807               	__c.6318:
+ 808 0000 03E3 0333 		.string	"\003\343\0033"
+ 808      00
+ 809               		.section	.progmem.data.__c.6316,"a"
+ 812               	__c.6316:
+ 813 0000 02E3 0233 		.string	"\002\343\0023"
+ 813      00
+ 814               		.section	.progmem.data.__c.6313,"a"
+ 817               	__c.6313:
+ 818 0000 03E1 033E 		.string	"\003\341\003>"
+ 818      00
+ 819               		.section	.progmem.data.__c.6311,"a"
+ 822               	__c.6311:
+ 823 0000 02E1 023E 		.string	"\002\341\002>"
+ 823      00
+ 824               		.section	.progmem.data.__c.6308,"a"
+ 827               	__c.6308:
+ 828 0000 03E3 0317 		.string	"\003\343\003\027"
+ 828      00
+ 829               		.section	.progmem.data.__c.6306,"a"
+ 832               	__c.6306:
+ 833 0000 02E3 0217 		.string	"\002\343\002\027"
+ 833      00
+ 834               		.section	.progmem.data.__c.6303,"a"
+ 837               	__c.6303:
+ 838 0000 03E3 0307 		.string	"\003\343\003\007"
+ 838      00
+ 839               		.section	.progmem.data.__c.6301,"a"
+ 842               	__c.6301:
+ 843 0000 02E3 0207 		.string	"\002\343\002\007"
+ 843      00
+ 844               		.section	.progmem.data.__c.6298,"a"
+ 847               	__c.6298:
+ 848 0000 03E3 0304 		.string	"\003\343\003\004"
+ 848      00
+ 849               		.section	.progmem.data.__c.6296,"a"
+ 852               	__c.6296:
+ 853 0000 02E3 0204 		.string	"\002\343\002\004"
+ 853      00
+ 854               		.section	.progmem.data.__c.6293,"a"
+ 857               	__c.6293:
+ 858 0000 03E3 03E2 		.string	"\003\343\003\342\003\341\003\b"
+ 858      03E1 0308 
+ 858      00
+ 859               		.section	.progmem.data.__c.6291,"a"
+ 862               	__c.6291:
+ 863 0000 02E3 02E2 		.string	"\002\343\002\342\002\341\002\b"
+ 863      02E1 0208 
+ 863      00
+ 864               		.section	.progmem.data.__c.6288,"a"
+ 867               	__c.6288:
+ 868 0000 03E3 030F 		.string	"\003\343\003\017"
+ 868      00
+ 869               		.section	.progmem.data.__c.6286,"a"
+ 872               	__c.6286:
+ 873 0000 02E3 020F 		.string	"\002\343\002\017"
+ 873      00
+ 874               		.section	.progmem.data.__c.6283,"a"
+ 877               	__c.6283:
+ 878 0000 03E3 0316 		.string	"\003\343\003\026"
+ 878      00
+ 879               		.section	.progmem.data.__c.6281,"a"
+ 882               	__c.6281:
+ 883 0000 02E3 0216 		.string	"\002\343\002\026"
+ 883      00
+ 884               		.section	.progmem.data.__c.6278,"a"
+ 887               	__c.6278:
+ 888 0000 03E1 03E2 		.string	"\003\341\003\342\003\343\003\026"
+ 888      03E3 0316 
+ 888      00
+ 889               		.section	.progmem.data.__c.6276,"a"
+ 892               	__c.6276:
+ 893 0000 02E1 02E2 		.string	"\002\341\002\342\002\343\002\026"
+ 893      02E3 0216 
+ 893      00
+ 894               		.section	.progmem.data.__c.6273,"a"
+ 897               	__c.6273:
+ 898 0000 03E3 0319 		.string	"\003\343\003\031"
+ 898      00
+ 899               		.section	.progmem.data.__c.6271,"a"
+ 902               	__c.6271:
+ 903 0000 02E3 0219 		.string	"\002\343\002\031"
+ 903      00
+ 904               		.section	.progmem.data.__c.6268,"a"
+ 907               	__c.6268:
+ 908 0000 03E3 031A 		.string	"\003\343\003\032"
+ 908      00
+ 909               		.section	.progmem.data.__c.6266,"a"
+ 912               	__c.6266:
+ 913 0000 02E3 021A 		.string	"\002\343\002\032"
+ 913      00
+ 914               		.section	.progmem.data.__c.6263,"a"
+ 917               	__c.6263:
+ 918 0000 03E3 0327 		.string	"\003\343\003'"
+ 918      00
+ 919               		.section	.progmem.data.__c.6261,"a"
+ 922               	__c.6261:
+ 923 0000 02E3 0227 		.string	"\002\343\002'"
+ 923      00
+ 924               		.section	.progmem.data.__c.6258,"a"
+ 927               	__c.6258:
+ 928 0000 03E3 0306 		.string	"\003\343\003\006"
+ 928      00
+ 929               		.section	.progmem.data.__c.6256,"a"
+ 932               	__c.6256:
+ 933 0000 02E3 0206 		.string	"\002\343\002\006"
+ 933      00
+ 934               		.section	.progmem.data.__c.6253,"a"
+ 937               	__c.6253:
+ 938 0000 03E3 0312 		.string	"\003\343\003\022"
+ 938      00
+ 939               		.section	.progmem.data.__c.6251,"a"
+ 942               	__c.6251:
+ 943 0000 02E3 0212 		.string	"\002\343\002\022"
+ 943      00
+ 944               		.section	.progmem.data.__c.6248,"a"
+ 947               	__c.6248:
+ 948 0000 03E3 0357 		.string	"\003\343\003W"
+ 948      00
+ 949               		.section	.progmem.data.__c.6246,"a"
+ 952               	__c.6246:
+ 953 0000 02E3 0257 		.string	"\002\343\002W"
+ 953      00
+ 954               		.section	.progmem.data.__c.6243,"a"
+ 957               	__c.6243:
+ 958 0000 03E3 0356 		.string	"\003\343\003V"
+ 958      00
+ 959               		.section	.progmem.data.__c.6241,"a"
+ 962               	__c.6241:
+ 963 0000 02E3 0256 		.string	"\002\343\002V"
+ 963      00
+ 964               		.section	.progmem.data.__c.6238,"a"
+ 967               	__c.6238:
+ 968 0000 03E3 031D 		.string	"\003\343\003\035"
+ 968      00
+ 969               		.section	.progmem.data.__c.6236,"a"
+ 972               	__c.6236:
+ 973 0000 02E3 021D 		.string	"\002\343\002\035"
+ 973      00
+ 974               		.section	.progmem.data.__c.6232,"a"
+ 977               	__c.6232:
+ 978 0000 03E1 03E3 		.string	"\003\341\003\343\003\035"
+ 978      031D 00
+ 979               		.section	.progmem.data.__c.6230,"a"
+ 982               	__c.6230:
+ 983 0000 02E1 02E3 		.string	"\002\341\002\343\002\035"
+ 983      021D 00
+ 984               	.global	keymaps
+ 985               		.section	.progmem.data.keymaps,"a"
+ 988               	keymaps:
+ 989 0000 085D      		.word	23816
+ 990 0002 095D      		.word	23817
+ 991 0004 0A5D      		.word	23818
+ 992 0006 0B5D      		.word	23819
+ 993 0008 0C5D      		.word	23820
+ 994 000a 0D5D      		.word	23821
+ 995 000c 0E5D      		.word	23822
+ 996 000e 2C00      		.word	44
+ 997 0010 0F5D      		.word	23823
+ 998 0012 105D      		.word	23824
+ 999 0014 E200      		.word	226
+ 1000 0016 E100      		.word	225
+ 1001 0018 1350      		.word	20499
+ 1002 001a 1250      		.word	20498
+ 1003 001c 1150      		.word	20497
+ 1004 001e 1050      		.word	20496
+ 1005 0020 1000      		.word	16
+ 1006 0022 1900      		.word	25
+ 1007 0024 2F00      		.word	47
+ 1008 0026 3000      		.word	48
+ 1009 0028 1A00      		.word	26
+ 1010 002a 1200      		.word	18
+ 1011 002c 1B00      		.word	27
+ 1012 002e 0500      		.word	5
+ 1013 0030 0D00      		.word	13
+ 1014 0032 0F00      		.word	15
+ 1015 0034 0800      		.word	8
+ 1016 0036 0600      		.word	6
+ 1017 0038 1600      		.word	22
+ 1018 003a 0900      		.word	9
+ 1019 003c 0100      		.word	1
+ 1020 003e 1050      		.word	20496
+ 1021 0040 2900      		.word	41
+ 1022 0042 115D      		.word	23825
+ 1023 0044 125D      		.word	23826
+ 1024 0046 135D      		.word	23827
+ 1025 0048 2B00      		.word	43
+ 1026 004a 145D      		.word	23828
+ 1027 004c 155D      		.word	23829
+ 1028 004e 165D      		.word	23830
+ 1029 0050 6A00      		.word	106
+ 1030 0052 0100      		.word	1
+ 1031 0054 175D      		.word	23831
+ 1032 0056 185D      		.word	23832
+ 1033 0058 6900      		.word	105
+ 1034 005a 6800      		.word	104
+ 1035 005c 195D      		.word	23833
+ 1036 005e 1050      		.word	20496
+ 1037 0060 2900      		.word	41
+ 1038 0062 1A5D      		.word	23834
+ 1039 0064 C95C      		.word	23753
+ 1040 0066 C25C      		.word	23746
+ 1041 0068 2B00      		.word	43
+ 1042 006a 1B5D      		.word	23835
+ 1043 006c CA5C      		.word	23754
+ 1044 006e C35C      		.word	23747
+ 1045 0070 1C5D      		.word	23836
+ 1046 0072 0100      		.word	1
+ 1047 0074 1D5D      		.word	23837
+ 1048 0076 005C      		.word	23552
+ 1049 0078 1E5D      		.word	23838
+ 1050 007a 1F5D      		.word	23839
+ 1051 007c 0100      		.word	1
+ 1052 007e 1050      		.word	20496
+ 1053               		.text
+ 1054               	.Letext0:
+ 1055               		.file 2 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/avr/include/stdint.h"
+ 1056               		.file 3 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/lib/avr-gcc/8/gcc/avr/8.3.0/include/stddef.h"
+ 1057               		.file 4 "tmk_core/common/keyboard.h"
+ 1058               		.file 5 "tmk_core/common/keycode.h"
+ 1059               		.file 6 "tmk_core/common/action_code.h"
+ 1060               		.file 7 "tmk_core/common/action.h"
+ 1061               		.file 8 "lib/lufa/LUFA/Drivers/USB/Core/AVR8/../StdRequestType.h"
+ 1062               		.file 9 "lib/lufa/LUFA/Drivers/USB/Core/AVR8/../DeviceStandardReq.h"
+ 1063               		.file 10 "lib/lufa/LUFA/Drivers/USB/Core/USBTask.h"
+ 1064               		.file 11 "lib/lufa/LUFA/Drivers/USB/Core/HostStandardReq.h"
+ 1065               		.file 12 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/avr/include/stdio.h"
+ 1066               		.file 13 "tmk_core/common/report.h"
+ 1067               		.file 14 "tmk_core/common/host.h"
+ 1068               		.file 15 "tmk_core/common/debug.h"
+ 1069               		.file 16 "quantum/keycode_config.h"
+ 1070               		.file 17 "quantum/quantum_keycodes.h"
+ 1071               		.file 18 "quantum/keymap.h"
+ 1072               		.file 19 "quantum/rgblight.h"
+ 1073               		.file 20 "./quantum/color.h"
+ 1074               		.file 21 "tmk_core/common/action_layer.h"
+ 1075               		.file 22 "tmk_core/common/timer.h"
+ 1076               		.file 23 "tmk_core/common/action_util.h"
+ 1077               		.file 24 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/avr/include/stdlib.h"
+ 1078               		.file 25 "quantum/quantum.h"
+ 1079               		.file 26 "tmk_core/common/util.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 keymap.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:13     .text.process_record_user:0000000000000000 process_record_user
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:983    .progmem.data.__c.6230:0000000000000000 __c.6230
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:978    .progmem.data.__c.6232:0000000000000000 __c.6232
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:973    .progmem.data.__c.6236:0000000000000000 __c.6236
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:968    .progmem.data.__c.6238:0000000000000000 __c.6238
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:963    .progmem.data.__c.6241:0000000000000000 __c.6241
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:958    .progmem.data.__c.6243:0000000000000000 __c.6243
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:953    .progmem.data.__c.6246:0000000000000000 __c.6246
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:948    .progmem.data.__c.6248:0000000000000000 __c.6248
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:943    .progmem.data.__c.6251:0000000000000000 __c.6251
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:938    .progmem.data.__c.6253:0000000000000000 __c.6253
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:933    .progmem.data.__c.6256:0000000000000000 __c.6256
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:928    .progmem.data.__c.6258:0000000000000000 __c.6258
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:923    .progmem.data.__c.6261:0000000000000000 __c.6261
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:918    .progmem.data.__c.6263:0000000000000000 __c.6263
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:913    .progmem.data.__c.6266:0000000000000000 __c.6266
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:908    .progmem.data.__c.6268:0000000000000000 __c.6268
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:903    .progmem.data.__c.6271:0000000000000000 __c.6271
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:898    .progmem.data.__c.6273:0000000000000000 __c.6273
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:893    .progmem.data.__c.6276:0000000000000000 __c.6276
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:888    .progmem.data.__c.6278:0000000000000000 __c.6278
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:883    .progmem.data.__c.6281:0000000000000000 __c.6281
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:878    .progmem.data.__c.6283:0000000000000000 __c.6283
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:873    .progmem.data.__c.6286:0000000000000000 __c.6286
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:868    .progmem.data.__c.6288:0000000000000000 __c.6288
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:863    .progmem.data.__c.6291:0000000000000000 __c.6291
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:858    .progmem.data.__c.6293:0000000000000000 __c.6293
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:853    .progmem.data.__c.6296:0000000000000000 __c.6296
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:848    .progmem.data.__c.6298:0000000000000000 __c.6298
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:843    .progmem.data.__c.6301:0000000000000000 __c.6301
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:838    .progmem.data.__c.6303:0000000000000000 __c.6303
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:833    .progmem.data.__c.6306:0000000000000000 __c.6306
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:828    .progmem.data.__c.6308:0000000000000000 __c.6308
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:823    .progmem.data.__c.6311:0000000000000000 __c.6311
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:818    .progmem.data.__c.6313:0000000000000000 __c.6313
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:813    .progmem.data.__c.6316:0000000000000000 __c.6316
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:808    .progmem.data.__c.6318:0000000000000000 __c.6318
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:803    .progmem.data.__c.6321:0000000000000000 __c.6321
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:798    .progmem.data.__c.6323:0000000000000000 __c.6323
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:793    .progmem.data.__c.6326:0000000000000000 __c.6326
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:788    .progmem.data.__c.6328:0000000000000000 __c.6328
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:783    .progmem.data.__c.6331:0000000000000000 __c.6331
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:778    .progmem.data.__c.6333:0000000000000000 __c.6333
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:773    .progmem.data.__c.6336:0000000000000000 __c.6336
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:768    .progmem.data.__c.6338:0000000000000000 __c.6338
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:763    .progmem.data.__c.6341:0000000000000000 __c.6341
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:758    .progmem.data.__c.6343:0000000000000000 __c.6343
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:753    .progmem.data.__c.6346:0000000000000000 __c.6346
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:748    .progmem.data.__c.6348:0000000000000000 __c.6348
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:611    .text.eeconfig_init_user:0000000000000000 eeconfig_init_user
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:638    .text.layer_state_set_user:0000000000000000 layer_state_set_user
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccgftr2h.s:989    .progmem.data.keymaps:0000000000000000 keymaps
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:13     .text.process_record_user:0000000000000000 process_record_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:982    .progmem.data.__c.6230:0000000000000000 __c.6230
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:977    .progmem.data.__c.6232:0000000000000000 __c.6232
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:972    .progmem.data.__c.6236:0000000000000000 __c.6236
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:967    .progmem.data.__c.6238:0000000000000000 __c.6238
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:962    .progmem.data.__c.6241:0000000000000000 __c.6241
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:957    .progmem.data.__c.6243:0000000000000000 __c.6243
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:952    .progmem.data.__c.6246:0000000000000000 __c.6246
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:947    .progmem.data.__c.6248:0000000000000000 __c.6248
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:942    .progmem.data.__c.6251:0000000000000000 __c.6251
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:937    .progmem.data.__c.6253:0000000000000000 __c.6253
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:932    .progmem.data.__c.6256:0000000000000000 __c.6256
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:927    .progmem.data.__c.6258:0000000000000000 __c.6258
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:922    .progmem.data.__c.6261:0000000000000000 __c.6261
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:917    .progmem.data.__c.6263:0000000000000000 __c.6263
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:912    .progmem.data.__c.6266:0000000000000000 __c.6266
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:907    .progmem.data.__c.6268:0000000000000000 __c.6268
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:902    .progmem.data.__c.6271:0000000000000000 __c.6271
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:897    .progmem.data.__c.6273:0000000000000000 __c.6273
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:892    .progmem.data.__c.6276:0000000000000000 __c.6276
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:887    .progmem.data.__c.6278:0000000000000000 __c.6278
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:882    .progmem.data.__c.6281:0000000000000000 __c.6281
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:877    .progmem.data.__c.6283:0000000000000000 __c.6283
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:872    .progmem.data.__c.6286:0000000000000000 __c.6286
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:867    .progmem.data.__c.6288:0000000000000000 __c.6288
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:862    .progmem.data.__c.6291:0000000000000000 __c.6291
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:857    .progmem.data.__c.6293:0000000000000000 __c.6293
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:852    .progmem.data.__c.6296:0000000000000000 __c.6296
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:847    .progmem.data.__c.6298:0000000000000000 __c.6298
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:842    .progmem.data.__c.6301:0000000000000000 __c.6301
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:837    .progmem.data.__c.6303:0000000000000000 __c.6303
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:832    .progmem.data.__c.6306:0000000000000000 __c.6306
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:827    .progmem.data.__c.6308:0000000000000000 __c.6308
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:822    .progmem.data.__c.6311:0000000000000000 __c.6311
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:817    .progmem.data.__c.6313:0000000000000000 __c.6313
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:812    .progmem.data.__c.6316:0000000000000000 __c.6316
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:807    .progmem.data.__c.6318:0000000000000000 __c.6318
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:802    .progmem.data.__c.6321:0000000000000000 __c.6321
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:797    .progmem.data.__c.6323:0000000000000000 __c.6323
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:792    .progmem.data.__c.6326:0000000000000000 __c.6326
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:787    .progmem.data.__c.6328:0000000000000000 __c.6328
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:782    .progmem.data.__c.6331:0000000000000000 __c.6331
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:777    .progmem.data.__c.6333:0000000000000000 __c.6333
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:772    .progmem.data.__c.6336:0000000000000000 __c.6336
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:767    .progmem.data.__c.6338:0000000000000000 __c.6338
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:762    .progmem.data.__c.6341:0000000000000000 __c.6341
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:757    .progmem.data.__c.6343:0000000000000000 __c.6343
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:752    .progmem.data.__c.6346:0000000000000000 __c.6346
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:747    .progmem.data.__c.6348:0000000000000000 __c.6348
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:611    .text.eeconfig_init_user:0000000000000000 eeconfig_init_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:638    .text.layer_state_set_user:0000000000000000 layer_state_set_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:988    .progmem.data.keymaps:0000000000000000 keymaps
 
 UNDEFINED SYMBOLS
 __tablejump2__

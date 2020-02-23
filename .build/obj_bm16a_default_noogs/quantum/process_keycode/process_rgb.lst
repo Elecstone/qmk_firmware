@@ -699,26 +699,26 @@
  532               		.file 25 "quantum/quantum.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 process_rgb.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:13     .text.rgblight_step:0000000000000000 rgblight_step
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:13     .text.rgblight_step:0000000000000000 rgblight_step.localalias.0
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:32     .text.handleKeycodeRGB:0000000000000000 handleKeycodeRGB
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:60     .text.handleKeycodeRGBMode:0000000000000000 handleKeycodeRGBMode
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:124    .text.rgblight_step_reverse:0000000000000000 rgblight_step_reverse
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:139    .text.rgblight_increase_hue:0000000000000000 rgblight_increase_hue
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:154    .text.rgblight_decrease_hue:0000000000000000 rgblight_decrease_hue
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:169    .text.rgblight_increase_sat:0000000000000000 rgblight_increase_sat
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:184    .text.rgblight_decrease_sat:0000000000000000 rgblight_decrease_sat
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:199    .text.rgblight_increase_val:0000000000000000 rgblight_increase_val
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:214    .text.rgblight_decrease_val:0000000000000000 rgblight_decrease_val
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:229    .text.rgblight_increase_speed:0000000000000000 rgblight_increase_speed
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:244    .text.rgblight_decrease_speed:0000000000000000 rgblight_decrease_speed
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:259    .text.rgblight_toggle:0000000000000000 rgblight_toggle
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccWIJ65i.s:274    .text.process_rgb:0000000000000000 process_rgb
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:13     .text.rgblight_step:0000000000000000 rgblight_step
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:13     .text.rgblight_step:0000000000000000 rgblight_step.localalias.0
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:32     .text.handleKeycodeRGB:0000000000000000 handleKeycodeRGB
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:60     .text.handleKeycodeRGBMode:0000000000000000 handleKeycodeRGBMode
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:124    .text.rgblight_step_reverse:0000000000000000 rgblight_step_reverse
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:139    .text.rgblight_increase_hue:0000000000000000 rgblight_increase_hue
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:154    .text.rgblight_decrease_hue:0000000000000000 rgblight_decrease_hue
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:169    .text.rgblight_increase_sat:0000000000000000 rgblight_increase_sat
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:184    .text.rgblight_decrease_sat:0000000000000000 rgblight_decrease_sat
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:199    .text.rgblight_increase_val:0000000000000000 rgblight_increase_val
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:214    .text.rgblight_decrease_val:0000000000000000 rgblight_decrease_val
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:229    .text.rgblight_increase_speed:0000000000000000 rgblight_increase_speed
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:244    .text.rgblight_decrease_speed:0000000000000000 rgblight_decrease_speed
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:259    .text.rgblight_toggle:0000000000000000 rgblight_toggle
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccW7Qd61.s:274    .text.process_rgb:0000000000000000 process_rgb
 
 UNDEFINED SYMBOLS
 rgblight_get_mode

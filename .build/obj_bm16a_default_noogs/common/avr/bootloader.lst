@@ -1129,13 +1129,13 @@
  185               		.file 9 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/avr/include/stdio.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 bootloader.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccnarpuh.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccnarpuh.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccnarpuh.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccnarpuh.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccnarpuh.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccnarpuh.s:13     .text.bootloader_jump:0000000000000000 bootloader_jump
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccnarpuh.s:176    .noinit:0000000000000000 reset_key
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccnarpuh.s:99     .init3:0000000000000000 bootloader_jump_after_watchdog_reset
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cca7cgqY.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cca7cgqY.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cca7cgqY.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cca7cgqY.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cca7cgqY.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cca7cgqY.s:13     .text.bootloader_jump:0000000000000000 bootloader_jump
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cca7cgqY.s:176    .noinit:0000000000000000 reset_key
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cca7cgqY.s:99     .init3:0000000000000000 bootloader_jump_after_watchdog_reset
 
 NO UNDEFINED SYMBOLS

@@ -458,12 +458,12 @@
  319               		.file 4 "quantum/led_tables.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 color.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccNpUhRI.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccNpUhRI.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccNpUhRI.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccNpUhRI.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccNpUhRI.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccNpUhRI.s:13     .text.hsv_to_rgb:0000000000000000 hsv_to_rgb
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccx39SDL.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccx39SDL.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccx39SDL.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccx39SDL.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccx39SDL.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccx39SDL.s:13     .text.hsv_to_rgb:0000000000000000 hsv_to_rgb
 
 UNDEFINED SYMBOLS
 CIE1931_CURVE

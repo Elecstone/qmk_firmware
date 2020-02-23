@@ -678,15 +678,15 @@
  198               		.file 4 "./quantum/color.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 ws2812.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccrpQC3F.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccrpQC3F.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccrpQC3F.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccrpQC3F.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccrpQC3F.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccrpQC3F.s:13     .text.ws2812_sendarray_mask:0000000000000000 ws2812_sendarray_mask
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccrpQC3F.s:76     .text.ws2812_sendarray_mask:0000000000000026 loop55
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccrpQC3F.s:103    .text.ws2812_setleds_pin:0000000000000000 ws2812_setleds_pin
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccrpQC3F.s:158    .text.ws2812_setleds:0000000000000000 ws2812_setleds
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccrpQC3F.s:178    .text.ws2812_sendarray:0000000000000000 ws2812_sendarray
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccTKpcPi.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccTKpcPi.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccTKpcPi.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccTKpcPi.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccTKpcPi.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccTKpcPi.s:13     .text.ws2812_sendarray_mask:0000000000000000 ws2812_sendarray_mask
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccTKpcPi.s:76     .text.ws2812_sendarray_mask:0000000000000026 loop55
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccTKpcPi.s:103    .text.ws2812_setleds_pin:0000000000000000 ws2812_setleds_pin
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccTKpcPi.s:158    .text.ws2812_setleds:0000000000000000 ws2812_setleds
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccTKpcPi.s:178    .text.ws2812_sendarray:0000000000000000 ws2812_sendarray
 
 NO UNDEFINED SYMBOLS

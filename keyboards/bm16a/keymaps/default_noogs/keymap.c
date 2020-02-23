@@ -244,7 +244,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_F14, KC_F13, GUIDES, TO(0) 
 	),
 	
-	// Layer 2 - RGB Controls and Browser Functions
+	// Layer 3 - RGB Controls and Browser Functions
 	[3] = LAYOUT_ortho_4x4(
 		KC_ESC, NEW_WINDOW, RGB_VAI, RGB_TOG, 
 		KC_TAB, NEW_TAB, RGB_VAD, RGB_MOD, 
@@ -260,25 +260,26 @@ void eeconfig_init_user(void)	{
 
 	rgblight_enable(); // Enable RGB by default
 	rgblight_sethsv_white(); // Set it to white by default
-	rgblight_mode(RGBLIGHT_MODE_BREATHING); // Set to breathing by default
+	rgblight_mode(RGBLIGHT_MODE_BREATHING); // Set to breating by default
 }
 
 layer_state_t layer_state_set_user(layer_state_t state)	{
 	rgblight_config_t rgblight_config;
 		switch(biton32(state))	{
 			case 1:
-				// Azure
+				// Teal
 				rgblight_enable_noeeprom();
-				rgblight_sethsv_noeeprom(HSV_AZURE);
+				rgblight_sethsv_noeeprom(HSV_TEAL);
 				break;
 			case 2:
 				// Purple
 				rgblight_enable_noeeprom();
 				rgblight_sethsv_noeeprom(HSV_PURPLE);
 				break;
-			case 3: // Magenta
+			case 3: // Chartreuse
 				rgblight_enable_noeeprom();
-				rgblight_sethsv_noeeprom(HSV_MAGENTA);
+				rgblight_sethsv_noeeprom(HSV_CHARTREUSE);
+				break;
 			default: // White
 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
 				if (rgblight_config.enable) {

@@ -1160,24 +1160,24 @@
  456               		.file 18 "lib/lufa/LUFA/Drivers/USB/Core/AVR8/../Device.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 suspend.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:13     .text.suspend_idle:0000000000000000 suspend_idle
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:67     .text.matrix_power_up:0000000000000000 matrix_power_up
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:67     .text.matrix_power_up:0000000000000000 matrix_power_up.localalias.0
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:86     .text.suspend_power_down_user:0000000000000000 suspend_power_down_user
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:101    .text.suspend_power_down_kb:0000000000000000 suspend_power_down_kb
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:118    .text.suspend_power_down:0000000000000000 suspend_power_down
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:437    .bss.wdt_timeout:0000000000000000 wdt_timeout
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:242    .text.matrix_power_down:0000000000000000 matrix_power_down
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:257    .text.suspend_wakeup_condition:0000000000000000 suspend_wakeup_condition
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:322    .text.suspend_wakeup_init_user:0000000000000000 suspend_wakeup_init_user
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:337    .text.suspend_wakeup_init_kb:0000000000000000 suspend_wakeup_init_kb
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:354    .text.suspend_wakeup_init:0000000000000000 suspend_wakeup_init
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc8EunMt.s:382    .text.__vector_12:0000000000000000 __vector_12
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:13     .text.suspend_idle:0000000000000000 suspend_idle
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:67     .text.matrix_power_up:0000000000000000 matrix_power_up
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:67     .text.matrix_power_up:0000000000000000 matrix_power_up.localalias.0
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:86     .text.suspend_power_down_user:0000000000000000 suspend_power_down_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:101    .text.suspend_power_down_kb:0000000000000000 suspend_power_down_kb
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:118    .text.suspend_power_down:0000000000000000 suspend_power_down
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:437    .bss.wdt_timeout:0000000000000000 wdt_timeout
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:242    .text.matrix_power_down:0000000000000000 matrix_power_down
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:257    .text.suspend_wakeup_condition:0000000000000000 suspend_wakeup_condition
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:322    .text.suspend_wakeup_init_user:0000000000000000 suspend_wakeup_init_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:337    .text.suspend_wakeup_init_kb:0000000000000000 suspend_wakeup_init_kb
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:354    .text.suspend_wakeup_init:0000000000000000 suspend_wakeup_init
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cckRklJM.s:382    .text.__vector_12:0000000000000000 __vector_12
                             *ABS*:0000000000000003 __gcc_isr.n_pushed.001
 
 UNDEFINED SYMBOLS

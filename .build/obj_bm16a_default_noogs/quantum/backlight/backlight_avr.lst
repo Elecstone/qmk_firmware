@@ -836,16 +836,16 @@
  340               		.file 22 "quantum/backlight/backlight.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 backlight_avr.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:13     .text.backlight_on:0000000000000000 backlight_on
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:53     .text.backlight_off:0000000000000000 backlight_off
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:90     .text.backlight_set:0000000000000000 backlight_set
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:266    .text.backlight_task:0000000000000000 backlight_task
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccBxEFNU.s:284    .text.backlight_init_ports:0000000000000000 backlight_init_ports
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccGyb2lv.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccGyb2lv.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccGyb2lv.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccGyb2lv.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccGyb2lv.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccGyb2lv.s:13     .text.backlight_on:0000000000000000 backlight_on
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccGyb2lv.s:53     .text.backlight_off:0000000000000000 backlight_off
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccGyb2lv.s:90     .text.backlight_set:0000000000000000 backlight_set
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccGyb2lv.s:266    .text.backlight_task:0000000000000000 backlight_task
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccGyb2lv.s:284    .text.backlight_init_ports:0000000000000000 backlight_init_ports
 
 UNDEFINED SYMBOLS
 __umulhisi3

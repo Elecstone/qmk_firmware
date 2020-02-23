@@ -603,15 +603,15 @@
  399               		.file 24 "quantum/quantum.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 process_space_cadet.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccNh313j.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccNh313j.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccNh313j.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccNh313j.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccNh313j.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccNh313j.s:13     .text.perform_space_cadet:0000000000000000 perform_space_cadet
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccNh313j.s:373    .bss.sc_last:0000000000000000 sc_last
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccNh313j.s:368    .bss.sc_timer:0000000000000000 sc_timer
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccNh313j.s:224    .text.process_space_cadet:0000000000000000 process_space_cadet
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc6MO2og.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc6MO2og.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc6MO2og.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc6MO2og.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc6MO2og.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc6MO2og.s:13     .text.perform_space_cadet:0000000000000000 perform_space_cadet
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc6MO2og.s:373    .bss.sc_last:0000000000000000 sc_last
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc6MO2og.s:368    .bss.sc_timer:0000000000000000 sc_timer
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc6MO2og.s:224    .text.process_space_cadet:0000000000000000 process_space_cadet
 
 UNDEFINED SYMBOLS
 timer_read

@@ -1341,17 +1341,17 @@
  981               		.file 26 "quantum/quantum.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 keymap_common.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccwQvzdM.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccwQvzdM.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccwQvzdM.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccwQvzdM.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccwQvzdM.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccwQvzdM.s:13     .text.action_get_macro:0000000000000000 action_get_macro
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccwQvzdM.s:37     .text.action_function:0000000000000000 action_function
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccwQvzdM.s:56     .text.keymap_key_to_keycode:0000000000000000 keymap_key_to_keycode
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccwQvzdM.s:110    .text.keymap_function_id_to_action:0000000000000000 keymap_function_id_to_action
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccwQvzdM.s:954    .progmem.data.fn_actions:0000000000000000 fn_actions
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccwQvzdM.s:151    .text.action_for_key:0000000000000000 action_for_key
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccOZXaFC.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccOZXaFC.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccOZXaFC.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccOZXaFC.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccOZXaFC.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccOZXaFC.s:13     .text.action_get_macro:0000000000000000 action_get_macro
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccOZXaFC.s:37     .text.action_function:0000000000000000 action_function
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccOZXaFC.s:56     .text.keymap_key_to_keycode:0000000000000000 keymap_key_to_keycode
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccOZXaFC.s:110    .text.keymap_function_id_to_action:0000000000000000 keymap_function_id_to_action
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccOZXaFC.s:954    .progmem.data.fn_actions:0000000000000000 fn_actions
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccOZXaFC.s:151    .text.action_for_key:0000000000000000 action_for_key
 
 UNDEFINED SYMBOLS
 keymaps

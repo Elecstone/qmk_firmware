@@ -205,16 +205,16 @@
  139               		.file 13 "tmk_core/protocol/lufa/outputselect.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 outputselect.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccLit73m.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccLit73m.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccLit73m.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccLit73m.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccLit73m.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccLit73m.s:13     .text.set_output_user:0000000000000000 set_output_user
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccLit73m.s:33     .text.set_output:0000000000000000 set_output
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccLit73m.s:124    .bss.desired_output:0000000000000000 desired_output
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccLit73m.s:66     .text.auto_detect_output:0000000000000000 auto_detect_output
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccLit73m.s:95     .text.where_to_send:0000000000000000 where_to_send
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccYFeVVj.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccYFeVVj.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccYFeVVj.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccYFeVVj.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccYFeVVj.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccYFeVVj.s:13     .text.set_output_user:0000000000000000 set_output_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccYFeVVj.s:33     .text.set_output:0000000000000000 set_output
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccYFeVVj.s:124    .bss.desired_output:0000000000000000 desired_output
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccYFeVVj.s:66     .text.auto_detect_output:0000000000000000 auto_detect_output
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccYFeVVj.s:95     .text.where_to_send:0000000000000000 where_to_send
 
 UNDEFINED SYMBOLS
 USB_DeviceState

@@ -113,12 +113,12 @@
   80               		.file 14 "tmk_core/common/eeconfig.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 magic.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccUYSLEc.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccUYSLEc.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccUYSLEc.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccUYSLEc.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccUYSLEc.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccUYSLEc.s:13     .text.magic:0000000000000000 magic
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccHEjDoP.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccHEjDoP.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccHEjDoP.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccHEjDoP.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccHEjDoP.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccHEjDoP.s:13     .text.magic:0000000000000000 magic
                             *COM*:0000000000000002 keymap_config
 
 UNDEFINED SYMBOLS

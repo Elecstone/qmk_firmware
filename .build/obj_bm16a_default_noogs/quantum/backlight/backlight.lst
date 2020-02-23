@@ -942,33 +942,33 @@
  652               		.file 5 "tmk_core/common/eeconfig.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 backlight.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:13     .text.is_backlight_enabled:0000000000000000 is_backlight_enabled
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:13     .text.is_backlight_enabled:0000000000000000 is_backlight_enabled
                             *COM*:0000000000000001 backlight_config
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:35     .text.eeconfig_update_backlight_current:0000000000000000 eeconfig_update_backlight_current
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:53     .text.get_backlight_level:0000000000000000 get_backlight_level
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:76     .text.breathing_period_set:0000000000000000 breathing_period_set
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:644    .data.breathing_period:0000000000000000 breathing_period
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:103    .text.get_breathing_period:0000000000000000 get_breathing_period
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:122    .text.breathing_period_default:0000000000000000 breathing_period_default
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:140    .text.breathing_period_inc:0000000000000000 breathing_period_inc
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:159    .text.breathing_period_dec:0000000000000000 breathing_period_dec
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:178    .text.backlight_init_ports:0000000000000000 backlight_init_ports
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:196    .text.backlight_set:0000000000000000 backlight_set
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:215    .text.backlight_init:0000000000000000 backlight_init
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:273    .text.backlight_increase:0000000000000000 backlight_increase
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:325    .text.backlight_decrease:0000000000000000 backlight_decrease
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:376    .text.backlight_enable:0000000000000000 backlight_enable
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:427    .text.backlight_disable:0000000000000000 backlight_disable
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:463    .text.backlight_toggle:0000000000000000 backlight_toggle
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:493    .text.backlight_step:0000000000000000 backlight_step
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:560    .text.backlight_level_noeeprom:0000000000000000 backlight_level_noeeprom
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:607    .text.backlight_level:0000000000000000 backlight_level
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccI603rs.s:629    .text.backlight_task:0000000000000000 backlight_task
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:35     .text.eeconfig_update_backlight_current:0000000000000000 eeconfig_update_backlight_current
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:53     .text.get_backlight_level:0000000000000000 get_backlight_level
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:76     .text.breathing_period_set:0000000000000000 breathing_period_set
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:644    .data.breathing_period:0000000000000000 breathing_period
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:103    .text.get_breathing_period:0000000000000000 get_breathing_period
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:122    .text.breathing_period_default:0000000000000000 breathing_period_default
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:140    .text.breathing_period_inc:0000000000000000 breathing_period_inc
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:159    .text.breathing_period_dec:0000000000000000 breathing_period_dec
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:178    .text.backlight_init_ports:0000000000000000 backlight_init_ports
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:196    .text.backlight_set:0000000000000000 backlight_set
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:215    .text.backlight_init:0000000000000000 backlight_init
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:273    .text.backlight_increase:0000000000000000 backlight_increase
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:325    .text.backlight_decrease:0000000000000000 backlight_decrease
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:376    .text.backlight_enable:0000000000000000 backlight_enable
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:427    .text.backlight_disable:0000000000000000 backlight_disable
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:463    .text.backlight_toggle:0000000000000000 backlight_toggle
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:493    .text.backlight_step:0000000000000000 backlight_step
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:560    .text.backlight_level_noeeprom:0000000000000000 backlight_level_noeeprom
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:607    .text.backlight_level:0000000000000000 backlight_level
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccM3mksK.s:629    .text.backlight_task:0000000000000000 backlight_task
 
 UNDEFINED SYMBOLS
 eeconfig_update_backlight

@@ -757,20 +757,20 @@
  510               		.file 12 "tmk_core/common/util.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 report.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccg2Ecd8.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccg2Ecd8.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccg2Ecd8.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccg2Ecd8.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccg2Ecd8.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccg2Ecd8.s:13     .text.has_anykey:0000000000000000 has_anykey
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccg2Ecd8.s:78     .text.get_first_key:0000000000000000 get_first_key
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccg2Ecd8.s:169    .text.add_key_byte:0000000000000000 add_key_byte
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccg2Ecd8.s:244    .text.del_key_byte:0000000000000000 del_key_byte
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccg2Ecd8.s:290    .text.add_key_bit:0000000000000000 add_key_bit
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccg2Ecd8.s:342    .text.del_key_bit:0000000000000000 del_key_bit
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccg2Ecd8.s:395    .text.add_key_to_report:0000000000000000 add_key_to_report
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccg2Ecd8.s:426    .text.del_key_from_report:0000000000000000 del_key_from_report
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccg2Ecd8.s:457    .text.clear_keys_from_report:0000000000000000 clear_keys_from_report
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc5rXitx.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc5rXitx.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc5rXitx.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc5rXitx.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc5rXitx.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc5rXitx.s:13     .text.has_anykey:0000000000000000 has_anykey
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc5rXitx.s:78     .text.get_first_key:0000000000000000 get_first_key
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc5rXitx.s:169    .text.add_key_byte:0000000000000000 add_key_byte
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc5rXitx.s:244    .text.del_key_byte:0000000000000000 del_key_byte
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc5rXitx.s:290    .text.add_key_bit:0000000000000000 add_key_bit
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc5rXitx.s:342    .text.del_key_bit:0000000000000000 del_key_bit
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc5rXitx.s:395    .text.add_key_to_report:0000000000000000 add_key_to_report
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc5rXitx.s:426    .text.del_key_from_report:0000000000000000 del_key_from_report
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc5rXitx.s:457    .text.clear_keys_from_report:0000000000000000 clear_keys_from_report
 
 UNDEFINED SYMBOLS
 keyboard_protocol

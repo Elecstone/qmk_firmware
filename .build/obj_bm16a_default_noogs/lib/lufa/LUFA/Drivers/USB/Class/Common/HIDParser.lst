@@ -2604,15 +2604,15 @@
  1914               		.file 4 "lib/lufa/LUFA/Drivers/USB/Class/Common/HIDParser.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 HIDParser.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccZ6NVnS.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccZ6NVnS.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccZ6NVnS.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccZ6NVnS.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccZ6NVnS.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccZ6NVnS.s:13     .text.USB_ProcessHIDReport:0000000000000000 USB_ProcessHIDReport
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccZ6NVnS.s:1441   .text.USB_GetHIDReportItemInfo:0000000000000000 USB_GetHIDReportItemInfo
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccZ6NVnS.s:1635   .text.USB_SetHIDReportItemInfo:0000000000000000 USB_SetHIDReportItemInfo
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccZ6NVnS.s:1825   .text.USB_GetHIDReportSize:0000000000000000 USB_GetHIDReportSize
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc9RJrUZ.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc9RJrUZ.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc9RJrUZ.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc9RJrUZ.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc9RJrUZ.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc9RJrUZ.s:13     .text.USB_ProcessHIDReport:0000000000000000 USB_ProcessHIDReport
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc9RJrUZ.s:1441   .text.USB_GetHIDReportItemInfo:0000000000000000 USB_GetHIDReportItemInfo
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc9RJrUZ.s:1635   .text.USB_SetHIDReportItemInfo:0000000000000000 USB_SetHIDReportItemInfo
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc9RJrUZ.s:1825   .text.USB_GetHIDReportSize:0000000000000000 USB_GetHIDReportSize
 
 UNDEFINED SYMBOLS
 CALLBACK_HIDParser_FilterHIDReportItem
