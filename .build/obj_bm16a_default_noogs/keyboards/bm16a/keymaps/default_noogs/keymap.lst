@@ -1162,7 +1162,7 @@
  291:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		}
  292:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	return state;
  690               		.loc 1 292 2 is_stmt 1 view .LVU211
- 293:keyboards/bm16a/keymaps/default_noogs/keymap.c **** }
+ 293:keyboards/bm16a/keymaps/default_noogs/keymap.c **** }...
  691               		.loc 1 293 1 is_stmt 0 view .LVU212
  692 002a C701      		movw r24,r14
  693 002c B601      		movw r22,r12
@@ -1173,56 +1173,56 @@
  698 0034 CF90      		pop r12
  699 0036 0895      		ret
  700               	.L55:
- 276:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_PURPLE);
+ 276:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
  701               		.loc 1 276 5 is_stmt 1 view .LVU213
  702 0038 0E94 0000 		call rgblight_enable_noeeprom
  703               	.LVL12:
- 277:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				break;
+ 277:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_PURPLE);
  704               		.loc 1 277 5 view .LVU214
  705 003c 4FEF      		ldi r20,lo8(-1)
  706 003e 6FEF      		ldi r22,lo8(-1)
  707 0040 8FEB      		ldi r24,lo8(-65)
  708 0042 00C0      		rjmp .L60
  709               	.L56:
- 280:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_CHARTREUSE);
+ 280:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
  710               		.loc 1 280 5 view .LVU215
  711 0044 0E94 0000 		call rgblight_enable_noeeprom
  712               	.LVL13:
- 281:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				break;
+ 281:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_CHARTREUSE);
  713               		.loc 1 281 5 view .LVU216
  714 0048 4FEF      		ldi r20,lo8(-1)
  715 004a 6FEF      		ldi r22,lo8(-1)
  716 004c 80E4      		ldi r24,lo8(64)
  717 004e 00C0      		rjmp .L60
  718               	.L57:
- 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
+ 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
  719               		.loc 1 284 5 view .LVU217
- 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
+ 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
  720               		.loc 1 284 27 is_stmt 0 view .LVU218
  721 0050 0E94 0000 		call eeconfig_read_rgblight
  722               	.LVL14:
- 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
+ 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
  723               		.loc 1 285 5 is_stmt 1 view .LVU219
- 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
+ 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
  724               		.loc 1 285 8 is_stmt 0 view .LVU220
  725 0054 60FF      		sbrs r22,0
  726 0056 00C0      		rjmp .L59
- 286:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				} else {
+ 286:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
  727               		.loc 1 286 6 is_stmt 1 view .LVU221
  728 0058 4FEF      		ldi r20,lo8(-1)
  729 005a 60E0      		ldi r22,0
  730               	.LVL15:
- 286:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				} else {
+ 286:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
  731               		.loc 1 286 6 is_stmt 0 view .LVU222
  732 005c 80E0      		ldi r24,0
  733 005e 00C0      		rjmp .L60
  734               	.LVL16:
  735               	.L59:
- 288:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				}
+ 288:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_disable_noeeprom(); // Otherwise returns to disabled state
  736               		.loc 1 288 6 is_stmt 1 view .LVU223
  737 0060 0E94 0000 		call rgblight_disable_noeeprom
  738               	.LVL17:
- 288:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				}
+ 288:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_disable_noeeprom(); // Otherwise returns to disabled state
  739               		.loc 1 288 6 is_stmt 0 view .LVU224
  740 0064 00C0      		rjmp .L58
  741               		.cfi_endproc
@@ -1519,63 +1519,63 @@
  1079               		.file 26 "tmk_core/common/util.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 keymap.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:13     .text.process_record_user:0000000000000000 process_record_user
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:982    .progmem.data.__c.6230:0000000000000000 __c.6230
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:977    .progmem.data.__c.6232:0000000000000000 __c.6232
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:972    .progmem.data.__c.6236:0000000000000000 __c.6236
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:967    .progmem.data.__c.6238:0000000000000000 __c.6238
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:962    .progmem.data.__c.6241:0000000000000000 __c.6241
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:957    .progmem.data.__c.6243:0000000000000000 __c.6243
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:952    .progmem.data.__c.6246:0000000000000000 __c.6246
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:947    .progmem.data.__c.6248:0000000000000000 __c.6248
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:942    .progmem.data.__c.6251:0000000000000000 __c.6251
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:937    .progmem.data.__c.6253:0000000000000000 __c.6253
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:932    .progmem.data.__c.6256:0000000000000000 __c.6256
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:927    .progmem.data.__c.6258:0000000000000000 __c.6258
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:922    .progmem.data.__c.6261:0000000000000000 __c.6261
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:917    .progmem.data.__c.6263:0000000000000000 __c.6263
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:912    .progmem.data.__c.6266:0000000000000000 __c.6266
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:907    .progmem.data.__c.6268:0000000000000000 __c.6268
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:902    .progmem.data.__c.6271:0000000000000000 __c.6271
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:897    .progmem.data.__c.6273:0000000000000000 __c.6273
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:892    .progmem.data.__c.6276:0000000000000000 __c.6276
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:887    .progmem.data.__c.6278:0000000000000000 __c.6278
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:882    .progmem.data.__c.6281:0000000000000000 __c.6281
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:877    .progmem.data.__c.6283:0000000000000000 __c.6283
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:872    .progmem.data.__c.6286:0000000000000000 __c.6286
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:867    .progmem.data.__c.6288:0000000000000000 __c.6288
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:862    .progmem.data.__c.6291:0000000000000000 __c.6291
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:857    .progmem.data.__c.6293:0000000000000000 __c.6293
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:852    .progmem.data.__c.6296:0000000000000000 __c.6296
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:847    .progmem.data.__c.6298:0000000000000000 __c.6298
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:842    .progmem.data.__c.6301:0000000000000000 __c.6301
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:837    .progmem.data.__c.6303:0000000000000000 __c.6303
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:832    .progmem.data.__c.6306:0000000000000000 __c.6306
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:827    .progmem.data.__c.6308:0000000000000000 __c.6308
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:822    .progmem.data.__c.6311:0000000000000000 __c.6311
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:817    .progmem.data.__c.6313:0000000000000000 __c.6313
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:812    .progmem.data.__c.6316:0000000000000000 __c.6316
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:807    .progmem.data.__c.6318:0000000000000000 __c.6318
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:802    .progmem.data.__c.6321:0000000000000000 __c.6321
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:797    .progmem.data.__c.6323:0000000000000000 __c.6323
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:792    .progmem.data.__c.6326:0000000000000000 __c.6326
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:787    .progmem.data.__c.6328:0000000000000000 __c.6328
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:782    .progmem.data.__c.6331:0000000000000000 __c.6331
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:777    .progmem.data.__c.6333:0000000000000000 __c.6333
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:772    .progmem.data.__c.6336:0000000000000000 __c.6336
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:767    .progmem.data.__c.6338:0000000000000000 __c.6338
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:762    .progmem.data.__c.6341:0000000000000000 __c.6341
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:757    .progmem.data.__c.6343:0000000000000000 __c.6343
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:752    .progmem.data.__c.6346:0000000000000000 __c.6346
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:747    .progmem.data.__c.6348:0000000000000000 __c.6348
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:611    .text.eeconfig_init_user:0000000000000000 eeconfig_init_user
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:638    .text.layer_state_set_user:0000000000000000 layer_state_set_user
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc3GS5Wm.s:988    .progmem.data.keymaps:0000000000000000 keymaps
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:13     .text.process_record_user:0000000000000000 process_record_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:982    .progmem.data.__c.6230:0000000000000000 __c.6230
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:977    .progmem.data.__c.6232:0000000000000000 __c.6232
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:972    .progmem.data.__c.6236:0000000000000000 __c.6236
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:967    .progmem.data.__c.6238:0000000000000000 __c.6238
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:962    .progmem.data.__c.6241:0000000000000000 __c.6241
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:957    .progmem.data.__c.6243:0000000000000000 __c.6243
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:952    .progmem.data.__c.6246:0000000000000000 __c.6246
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:947    .progmem.data.__c.6248:0000000000000000 __c.6248
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:942    .progmem.data.__c.6251:0000000000000000 __c.6251
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:937    .progmem.data.__c.6253:0000000000000000 __c.6253
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:932    .progmem.data.__c.6256:0000000000000000 __c.6256
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:927    .progmem.data.__c.6258:0000000000000000 __c.6258
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:922    .progmem.data.__c.6261:0000000000000000 __c.6261
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:917    .progmem.data.__c.6263:0000000000000000 __c.6263
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:912    .progmem.data.__c.6266:0000000000000000 __c.6266
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:907    .progmem.data.__c.6268:0000000000000000 __c.6268
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:902    .progmem.data.__c.6271:0000000000000000 __c.6271
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:897    .progmem.data.__c.6273:0000000000000000 __c.6273
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:892    .progmem.data.__c.6276:0000000000000000 __c.6276
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:887    .progmem.data.__c.6278:0000000000000000 __c.6278
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:882    .progmem.data.__c.6281:0000000000000000 __c.6281
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:877    .progmem.data.__c.6283:0000000000000000 __c.6283
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:872    .progmem.data.__c.6286:0000000000000000 __c.6286
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:867    .progmem.data.__c.6288:0000000000000000 __c.6288
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:862    .progmem.data.__c.6291:0000000000000000 __c.6291
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:857    .progmem.data.__c.6293:0000000000000000 __c.6293
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:852    .progmem.data.__c.6296:0000000000000000 __c.6296
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:847    .progmem.data.__c.6298:0000000000000000 __c.6298
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:842    .progmem.data.__c.6301:0000000000000000 __c.6301
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:837    .progmem.data.__c.6303:0000000000000000 __c.6303
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:832    .progmem.data.__c.6306:0000000000000000 __c.6306
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:827    .progmem.data.__c.6308:0000000000000000 __c.6308
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:822    .progmem.data.__c.6311:0000000000000000 __c.6311
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:817    .progmem.data.__c.6313:0000000000000000 __c.6313
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:812    .progmem.data.__c.6316:0000000000000000 __c.6316
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:807    .progmem.data.__c.6318:0000000000000000 __c.6318
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:802    .progmem.data.__c.6321:0000000000000000 __c.6321
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:797    .progmem.data.__c.6323:0000000000000000 __c.6323
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:792    .progmem.data.__c.6326:0000000000000000 __c.6326
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:787    .progmem.data.__c.6328:0000000000000000 __c.6328
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:782    .progmem.data.__c.6331:0000000000000000 __c.6331
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:777    .progmem.data.__c.6333:0000000000000000 __c.6333
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:772    .progmem.data.__c.6336:0000000000000000 __c.6336
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:767    .progmem.data.__c.6338:0000000000000000 __c.6338
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:762    .progmem.data.__c.6341:0000000000000000 __c.6341
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:757    .progmem.data.__c.6343:0000000000000000 __c.6343
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:752    .progmem.data.__c.6346:0000000000000000 __c.6346
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:747    .progmem.data.__c.6348:0000000000000000 __c.6348
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:611    .text.eeconfig_init_user:0000000000000000 eeconfig_init_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:638    .text.layer_state_set_user:0000000000000000 layer_state_set_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:988    .progmem.data.keymaps:0000000000000000 keymaps
 
 UNDEFINED SYMBOLS
 __tablejump2__
