@@ -1,0 +1,1 @@
+-Wl,--gc-sections -Wl,-Map=.build/bm16a_default_noogs.map,--cref     -lm 

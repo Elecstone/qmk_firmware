@@ -1,0 +1,1590 @@
+   1               		.file	"keymap.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.text
+   8               	.Ltext0:
+   9               		.cfi_sections	.debug_frame
+  10               		.section	.text.process_record_user,"ax",@progbits
+  11               	.global	process_record_user
+  13               	process_record_user:
+  14               	.LVL0:
+  15               	.LFB112:
+  16               		.file 1 "keyboards/bm16a/keymaps/default_noogs/keymap.c"
+   1:keyboards/bm16a/keymaps/default_noogs/keymap.c **** /* Copyright 2019
+   2:keyboards/bm16a/keymaps/default_noogs/keymap.c **** *
+   3:keyboards/bm16a/keymaps/default_noogs/keymap.c **** * This program is free software: you can redistribute it and/or modify
+   4:keyboards/bm16a/keymaps/default_noogs/keymap.c **** * it under the terms of the GNU General Public License as published by
+   5:keyboards/bm16a/keymaps/default_noogs/keymap.c **** * the Free Software Foundation, either version 2 of the License, or
+   6:keyboards/bm16a/keymaps/default_noogs/keymap.c **** * (at your option) any later version.
+   7:keyboards/bm16a/keymaps/default_noogs/keymap.c **** *
+   8:keyboards/bm16a/keymaps/default_noogs/keymap.c **** * This program is distributed in the hope that it will be useful,
+   9:keyboards/bm16a/keymaps/default_noogs/keymap.c **** * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  10:keyboards/bm16a/keymaps/default_noogs/keymap.c **** * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  11:keyboards/bm16a/keymaps/default_noogs/keymap.c **** * GNU General Public License for more details.
+  12:keyboards/bm16a/keymaps/default_noogs/keymap.c **** *
+  13:keyboards/bm16a/keymaps/default_noogs/keymap.c **** * You should have received a copy of the GNU General Public License
+  14:keyboards/bm16a/keymaps/default_noogs/keymap.c **** * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  15:keyboards/bm16a/keymaps/default_noogs/keymap.c **** */
+  16:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 
+  17:keyboards/bm16a/keymaps/default_noogs/keymap.c **** #include QMK_KEYBOARD_H
+  18:keyboards/bm16a/keymaps/default_noogs/keymap.c **** //#define RGB_VAL 16 //Define 16 RGB LEDs
+  19:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 
+  20:keyboards/bm16a/keymaps/default_noogs/keymap.c **** enum custom_keycodes {
+  21:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	REDO = SAFE_RANGE, 	// M10
+  22:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	UNDO,				// M9
+  23:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	ZOOM_OUT,			// M8
+  24:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	ZOOM_IN,			// M7
+  25:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	OPEN,				// M2
+  26:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	COPY,				// M13
+  27:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	RESET_ZOOM,			// M22
+  28:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	CLOSE,				// M1
+  29:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	PASTE,				// M14
+  30:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	WEB_SAVE,			// M6
+  31:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	SAVE,				// M0
+  32:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	LEVELS,				// M4
+  33:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	COPY_LAYER,			// M23
+  34:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	SELECT_ALL,			// M12
+  35:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	DESELECT,			// M3
+  36:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	FREE_TRANSFORM,		// M16
+  37:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	FILL,				// M11
+  38:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	GUIDES,				// M5
+  39:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	NEW_WINDOW,			// M19
+  40:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	NEW_TAB,			// M18
+  41:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	SAVE_AS,			// M15
+  42:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	QUIT,				// M21 - Doesn't work for Chrome
+  43:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	PRINT,				// M17
+  44:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	FIND				// M20
+  45:keyboards/bm16a/keymaps/default_noogs/keymap.c **** };
+  46:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 
+  47:keyboards/bm16a/keymaps/default_noogs/keymap.c **** bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  17               		.loc 1 47 65 view -0
+  18               		.cfi_startproc
+  19               	/* prologue: function */
+  20               	/* frame size = 0 */
+  21               	/* stack size = 0 */
+  22               	.L__stack_usage = 0
+  48:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	switch (keycode) {
+  23               		.loc 1 48 2 view .LVU1
+  24 0000 8850      		subi r24,8
+  25 0002 9D45      		sbci r25,93
+  26               	.LVL1:
+  27               		.loc 1 48 2 is_stmt 0 view .LVU2
+  28 0004 8831      		cpi r24,24
+  29 0006 9105      		cpc r25,__zero_reg__
+  30 0008 00F4      		brsh .L2
+  31 000a FC01      		movw r30,r24
+  32 000c E050      		subi r30,lo8(-(gs(.L4)))
+  33 000e F040      		sbci r31,hi8(-(gs(.L4)))
+  34 0010 DB01      		movw r26,r22
+  35 0012 1296      		adiw r26,2
+  36 0014 9C91      		ld r25,X
+  37 0016 0C94 0000 		jmp __tablejump2__
+  38               		.section	.jumptables.gcc.process_record_user,"a",@progbits
+  39               		.p2align	1
+  40               	.L4:
+  41 0000 0000      		.word gs(.L27)
+  42 0002 0000      		.word gs(.L26)
+  43 0004 0000      		.word gs(.L25)
+  44 0006 0000      		.word gs(.L24)
+  45 0008 0000      		.word gs(.L23)
+  46 000a 0000      		.word gs(.L22)
+  47 000c 0000      		.word gs(.L21)
+  48 000e 0000      		.word gs(.L20)
+  49 0010 0000      		.word gs(.L19)
+  50 0012 0000      		.word gs(.L18)
+  51 0014 0000      		.word gs(.L17)
+  52 0016 0000      		.word gs(.L16)
+  53 0018 0000      		.word gs(.L15)
+  54 001a 0000      		.word gs(.L14)
+  55 001c 0000      		.word gs(.L13)
+  56 001e 0000      		.word gs(.L12)
+  57 0020 0000      		.word gs(.L11)
+  58 0022 0000      		.word gs(.L10)
+  59 0024 0000      		.word gs(.L9)
+  60 0026 0000      		.word gs(.L8)
+  61 0028 0000      		.word gs(.L7)
+  62 002a 0000      		.word gs(.L6)
+  63 002c 0000      		.word gs(.L5)
+  64 002e 0000      		.word gs(.L3)
+  65               		.section	.text.process_record_user
+  66               	.L27:
+  49:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case REDO:
+  50:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+  67               		.loc 1 50 4 is_stmt 1 view .LVU3
+  68               		.loc 1 50 7 is_stmt 0 view .LVU4
+  69 001a 9923      		tst r25
+  70 001c 01F0      		breq .L28
+  51:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LSFT) SS_DOWN(X_LGUI) SS_DOWN(X_Z));
+  71               		.loc 1 51 5 is_stmt 1 view .LVU5
+  72               	.LBB2:
+  73               		.loc 1 51 5 view .LVU6
+  74               		.loc 1 51 5 view .LVU7
+  75               	.LBE2:
+  76 001e 80E0      		ldi r24,lo8(__c.6230)
+  77 0020 90E0      		ldi r25,hi8(__c.6230)
+  78               	.LVL2:
+  79               	.L52:
+  52:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+  53:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LSFT) SS_UP(X_LGUI) SS_UP(X_Z));
+  54:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+  55:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+  56:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case UNDO:
+  57:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+  58:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_Z));
+  59:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+  60:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_Z));
+  61:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+  62:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+  63:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case ZOOM_OUT:
+  64:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+  65:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_PMNS));
+  66:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+  67:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_PMNS));
+  68:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+  69:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+  70:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case ZOOM_IN:
+  71:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+  72:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_PPLS));
+  73:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+  74:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_PPLS));
+  75:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+  76:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+  77:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case OPEN:
+  78:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+  79:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_O));
+  80:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+  81:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_O));
+  82:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+  83:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+  84:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case COPY:
+  85:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+  86:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_C));
+  87:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+  88:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_C));
+  89:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+  90:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+  91:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case RESET_ZOOM:
+  92:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+  93:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_0));
+  94:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+  95:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_0));
+  96:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+  97:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+  98:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case CLOSE:
+  99:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 100:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_W));
+ 101:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 102:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_W));
+ 103:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 104:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 105:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case PASTE:
+ 106:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 107:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_V));
+ 108:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 109:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_V));
+ 110:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 111:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 112:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case WEB_SAVE:
+ 113:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 114:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LSFT) SS_DOWN(X_LALT) SS_DOWN(X_LGUI) SS_DOWN(X_S));
+ 115:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 116:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LSFT) SS_UP(X_LALT) SS_UP(X_LGUI) SS_UP(X_S));
+ 117:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 118:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 119:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case SAVE:
+ 120:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 121:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_S));
+ 122:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 123:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_S));
+ 124:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 125:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 126:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case LEVELS:
+ 127:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 128:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_L));
+ 129:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 130:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_L));
+ 131:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 132:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 133:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case COPY_LAYER:
+ 134:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 135:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_LALT) SS_DOWN(X_LSFT) SS_DOWN(X_E));
+ 136:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 137:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_LALT) SS_UP(X_LSFT) SS_UP(X_E));
+ 138:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 139:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 140:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case SELECT_ALL:
+ 141:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 142:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_A));
+ 143:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 144:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_A));
+ 145:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 146:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 147:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case DESELECT:
+ 148:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 149:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_D));
+ 150:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 151:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_D));
+ 152:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 153:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 154:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case FREE_TRANSFORM:
+ 155:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 156:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_T));
+ 157:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 158:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_T));
+ 159:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 160:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 161:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case FILL:
+ 162:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 163:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LSFT) SS_DOWN(X_F5));
+ 164:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 165:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LSFT) SS_UP(X_F5));
+ 166:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 167:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 168:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case GUIDES:
+ 169:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 170:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_SCLN));
+ 171:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 172:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_SCLN));
+ 173:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 174:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 175:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case NEW_WINDOW:
+ 176:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 177:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_N));
+ 178:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 179:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_N));
+ 180:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 181:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 182:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case NEW_TAB:
+ 183:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 184:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_LSFT) SS_DOWN(X_T));
+ 185:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 186:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_LSFT) SS_UP(X_T));
+ 187:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 188:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 189:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case SAVE_AS:
+ 190:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 191:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_LSFT) SS_DOWN(X_S));
+ 192:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 193:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_LSFT) SS_UP(X_S));
+ 194:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 195:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 196:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case QUIT:
+ 197:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 198:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_Q));
+ 199:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 200:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_Q));
+ 201:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 202:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 203:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case PRINT:
+ 204:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 205:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_P));
+ 206:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 207:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_P));
+ 208:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 209:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 210:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		case FIND:
+ 211:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			if (record->event.pressed)	{
+ 212:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_F));
+ 213:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 214:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_UP(X_LGUI) SS_UP(X_F));
+  80               		.loc 1 214 5 is_stmt 0 view .LVU8
+  81 0022 0E94 0000 		call send_string_P
+  82               	.LVL3:
+  83               	.L2:
+ 215:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 216:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 217:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		}
+ 218:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	return true;
+  84               		.loc 1 218 2 is_stmt 1 view .LVU9
+ 219:keyboards/bm16a/keymaps/default_noogs/keymap.c **** };
+  85               		.loc 1 219 1 is_stmt 0 view .LVU10
+  86 0026 81E0      		ldi r24,lo8(1)
+  87               	/* epilogue start */
+  88 0028 0895      		ret
+  89               	.LVL4:
+  90               	.L28:
+  53:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+  91               		.loc 1 53 5 is_stmt 1 view .LVU11
+  92               	.LBB3:
+  53:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+  93               		.loc 1 53 5 view .LVU12
+  53:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+  94               		.loc 1 53 5 view .LVU13
+  95               	.LBE3:
+  96 002a 80E0      		ldi r24,lo8(__c.6232)
+  97 002c 90E0      		ldi r25,hi8(__c.6232)
+  98 002e 00C0      		rjmp .L52
+  99               	.L26:
+  57:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_Z));
+ 100               		.loc 1 57 4 view .LVU14
+  57:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_Z));
+ 101               		.loc 1 57 7 is_stmt 0 view .LVU15
+ 102 0030 9923      		tst r25
+ 103 0032 01F0      		breq .L29
+  58:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 104               		.loc 1 58 5 is_stmt 1 view .LVU16
+ 105               	.LBB4:
+  58:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 106               		.loc 1 58 5 view .LVU17
+  58:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 107               		.loc 1 58 5 view .LVU18
+ 108               	.LBE4:
+ 109 0034 80E0      		ldi r24,lo8(__c.6236)
+ 110 0036 90E0      		ldi r25,hi8(__c.6236)
+ 111 0038 00C0      		rjmp .L52
+ 112               	.L29:
+  60:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 113               		.loc 1 60 5 view .LVU19
+ 114               	.LBB5:
+  60:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 115               		.loc 1 60 5 view .LVU20
+  60:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 116               		.loc 1 60 5 view .LVU21
+ 117               	.LBE5:
+ 118 003a 80E0      		ldi r24,lo8(__c.6238)
+ 119 003c 90E0      		ldi r25,hi8(__c.6238)
+ 120 003e 00C0      		rjmp .L52
+ 121               	.L25:
+  64:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_PMNS));
+ 122               		.loc 1 64 4 view .LVU22
+  64:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_PMNS));
+ 123               		.loc 1 64 7 is_stmt 0 view .LVU23
+ 124 0040 9923      		tst r25
+ 125 0042 01F0      		breq .L30
+  65:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 126               		.loc 1 65 5 is_stmt 1 view .LVU24
+ 127               	.LBB6:
+  65:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 128               		.loc 1 65 5 view .LVU25
+  65:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 129               		.loc 1 65 5 view .LVU26
+ 130               	.LBE6:
+ 131 0044 80E0      		ldi r24,lo8(__c.6241)
+ 132 0046 90E0      		ldi r25,hi8(__c.6241)
+ 133 0048 00C0      		rjmp .L52
+ 134               	.L30:
+  67:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 135               		.loc 1 67 5 view .LVU27
+ 136               	.LBB7:
+  67:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 137               		.loc 1 67 5 view .LVU28
+  67:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 138               		.loc 1 67 5 view .LVU29
+ 139               	.LBE7:
+ 140 004a 80E0      		ldi r24,lo8(__c.6243)
+ 141 004c 90E0      		ldi r25,hi8(__c.6243)
+ 142 004e 00C0      		rjmp .L52
+ 143               	.L24:
+  71:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_PPLS));
+ 144               		.loc 1 71 4 view .LVU30
+  71:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_PPLS));
+ 145               		.loc 1 71 7 is_stmt 0 view .LVU31
+ 146 0050 9923      		tst r25
+ 147 0052 01F0      		breq .L31
+  72:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 148               		.loc 1 72 5 is_stmt 1 view .LVU32
+ 149               	.LBB8:
+  72:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 150               		.loc 1 72 5 view .LVU33
+  72:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 151               		.loc 1 72 5 view .LVU34
+ 152               	.LBE8:
+ 153 0054 80E0      		ldi r24,lo8(__c.6246)
+ 154 0056 90E0      		ldi r25,hi8(__c.6246)
+ 155 0058 00C0      		rjmp .L52
+ 156               	.L31:
+  74:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 157               		.loc 1 74 5 view .LVU35
+ 158               	.LBB9:
+  74:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 159               		.loc 1 74 5 view .LVU36
+  74:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 160               		.loc 1 74 5 view .LVU37
+ 161               	.LBE9:
+ 162 005a 80E0      		ldi r24,lo8(__c.6248)
+ 163 005c 90E0      		ldi r25,hi8(__c.6248)
+ 164 005e 00C0      		rjmp .L52
+ 165               	.L23:
+  78:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_O));
+ 166               		.loc 1 78 4 view .LVU38
+  78:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_O));
+ 167               		.loc 1 78 7 is_stmt 0 view .LVU39
+ 168 0060 9923      		tst r25
+ 169 0062 01F0      		breq .L32
+  79:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 170               		.loc 1 79 5 is_stmt 1 view .LVU40
+ 171               	.LBB10:
+  79:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 172               		.loc 1 79 5 view .LVU41
+  79:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 173               		.loc 1 79 5 view .LVU42
+ 174               	.LBE10:
+ 175 0064 80E0      		ldi r24,lo8(__c.6251)
+ 176 0066 90E0      		ldi r25,hi8(__c.6251)
+ 177 0068 00C0      		rjmp .L52
+ 178               	.L32:
+  81:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 179               		.loc 1 81 5 view .LVU43
+ 180               	.LBB11:
+  81:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 181               		.loc 1 81 5 view .LVU44
+  81:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 182               		.loc 1 81 5 view .LVU45
+ 183               	.LBE11:
+ 184 006a 80E0      		ldi r24,lo8(__c.6253)
+ 185 006c 90E0      		ldi r25,hi8(__c.6253)
+ 186 006e 00C0      		rjmp .L52
+ 187               	.L22:
+  85:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_C));
+ 188               		.loc 1 85 4 view .LVU46
+  85:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_C));
+ 189               		.loc 1 85 7 is_stmt 0 view .LVU47
+ 190 0070 9923      		tst r25
+ 191 0072 01F0      		breq .L33
+  86:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 192               		.loc 1 86 5 is_stmt 1 view .LVU48
+ 193               	.LBB12:
+  86:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 194               		.loc 1 86 5 view .LVU49
+  86:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 195               		.loc 1 86 5 view .LVU50
+ 196               	.LBE12:
+ 197 0074 80E0      		ldi r24,lo8(__c.6256)
+ 198 0076 90E0      		ldi r25,hi8(__c.6256)
+ 199 0078 00C0      		rjmp .L52
+ 200               	.L33:
+  88:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 201               		.loc 1 88 5 view .LVU51
+ 202               	.LBB13:
+  88:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 203               		.loc 1 88 5 view .LVU52
+  88:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 204               		.loc 1 88 5 view .LVU53
+ 205               	.LBE13:
+ 206 007a 80E0      		ldi r24,lo8(__c.6258)
+ 207 007c 90E0      		ldi r25,hi8(__c.6258)
+ 208 007e 00C0      		rjmp .L52
+ 209               	.L21:
+  92:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_0));
+ 210               		.loc 1 92 4 view .LVU54
+  92:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_0));
+ 211               		.loc 1 92 7 is_stmt 0 view .LVU55
+ 212 0080 9923      		tst r25
+ 213 0082 01F0      		breq .L34
+  93:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 214               		.loc 1 93 5 is_stmt 1 view .LVU56
+ 215               	.LBB14:
+  93:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 216               		.loc 1 93 5 view .LVU57
+  93:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 217               		.loc 1 93 5 view .LVU58
+ 218               	.LBE14:
+ 219 0084 80E0      		ldi r24,lo8(__c.6261)
+ 220 0086 90E0      		ldi r25,hi8(__c.6261)
+ 221 0088 00C0      		rjmp .L52
+ 222               	.L34:
+  95:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 223               		.loc 1 95 5 view .LVU59
+ 224               	.LBB15:
+  95:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 225               		.loc 1 95 5 view .LVU60
+  95:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 226               		.loc 1 95 5 view .LVU61
+ 227               	.LBE15:
+ 228 008a 80E0      		ldi r24,lo8(__c.6263)
+ 229 008c 90E0      		ldi r25,hi8(__c.6263)
+ 230 008e 00C0      		rjmp .L52
+ 231               	.L20:
+  99:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_W));
+ 232               		.loc 1 99 4 view .LVU62
+  99:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_W));
+ 233               		.loc 1 99 7 is_stmt 0 view .LVU63
+ 234 0090 9923      		tst r25
+ 235 0092 01F0      		breq .L35
+ 100:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 236               		.loc 1 100 5 is_stmt 1 view .LVU64
+ 237               	.LBB16:
+ 100:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 238               		.loc 1 100 5 view .LVU65
+ 100:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 239               		.loc 1 100 5 view .LVU66
+ 240               	.LBE16:
+ 241 0094 80E0      		ldi r24,lo8(__c.6266)
+ 242 0096 90E0      		ldi r25,hi8(__c.6266)
+ 243 0098 00C0      		rjmp .L52
+ 244               	.L35:
+ 102:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 245               		.loc 1 102 5 view .LVU67
+ 246               	.LBB17:
+ 102:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 247               		.loc 1 102 5 view .LVU68
+ 102:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 248               		.loc 1 102 5 view .LVU69
+ 249               	.LBE17:
+ 250 009a 80E0      		ldi r24,lo8(__c.6268)
+ 251 009c 90E0      		ldi r25,hi8(__c.6268)
+ 252 009e 00C0      		rjmp .L52
+ 253               	.L19:
+ 106:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_V));
+ 254               		.loc 1 106 4 view .LVU70
+ 106:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_V));
+ 255               		.loc 1 106 7 is_stmt 0 view .LVU71
+ 256 00a0 9923      		tst r25
+ 257 00a2 01F0      		breq .L36
+ 107:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 258               		.loc 1 107 5 is_stmt 1 view .LVU72
+ 259               	.LBB18:
+ 107:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 260               		.loc 1 107 5 view .LVU73
+ 107:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 261               		.loc 1 107 5 view .LVU74
+ 262               	.LBE18:
+ 263 00a4 80E0      		ldi r24,lo8(__c.6271)
+ 264 00a6 90E0      		ldi r25,hi8(__c.6271)
+ 265 00a8 00C0      		rjmp .L52
+ 266               	.L36:
+ 109:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 267               		.loc 1 109 5 view .LVU75
+ 268               	.LBB19:
+ 109:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 269               		.loc 1 109 5 view .LVU76
+ 109:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 270               		.loc 1 109 5 view .LVU77
+ 271               	.LBE19:
+ 272 00aa 80E0      		ldi r24,lo8(__c.6273)
+ 273 00ac 90E0      		ldi r25,hi8(__c.6273)
+ 274 00ae 00C0      		rjmp .L52
+ 275               	.L18:
+ 113:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LSFT) SS_DOWN(X_LALT) SS_DOWN(X_LGUI) SS_DOWN(X_S));
+ 276               		.loc 1 113 4 view .LVU78
+ 113:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LSFT) SS_DOWN(X_LALT) SS_DOWN(X_LGUI) SS_DOWN(X_S));
+ 277               		.loc 1 113 7 is_stmt 0 view .LVU79
+ 278 00b0 9923      		tst r25
+ 279 00b2 01F0      		breq .L37
+ 114:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 280               		.loc 1 114 5 is_stmt 1 view .LVU80
+ 281               	.LBB20:
+ 114:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 282               		.loc 1 114 5 view .LVU81
+ 114:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 283               		.loc 1 114 5 view .LVU82
+ 284               	.LBE20:
+ 285 00b4 80E0      		ldi r24,lo8(__c.6276)
+ 286 00b6 90E0      		ldi r25,hi8(__c.6276)
+ 287 00b8 00C0      		rjmp .L52
+ 288               	.L37:
+ 116:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 289               		.loc 1 116 5 view .LVU83
+ 290               	.LBB21:
+ 116:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 291               		.loc 1 116 5 view .LVU84
+ 116:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 292               		.loc 1 116 5 view .LVU85
+ 293               	.LBE21:
+ 294 00ba 80E0      		ldi r24,lo8(__c.6278)
+ 295 00bc 90E0      		ldi r25,hi8(__c.6278)
+ 296 00be 00C0      		rjmp .L52
+ 297               	.L17:
+ 120:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_S));
+ 298               		.loc 1 120 4 view .LVU86
+ 120:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_S));
+ 299               		.loc 1 120 7 is_stmt 0 view .LVU87
+ 300 00c0 9923      		tst r25
+ 301 00c2 01F0      		breq .L38
+ 121:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 302               		.loc 1 121 5 is_stmt 1 view .LVU88
+ 303               	.LBB22:
+ 121:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 304               		.loc 1 121 5 view .LVU89
+ 121:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 305               		.loc 1 121 5 view .LVU90
+ 306               	.LBE22:
+ 307 00c4 80E0      		ldi r24,lo8(__c.6281)
+ 308 00c6 90E0      		ldi r25,hi8(__c.6281)
+ 309 00c8 00C0      		rjmp .L52
+ 310               	.L38:
+ 123:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 311               		.loc 1 123 5 view .LVU91
+ 312               	.LBB23:
+ 123:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 313               		.loc 1 123 5 view .LVU92
+ 123:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 314               		.loc 1 123 5 view .LVU93
+ 315               	.LBE23:
+ 316 00ca 80E0      		ldi r24,lo8(__c.6283)
+ 317 00cc 90E0      		ldi r25,hi8(__c.6283)
+ 318 00ce 00C0      		rjmp .L52
+ 319               	.L16:
+ 127:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_L));
+ 320               		.loc 1 127 4 view .LVU94
+ 127:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_L));
+ 321               		.loc 1 127 7 is_stmt 0 view .LVU95
+ 322 00d0 9923      		tst r25
+ 323 00d2 01F0      		breq .L39
+ 128:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 324               		.loc 1 128 5 is_stmt 1 view .LVU96
+ 325               	.LBB24:
+ 128:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 326               		.loc 1 128 5 view .LVU97
+ 128:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 327               		.loc 1 128 5 view .LVU98
+ 328               	.LBE24:
+ 329 00d4 80E0      		ldi r24,lo8(__c.6286)
+ 330 00d6 90E0      		ldi r25,hi8(__c.6286)
+ 331 00d8 00C0      		rjmp .L52
+ 332               	.L39:
+ 130:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 333               		.loc 1 130 5 view .LVU99
+ 334               	.LBB25:
+ 130:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 335               		.loc 1 130 5 view .LVU100
+ 130:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 336               		.loc 1 130 5 view .LVU101
+ 337               	.LBE25:
+ 338 00da 80E0      		ldi r24,lo8(__c.6288)
+ 339 00dc 90E0      		ldi r25,hi8(__c.6288)
+ 340 00de 00C0      		rjmp .L52
+ 341               	.L15:
+ 134:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_LALT) SS_DOWN(X_LSFT) SS_DOWN(X_E));
+ 342               		.loc 1 134 4 view .LVU102
+ 134:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_LALT) SS_DOWN(X_LSFT) SS_DOWN(X_E));
+ 343               		.loc 1 134 7 is_stmt 0 view .LVU103
+ 344 00e0 9923      		tst r25
+ 345 00e2 01F0      		breq .L40
+ 135:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 346               		.loc 1 135 5 is_stmt 1 view .LVU104
+ 347               	.LBB26:
+ 135:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 348               		.loc 1 135 5 view .LVU105
+ 135:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 349               		.loc 1 135 5 view .LVU106
+ 350               	.LBE26:
+ 351 00e4 80E0      		ldi r24,lo8(__c.6291)
+ 352 00e6 90E0      		ldi r25,hi8(__c.6291)
+ 353 00e8 00C0      		rjmp .L52
+ 354               	.L40:
+ 137:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 355               		.loc 1 137 5 view .LVU107
+ 356               	.LBB27:
+ 137:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 357               		.loc 1 137 5 view .LVU108
+ 137:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 358               		.loc 1 137 5 view .LVU109
+ 359               	.LBE27:
+ 360 00ea 80E0      		ldi r24,lo8(__c.6293)
+ 361 00ec 90E0      		ldi r25,hi8(__c.6293)
+ 362 00ee 00C0      		rjmp .L52
+ 363               	.L14:
+ 141:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_A));
+ 364               		.loc 1 141 4 view .LVU110
+ 141:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_A));
+ 365               		.loc 1 141 7 is_stmt 0 view .LVU111
+ 366 00f0 9923      		tst r25
+ 367 00f2 01F0      		breq .L41
+ 142:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 368               		.loc 1 142 5 is_stmt 1 view .LVU112
+ 369               	.LBB28:
+ 142:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 370               		.loc 1 142 5 view .LVU113
+ 142:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 371               		.loc 1 142 5 view .LVU114
+ 372               	.LBE28:
+ 373 00f4 80E0      		ldi r24,lo8(__c.6296)
+ 374 00f6 90E0      		ldi r25,hi8(__c.6296)
+ 375 00f8 00C0      		rjmp .L52
+ 376               	.L41:
+ 144:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 377               		.loc 1 144 5 view .LVU115
+ 378               	.LBB29:
+ 144:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 379               		.loc 1 144 5 view .LVU116
+ 144:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 380               		.loc 1 144 5 view .LVU117
+ 381               	.LBE29:
+ 382 00fa 80E0      		ldi r24,lo8(__c.6298)
+ 383 00fc 90E0      		ldi r25,hi8(__c.6298)
+ 384 00fe 00C0      		rjmp .L52
+ 385               	.L13:
+ 148:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_D));
+ 386               		.loc 1 148 4 view .LVU118
+ 148:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_D));
+ 387               		.loc 1 148 7 is_stmt 0 view .LVU119
+ 388 0100 9923      		tst r25
+ 389 0102 01F0      		breq .L42
+ 149:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 390               		.loc 1 149 5 is_stmt 1 view .LVU120
+ 391               	.LBB30:
+ 149:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 392               		.loc 1 149 5 view .LVU121
+ 149:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 393               		.loc 1 149 5 view .LVU122
+ 394               	.LBE30:
+ 395 0104 80E0      		ldi r24,lo8(__c.6301)
+ 396 0106 90E0      		ldi r25,hi8(__c.6301)
+ 397 0108 00C0      		rjmp .L52
+ 398               	.L42:
+ 151:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 399               		.loc 1 151 5 view .LVU123
+ 400               	.LBB31:
+ 151:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 401               		.loc 1 151 5 view .LVU124
+ 151:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 402               		.loc 1 151 5 view .LVU125
+ 403               	.LBE31:
+ 404 010a 80E0      		ldi r24,lo8(__c.6303)
+ 405 010c 90E0      		ldi r25,hi8(__c.6303)
+ 406 010e 00C0      		rjmp .L52
+ 407               	.L12:
+ 155:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_T));
+ 408               		.loc 1 155 4 view .LVU126
+ 155:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_T));
+ 409               		.loc 1 155 7 is_stmt 0 view .LVU127
+ 410 0110 9923      		tst r25
+ 411 0112 01F0      		breq .L43
+ 156:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 412               		.loc 1 156 5 is_stmt 1 view .LVU128
+ 413               	.LBB32:
+ 156:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 414               		.loc 1 156 5 view .LVU129
+ 156:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 415               		.loc 1 156 5 view .LVU130
+ 416               	.LBE32:
+ 417 0114 80E0      		ldi r24,lo8(__c.6306)
+ 418 0116 90E0      		ldi r25,hi8(__c.6306)
+ 419 0118 00C0      		rjmp .L52
+ 420               	.L43:
+ 158:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 421               		.loc 1 158 5 view .LVU131
+ 422               	.LBB33:
+ 158:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 423               		.loc 1 158 5 view .LVU132
+ 158:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 424               		.loc 1 158 5 view .LVU133
+ 425               	.LBE33:
+ 426 011a 80E0      		ldi r24,lo8(__c.6308)
+ 427 011c 90E0      		ldi r25,hi8(__c.6308)
+ 428 011e 00C0      		rjmp .L52
+ 429               	.L11:
+ 162:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LSFT) SS_DOWN(X_F5));
+ 430               		.loc 1 162 4 view .LVU134
+ 162:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LSFT) SS_DOWN(X_F5));
+ 431               		.loc 1 162 7 is_stmt 0 view .LVU135
+ 432 0120 9923      		tst r25
+ 433 0122 01F0      		breq .L44
+ 163:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 434               		.loc 1 163 5 is_stmt 1 view .LVU136
+ 435               	.LBB34:
+ 163:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 436               		.loc 1 163 5 view .LVU137
+ 163:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 437               		.loc 1 163 5 view .LVU138
+ 438               	.LBE34:
+ 439 0124 80E0      		ldi r24,lo8(__c.6311)
+ 440 0126 90E0      		ldi r25,hi8(__c.6311)
+ 441 0128 00C0      		rjmp .L52
+ 442               	.L44:
+ 165:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 443               		.loc 1 165 5 view .LVU139
+ 444               	.LBB35:
+ 165:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 445               		.loc 1 165 5 view .LVU140
+ 165:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 446               		.loc 1 165 5 view .LVU141
+ 447               	.LBE35:
+ 448 012a 80E0      		ldi r24,lo8(__c.6313)
+ 449 012c 90E0      		ldi r25,hi8(__c.6313)
+ 450 012e 00C0      		rjmp .L52
+ 451               	.L10:
+ 169:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_SCLN));
+ 452               		.loc 1 169 4 view .LVU142
+ 169:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_SCLN));
+ 453               		.loc 1 169 7 is_stmt 0 view .LVU143
+ 454 0130 9923      		tst r25
+ 455 0132 01F0      		breq .L45
+ 170:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 456               		.loc 1 170 5 is_stmt 1 view .LVU144
+ 457               	.LBB36:
+ 170:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 458               		.loc 1 170 5 view .LVU145
+ 170:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 459               		.loc 1 170 5 view .LVU146
+ 460               	.LBE36:
+ 461 0134 80E0      		ldi r24,lo8(__c.6316)
+ 462 0136 90E0      		ldi r25,hi8(__c.6316)
+ 463 0138 00C0      		rjmp .L52
+ 464               	.L45:
+ 172:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 465               		.loc 1 172 5 view .LVU147
+ 466               	.LBB37:
+ 172:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 467               		.loc 1 172 5 view .LVU148
+ 172:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 468               		.loc 1 172 5 view .LVU149
+ 469               	.LBE37:
+ 470 013a 80E0      		ldi r24,lo8(__c.6318)
+ 471 013c 90E0      		ldi r25,hi8(__c.6318)
+ 472 013e 00C0      		rjmp .L52
+ 473               	.L9:
+ 176:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_N));
+ 474               		.loc 1 176 4 view .LVU150
+ 176:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_N));
+ 475               		.loc 1 176 7 is_stmt 0 view .LVU151
+ 476 0140 9923      		tst r25
+ 477 0142 01F0      		breq .L46
+ 177:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 478               		.loc 1 177 5 is_stmt 1 view .LVU152
+ 479               	.LBB38:
+ 177:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 480               		.loc 1 177 5 view .LVU153
+ 177:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 481               		.loc 1 177 5 view .LVU154
+ 482               	.LBE38:
+ 483 0144 80E0      		ldi r24,lo8(__c.6321)
+ 484 0146 90E0      		ldi r25,hi8(__c.6321)
+ 485 0148 00C0      		rjmp .L52
+ 486               	.L46:
+ 179:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 487               		.loc 1 179 5 view .LVU155
+ 488               	.LBB39:
+ 179:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 489               		.loc 1 179 5 view .LVU156
+ 179:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 490               		.loc 1 179 5 view .LVU157
+ 491               	.LBE39:
+ 492 014a 80E0      		ldi r24,lo8(__c.6323)
+ 493 014c 90E0      		ldi r25,hi8(__c.6323)
+ 494 014e 00C0      		rjmp .L52
+ 495               	.L8:
+ 183:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_LSFT) SS_DOWN(X_T));
+ 496               		.loc 1 183 4 view .LVU158
+ 183:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_LSFT) SS_DOWN(X_T));
+ 497               		.loc 1 183 7 is_stmt 0 view .LVU159
+ 498 0150 9923      		tst r25
+ 499 0152 01F0      		breq .L47
+ 184:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 500               		.loc 1 184 5 is_stmt 1 view .LVU160
+ 501               	.LBB40:
+ 184:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 502               		.loc 1 184 5 view .LVU161
+ 184:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 503               		.loc 1 184 5 view .LVU162
+ 504               	.LBE40:
+ 505 0154 80E0      		ldi r24,lo8(__c.6326)
+ 506 0156 90E0      		ldi r25,hi8(__c.6326)
+ 507 0158 00C0      		rjmp .L52
+ 508               	.L47:
+ 186:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 509               		.loc 1 186 5 view .LVU163
+ 510               	.LBB41:
+ 186:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 511               		.loc 1 186 5 view .LVU164
+ 186:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 512               		.loc 1 186 5 view .LVU165
+ 513               	.LBE41:
+ 514 015a 80E0      		ldi r24,lo8(__c.6328)
+ 515 015c 90E0      		ldi r25,hi8(__c.6328)
+ 516 015e 00C0      		rjmp .L52
+ 517               	.L7:
+ 190:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_LSFT) SS_DOWN(X_S));
+ 518               		.loc 1 190 4 view .LVU166
+ 190:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_LSFT) SS_DOWN(X_S));
+ 519               		.loc 1 190 7 is_stmt 0 view .LVU167
+ 520 0160 9923      		tst r25
+ 521 0162 01F0      		breq .L48
+ 191:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 522               		.loc 1 191 5 is_stmt 1 view .LVU168
+ 523               	.LBB42:
+ 191:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 524               		.loc 1 191 5 view .LVU169
+ 191:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 525               		.loc 1 191 5 view .LVU170
+ 526               	.LBE42:
+ 527 0164 80E0      		ldi r24,lo8(__c.6331)
+ 528 0166 90E0      		ldi r25,hi8(__c.6331)
+ 529 0168 00C0      		rjmp .L52
+ 530               	.L48:
+ 193:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 531               		.loc 1 193 5 view .LVU171
+ 532               	.LBB43:
+ 193:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 533               		.loc 1 193 5 view .LVU172
+ 193:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 534               		.loc 1 193 5 view .LVU173
+ 535               	.LBE43:
+ 536 016a 80E0      		ldi r24,lo8(__c.6333)
+ 537 016c 90E0      		ldi r25,hi8(__c.6333)
+ 538 016e 00C0      		rjmp .L52
+ 539               	.L6:
+ 197:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_Q));
+ 540               		.loc 1 197 4 view .LVU174
+ 197:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_Q));
+ 541               		.loc 1 197 7 is_stmt 0 view .LVU175
+ 542 0170 9923      		tst r25
+ 543 0172 01F0      		breq .L49
+ 198:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 544               		.loc 1 198 5 is_stmt 1 view .LVU176
+ 545               	.LBB44:
+ 198:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 546               		.loc 1 198 5 view .LVU177
+ 198:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 547               		.loc 1 198 5 view .LVU178
+ 548               	.LBE44:
+ 549 0174 80E0      		ldi r24,lo8(__c.6336)
+ 550 0176 90E0      		ldi r25,hi8(__c.6336)
+ 551 0178 00C0      		rjmp .L52
+ 552               	.L49:
+ 200:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 553               		.loc 1 200 5 view .LVU179
+ 554               	.LBB45:
+ 200:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 555               		.loc 1 200 5 view .LVU180
+ 200:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 556               		.loc 1 200 5 view .LVU181
+ 557               	.LBE45:
+ 558 017a 80E0      		ldi r24,lo8(__c.6338)
+ 559 017c 90E0      		ldi r25,hi8(__c.6338)
+ 560 017e 00C0      		rjmp .L52
+ 561               	.L5:
+ 204:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_P));
+ 562               		.loc 1 204 4 view .LVU182
+ 204:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_P));
+ 563               		.loc 1 204 7 is_stmt 0 view .LVU183
+ 564 0180 9923      		tst r25
+ 565 0182 01F0      		breq .L50
+ 205:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 566               		.loc 1 205 5 is_stmt 1 view .LVU184
+ 567               	.LBB46:
+ 205:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 568               		.loc 1 205 5 view .LVU185
+ 205:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 569               		.loc 1 205 5 view .LVU186
+ 570               	.LBE46:
+ 571 0184 80E0      		ldi r24,lo8(__c.6341)
+ 572 0186 90E0      		ldi r25,hi8(__c.6341)
+ 573 0188 00C0      		rjmp .L52
+ 574               	.L50:
+ 207:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 575               		.loc 1 207 5 view .LVU187
+ 576               	.LBB47:
+ 207:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 577               		.loc 1 207 5 view .LVU188
+ 207:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 578               		.loc 1 207 5 view .LVU189
+ 579               	.LBE47:
+ 580 018a 80E0      		ldi r24,lo8(__c.6343)
+ 581 018c 90E0      		ldi r25,hi8(__c.6343)
+ 582 018e 00C0      		rjmp .L52
+ 583               	.L3:
+ 211:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_F));
+ 584               		.loc 1 211 4 view .LVU190
+ 211:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_F));
+ 585               		.loc 1 211 7 is_stmt 0 view .LVU191
+ 586 0190 9923      		tst r25
+ 587 0192 01F0      		breq .L51
+ 212:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 588               		.loc 1 212 5 is_stmt 1 view .LVU192
+ 589               	.LBB48:
+ 212:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 590               		.loc 1 212 5 view .LVU193
+ 212:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			} else {
+ 591               		.loc 1 212 5 view .LVU194
+ 592               	.LBE48:
+ 593 0194 80E0      		ldi r24,lo8(__c.6346)
+ 594 0196 90E0      		ldi r25,hi8(__c.6346)
+ 595 0198 00C0      		rjmp .L52
+ 596               	.L51:
+ 214:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 597               		.loc 1 214 5 view .LVU195
+ 598               	.LBB49:
+ 214:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 599               		.loc 1 214 5 view .LVU196
+ 214:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			}
+ 600               		.loc 1 214 5 view .LVU197
+ 601               	.LBE49:
+ 602 019a 80E0      		ldi r24,lo8(__c.6348)
+ 603 019c 90E0      		ldi r25,hi8(__c.6348)
+ 604 019e 00C0      		rjmp .L52
+ 605               		.cfi_endproc
+ 606               	.LFE112:
+ 608               		.section	.text.eeconfig_init_user,"ax",@progbits
+ 609               	.global	eeconfig_init_user
+ 611               	eeconfig_init_user:
+ 612               	.LFB113:
+ 220:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 
+ 221:keyboards/bm16a/keymaps/default_noogs/keymap.c **** const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+ 222:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 
+ 223:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	// Layer 0 - Base Layer with layer switching toggles for 0, 1, 2, 3
+ 224:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	[0] = LAYOUT_ortho_4x4(
+ 225:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		REDO, UNDO, ZOOM_OUT, ZOOM_IN, 
+ 226:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		OPEN, COPY, RESET_ZOOM, KC_SPC, 
+ 227:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		CLOSE, PASTE, KC_LALT, KC_LSFT, 
+ 228:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		TO(3), TO(2), TO(1), TO(0) 		// Toggle Layer
+ 229:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	),
+ 230:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	
+ 231:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	// Layer 1 - Photoshop and Illustrator Tools
+ 232:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	[1] = LAYOUT_ortho_4x4(
+ 233:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		KC_M, KC_V, KC_LBRC, KC_RBRC, 
+ 234:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		KC_W, KC_O, KC_X, KC_B, 
+ 235:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		KC_J, KC_L, KC_E, KC_C, 
+ 236:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		KC_S, KC_F, KC_TRNS, TO(0) 
+ 237:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	),
+ 238:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	
+ 239:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	// Layer 2 - Photoshop Functions and Actions
+ 240:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	[2] = LAYOUT_ortho_4x4(
+ 241:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		KC_ESC, WEB_SAVE, SAVE, LEVELS, 
+ 242:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		KC_TAB, COPY_LAYER, SELECT_ALL, DESELECT, 
+ 243:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		KC_F15, KC_TRNS, FREE_TRANSFORM, FILL, 
+ 244:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		KC_F14, KC_F13, GUIDES, TO(0) 
+ 245:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	),
+ 246:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	
+ 247:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	// Layer 3 - RGB Controls and Browser Functions
+ 248:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	[3] = LAYOUT_ortho_4x4(
+ 249:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		KC_ESC, NEW_WINDOW, RGB_VAI, RGB_TOG, 
+ 250:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		KC_TAB, NEW_TAB, RGB_VAD, RGB_MOD, 
+ 251:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		SAVE_AS, KC_TRNS, QUIT, RESET,   
+ 252:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		PRINT, FIND, KC_TRNS, TO(0)
+ 253:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	),
+ 254:keyboards/bm16a/keymaps/default_noogs/keymap.c **** };
+ 255:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 
+ 256:keyboards/bm16a/keymaps/default_noogs/keymap.c **** void eeconfig_init_user(void)	{
+ 613               		.loc 1 256 31 view -0
+ 614               		.cfi_startproc
+ 615               	/* prologue: function */
+ 616               	/* frame size = 0 */
+ 617               	/* stack size = 0 */
+ 618               	.L__stack_usage = 0
+ 257:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	 
+ 258:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	// EEPROM reset
+ 259:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	// Using deprecated versions to stop overloading EEPROM
+ 260:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 
+ 261:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	rgblight_enable(); // Enable RGB by default
+ 619               		.loc 1 261 2 view .LVU199
+ 620 0000 0E94 0000 		call rgblight_enable
+ 621               	.LVL5:
+ 262:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	rgblight_sethsv_white(); // Set it to white by default
+ 622               		.loc 1 262 2 view .LVU200
+ 623 0004 4FEF      		ldi r20,lo8(-1)
+ 624 0006 60E0      		ldi r22,0
+ 625 0008 80E0      		ldi r24,0
+ 626 000a 0E94 0000 		call rgblight_sethsv
+ 627               	.LVL6:
+ 263:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	rgblight_mode(RGBLIGHT_MODE_BREATHING); // Set to breating by default
+ 628               		.loc 1 263 2 view .LVU201
+ 629 000e 82E0      		ldi r24,lo8(2)
+ 630 0010 0C94 0000 		jmp rgblight_mode
+ 631               	.LVL7:
+ 632               		.cfi_endproc
+ 633               	.LFE113:
+ 635               		.section	.text.layer_state_set_user,"ax",@progbits
+ 636               	.global	layer_state_set_user
+ 638               	layer_state_set_user:
+ 639               	.LVL8:
+ 640               	.LFB114:
+ 264:keyboards/bm16a/keymaps/default_noogs/keymap.c **** }
+ 265:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 
+ 266:keyboards/bm16a/keymaps/default_noogs/keymap.c **** layer_state_t layer_state_set_user(layer_state_t state)	{
+ 641               		.loc 1 266 57 view -0
+ 642               		.cfi_startproc
+ 643               		.loc 1 266 57 is_stmt 0 view .LVU203
+ 644 0000 CF92      		push r12
+ 645               	.LCFI0:
+ 646               		.cfi_def_cfa_offset 3
+ 647               		.cfi_offset 12, -2
+ 648 0002 DF92      		push r13
+ 649               	.LCFI1:
+ 650               		.cfi_def_cfa_offset 4
+ 651               		.cfi_offset 13, -3
+ 652 0004 EF92      		push r14
+ 653               	.LCFI2:
+ 654               		.cfi_def_cfa_offset 5
+ 655               		.cfi_offset 14, -4
+ 656 0006 FF92      		push r15
+ 657               	.LCFI3:
+ 658               		.cfi_def_cfa_offset 6
+ 659               		.cfi_offset 15, -5
+ 660               	/* prologue: function */
+ 661               	/* frame size = 0 */
+ 662               	/* stack size = 4 */
+ 663               	.L__stack_usage = 4
+ 664 0008 6B01      		movw r12,r22
+ 665 000a 7C01      		movw r14,r24
+ 267:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	rgblight_config_t rgblight_config;
+ 666               		.loc 1 267 2 is_stmt 1 view .LVU204
+ 268:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		switch(biton32(state))	{
+ 667               		.loc 1 268 3 view .LVU205
+ 668               		.loc 1 268 10 is_stmt 0 view .LVU206
+ 669 000c 0E94 0000 		call biton32
+ 670               	.LVL9:
+ 671               		.loc 1 268 3 view .LVU207
+ 672 0010 8230      		cpi r24,lo8(2)
+ 673 0012 01F0      		breq .L55
+ 674 0014 8330      		cpi r24,lo8(3)
+ 675 0016 01F0      		breq .L56
+ 676 0018 8130      		cpi r24,lo8(1)
+ 677 001a 01F4      		brne .L57
+ 269:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			case 1:
+ 270:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				// Teal
+ 271:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
+ 678               		.loc 1 271 5 is_stmt 1 view .LVU208
+ 679 001c 0E94 0000 		call rgblight_enable_noeeprom
+ 680               	.LVL10:
+ 272:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_TEAL);
+ 681               		.loc 1 272 5 view .LVU209
+ 682 0020 40E8      		ldi r20,lo8(-128)
+ 683 0022 6FEF      		ldi r22,lo8(-1)
+ 684 0024 80E8      		ldi r24,lo8(-128)
+ 685               	.L60:
+ 273:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				break;
+ 274:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			case 2:
+ 275:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				// Purple
+ 276:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
+ 277:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_PURPLE);
+ 278:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				break;
+ 279:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			case 3: // Chartreuse
+ 280:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
+ 281:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_CHARTREUSE);
+ 282:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				break;
+ 283:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			default: // White
+ 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
+ 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
+ 286:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
+ 686               		.loc 1 286 6 is_stmt 0 view .LVU210
+ 687 0026 0E94 0000 		call rgblight_sethsv_noeeprom
+ 688               	.LVL11:
+ 689               	.L58:
+ 287:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				} else {
+ 288:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_disable_noeeprom(); // Otherwise returns to disabled state
+ 289:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				}
+ 290:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 291:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		}
+ 292:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	return state;
+ 690               		.loc 1 292 2 is_stmt 1 view .LVU211
+ 293:keyboards/bm16a/keymaps/default_noogs/keymap.c **** }...
+ 691               		.loc 1 293 1 is_stmt 0 view .LVU212
+ 692 002a C701      		movw r24,r14
+ 693 002c B601      		movw r22,r12
+ 694               	/* epilogue start */
+ 695 002e FF90      		pop r15
+ 696 0030 EF90      		pop r14
+ 697 0032 DF90      		pop r13
+ 698 0034 CF90      		pop r12
+ 699 0036 0895      		ret
+ 700               	.L55:
+ 276:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
+ 701               		.loc 1 276 5 is_stmt 1 view .LVU213
+ 702 0038 0E94 0000 		call rgblight_enable_noeeprom
+ 703               	.LVL12:
+ 277:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_PURPLE);
+ 704               		.loc 1 277 5 view .LVU214
+ 705 003c 4FEF      		ldi r20,lo8(-1)
+ 706 003e 6FEF      		ldi r22,lo8(-1)
+ 707 0040 8FEB      		ldi r24,lo8(-65)
+ 708 0042 00C0      		rjmp .L60
+ 709               	.L56:
+ 280:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
+ 710               		.loc 1 280 5 view .LVU215
+ 711 0044 0E94 0000 		call rgblight_enable_noeeprom
+ 712               	.LVL13:
+ 281:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_CHARTREUSE);
+ 713               		.loc 1 281 5 view .LVU216
+ 714 0048 4FEF      		ldi r20,lo8(-1)
+ 715 004a 6FEF      		ldi r22,lo8(-1)
+ 716 004c 80E4      		ldi r24,lo8(64)
+ 717 004e 00C0      		rjmp .L60
+ 718               	.L57:
+ 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
+ 719               		.loc 1 284 5 view .LVU217
+ 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
+ 720               		.loc 1 284 27 is_stmt 0 view .LVU218
+ 721 0050 0E94 0000 		call eeconfig_read_rgblight
+ 722               	.LVL14:
+ 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
+ 723               		.loc 1 285 5 is_stmt 1 view .LVU219
+ 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
+ 724               		.loc 1 285 8 is_stmt 0 view .LVU220
+ 725 0054 60FF      		sbrs r22,0
+ 726 0056 00C0      		rjmp .L59
+ 286:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
+ 727               		.loc 1 286 6 is_stmt 1 view .LVU221
+ 728 0058 4FEF      		ldi r20,lo8(-1)
+ 729 005a 60E0      		ldi r22,0
+ 730               	.LVL15:
+ 286:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
+ 731               		.loc 1 286 6 is_stmt 0 view .LVU222
+ 732 005c 80E0      		ldi r24,0
+ 733 005e 00C0      		rjmp .L60
+ 734               	.LVL16:
+ 735               	.L59:
+ 288:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_disable_noeeprom(); // Otherwise returns to disabled state
+ 736               		.loc 1 288 6 is_stmt 1 view .LVU223
+ 737 0060 0E94 0000 		call rgblight_disable_noeeprom
+ 738               	.LVL17:
+ 288:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_disable_noeeprom(); // Otherwise returns to disabled state
+ 739               		.loc 1 288 6 is_stmt 0 view .LVU224
+ 740 0064 00C0      		rjmp .L58
+ 741               		.cfi_endproc
+ 742               	.LFE114:
+ 744               		.section	.progmem.data.__c.6348,"a"
+ 747               	__c.6348:
+ 748 0000 03E3 0309 		.string	"\003\343\003\t"
+ 748      00
+ 749               		.section	.progmem.data.__c.6346,"a"
+ 752               	__c.6346:
+ 753 0000 02E3 0209 		.string	"\002\343\002\t"
+ 753      00
+ 754               		.section	.progmem.data.__c.6343,"a"
+ 757               	__c.6343:
+ 758 0000 03E3 0313 		.string	"\003\343\003\023"
+ 758      00
+ 759               		.section	.progmem.data.__c.6341,"a"
+ 762               	__c.6341:
+ 763 0000 02E3 0213 		.string	"\002\343\002\023"
+ 763      00
+ 764               		.section	.progmem.data.__c.6338,"a"
+ 767               	__c.6338:
+ 768 0000 03E3 0314 		.string	"\003\343\003\024"
+ 768      00
+ 769               		.section	.progmem.data.__c.6336,"a"
+ 772               	__c.6336:
+ 773 0000 02E3 0214 		.string	"\002\343\002\024"
+ 773      00
+ 774               		.section	.progmem.data.__c.6333,"a"
+ 777               	__c.6333:
+ 778 0000 03E3 03E1 		.string	"\003\343\003\341\003\026"
+ 778      0316 00
+ 779               		.section	.progmem.data.__c.6331,"a"
+ 782               	__c.6331:
+ 783 0000 02E3 02E1 		.string	"\002\343\002\341\002\026"
+ 783      0216 00
+ 784               		.section	.progmem.data.__c.6328,"a"
+ 787               	__c.6328:
+ 788 0000 03E3 03E1 		.string	"\003\343\003\341\003\027"
+ 788      0317 00
+ 789               		.section	.progmem.data.__c.6326,"a"
+ 792               	__c.6326:
+ 793 0000 02E3 02E1 		.string	"\002\343\002\341\002\027"
+ 793      0217 00
+ 794               		.section	.progmem.data.__c.6323,"a"
+ 797               	__c.6323:
+ 798 0000 03E3 0311 		.string	"\003\343\003\021"
+ 798      00
+ 799               		.section	.progmem.data.__c.6321,"a"
+ 802               	__c.6321:
+ 803 0000 02E3 0211 		.string	"\002\343\002\021"
+ 803      00
+ 804               		.section	.progmem.data.__c.6318,"a"
+ 807               	__c.6318:
+ 808 0000 03E3 0333 		.string	"\003\343\0033"
+ 808      00
+ 809               		.section	.progmem.data.__c.6316,"a"
+ 812               	__c.6316:
+ 813 0000 02E3 0233 		.string	"\002\343\0023"
+ 813      00
+ 814               		.section	.progmem.data.__c.6313,"a"
+ 817               	__c.6313:
+ 818 0000 03E1 033E 		.string	"\003\341\003>"
+ 818      00
+ 819               		.section	.progmem.data.__c.6311,"a"
+ 822               	__c.6311:
+ 823 0000 02E1 023E 		.string	"\002\341\002>"
+ 823      00
+ 824               		.section	.progmem.data.__c.6308,"a"
+ 827               	__c.6308:
+ 828 0000 03E3 0317 		.string	"\003\343\003\027"
+ 828      00
+ 829               		.section	.progmem.data.__c.6306,"a"
+ 832               	__c.6306:
+ 833 0000 02E3 0217 		.string	"\002\343\002\027"
+ 833      00
+ 834               		.section	.progmem.data.__c.6303,"a"
+ 837               	__c.6303:
+ 838 0000 03E3 0307 		.string	"\003\343\003\007"
+ 838      00
+ 839               		.section	.progmem.data.__c.6301,"a"
+ 842               	__c.6301:
+ 843 0000 02E3 0207 		.string	"\002\343\002\007"
+ 843      00
+ 844               		.section	.progmem.data.__c.6298,"a"
+ 847               	__c.6298:
+ 848 0000 03E3 0304 		.string	"\003\343\003\004"
+ 848      00
+ 849               		.section	.progmem.data.__c.6296,"a"
+ 852               	__c.6296:
+ 853 0000 02E3 0204 		.string	"\002\343\002\004"
+ 853      00
+ 854               		.section	.progmem.data.__c.6293,"a"
+ 857               	__c.6293:
+ 858 0000 03E3 03E2 		.string	"\003\343\003\342\003\341\003\b"
+ 858      03E1 0308 
+ 858      00
+ 859               		.section	.progmem.data.__c.6291,"a"
+ 862               	__c.6291:
+ 863 0000 02E3 02E2 		.string	"\002\343\002\342\002\341\002\b"
+ 863      02E1 0208 
+ 863      00
+ 864               		.section	.progmem.data.__c.6288,"a"
+ 867               	__c.6288:
+ 868 0000 03E3 030F 		.string	"\003\343\003\017"
+ 868      00
+ 869               		.section	.progmem.data.__c.6286,"a"
+ 872               	__c.6286:
+ 873 0000 02E3 020F 		.string	"\002\343\002\017"
+ 873      00
+ 874               		.section	.progmem.data.__c.6283,"a"
+ 877               	__c.6283:
+ 878 0000 03E3 0316 		.string	"\003\343\003\026"
+ 878      00
+ 879               		.section	.progmem.data.__c.6281,"a"
+ 882               	__c.6281:
+ 883 0000 02E3 0216 		.string	"\002\343\002\026"
+ 883      00
+ 884               		.section	.progmem.data.__c.6278,"a"
+ 887               	__c.6278:
+ 888 0000 03E1 03E2 		.string	"\003\341\003\342\003\343\003\026"
+ 888      03E3 0316 
+ 888      00
+ 889               		.section	.progmem.data.__c.6276,"a"
+ 892               	__c.6276:
+ 893 0000 02E1 02E2 		.string	"\002\341\002\342\002\343\002\026"
+ 893      02E3 0216 
+ 893      00
+ 894               		.section	.progmem.data.__c.6273,"a"
+ 897               	__c.6273:
+ 898 0000 03E3 0319 		.string	"\003\343\003\031"
+ 898      00
+ 899               		.section	.progmem.data.__c.6271,"a"
+ 902               	__c.6271:
+ 903 0000 02E3 0219 		.string	"\002\343\002\031"
+ 903      00
+ 904               		.section	.progmem.data.__c.6268,"a"
+ 907               	__c.6268:
+ 908 0000 03E3 031A 		.string	"\003\343\003\032"
+ 908      00
+ 909               		.section	.progmem.data.__c.6266,"a"
+ 912               	__c.6266:
+ 913 0000 02E3 021A 		.string	"\002\343\002\032"
+ 913      00
+ 914               		.section	.progmem.data.__c.6263,"a"
+ 917               	__c.6263:
+ 918 0000 03E3 0327 		.string	"\003\343\003'"
+ 918      00
+ 919               		.section	.progmem.data.__c.6261,"a"
+ 922               	__c.6261:
+ 923 0000 02E3 0227 		.string	"\002\343\002'"
+ 923      00
+ 924               		.section	.progmem.data.__c.6258,"a"
+ 927               	__c.6258:
+ 928 0000 03E3 0306 		.string	"\003\343\003\006"
+ 928      00
+ 929               		.section	.progmem.data.__c.6256,"a"
+ 932               	__c.6256:
+ 933 0000 02E3 0206 		.string	"\002\343\002\006"
+ 933      00
+ 934               		.section	.progmem.data.__c.6253,"a"
+ 937               	__c.6253:
+ 938 0000 03E3 0312 		.string	"\003\343\003\022"
+ 938      00
+ 939               		.section	.progmem.data.__c.6251,"a"
+ 942               	__c.6251:
+ 943 0000 02E3 0212 		.string	"\002\343\002\022"
+ 943      00
+ 944               		.section	.progmem.data.__c.6248,"a"
+ 947               	__c.6248:
+ 948 0000 03E3 0357 		.string	"\003\343\003W"
+ 948      00
+ 949               		.section	.progmem.data.__c.6246,"a"
+ 952               	__c.6246:
+ 953 0000 02E3 0257 		.string	"\002\343\002W"
+ 953      00
+ 954               		.section	.progmem.data.__c.6243,"a"
+ 957               	__c.6243:
+ 958 0000 03E3 0356 		.string	"\003\343\003V"
+ 958      00
+ 959               		.section	.progmem.data.__c.6241,"a"
+ 962               	__c.6241:
+ 963 0000 02E3 0256 		.string	"\002\343\002V"
+ 963      00
+ 964               		.section	.progmem.data.__c.6238,"a"
+ 967               	__c.6238:
+ 968 0000 03E3 031D 		.string	"\003\343\003\035"
+ 968      00
+ 969               		.section	.progmem.data.__c.6236,"a"
+ 972               	__c.6236:
+ 973 0000 02E3 021D 		.string	"\002\343\002\035"
+ 973      00
+ 974               		.section	.progmem.data.__c.6232,"a"
+ 977               	__c.6232:
+ 978 0000 03E1 03E3 		.string	"\003\341\003\343\003\035"
+ 978      031D 00
+ 979               		.section	.progmem.data.__c.6230,"a"
+ 982               	__c.6230:
+ 983 0000 02E1 02E3 		.string	"\002\341\002\343\002\035"
+ 983      021D 00
+ 984               	.global	keymaps
+ 985               		.section	.progmem.data.keymaps,"a"
+ 988               	keymaps:
+ 989 0000 085D      		.word	23816
+ 990 0002 095D      		.word	23817
+ 991 0004 0A5D      		.word	23818
+ 992 0006 0B5D      		.word	23819
+ 993 0008 0C5D      		.word	23820
+ 994 000a 0D5D      		.word	23821
+ 995 000c 0E5D      		.word	23822
+ 996 000e 2C00      		.word	44
+ 997 0010 0F5D      		.word	23823
+ 998 0012 105D      		.word	23824
+ 999 0014 E200      		.word	226
+ 1000 0016 E100      		.word	225
+ 1001 0018 1350      		.word	20499
+ 1002 001a 1250      		.word	20498
+ 1003 001c 1150      		.word	20497
+ 1004 001e 1050      		.word	20496
+ 1005 0020 1000      		.word	16
+ 1006 0022 1900      		.word	25
+ 1007 0024 2F00      		.word	47
+ 1008 0026 3000      		.word	48
+ 1009 0028 1A00      		.word	26
+ 1010 002a 1200      		.word	18
+ 1011 002c 1B00      		.word	27
+ 1012 002e 0500      		.word	5
+ 1013 0030 0D00      		.word	13
+ 1014 0032 0F00      		.word	15
+ 1015 0034 0800      		.word	8
+ 1016 0036 0600      		.word	6
+ 1017 0038 1600      		.word	22
+ 1018 003a 0900      		.word	9
+ 1019 003c 0100      		.word	1
+ 1020 003e 1050      		.word	20496
+ 1021 0040 2900      		.word	41
+ 1022 0042 115D      		.word	23825
+ 1023 0044 125D      		.word	23826
+ 1024 0046 135D      		.word	23827
+ 1025 0048 2B00      		.word	43
+ 1026 004a 145D      		.word	23828
+ 1027 004c 155D      		.word	23829
+ 1028 004e 165D      		.word	23830
+ 1029 0050 6A00      		.word	106
+ 1030 0052 0100      		.word	1
+ 1031 0054 175D      		.word	23831
+ 1032 0056 185D      		.word	23832
+ 1033 0058 6900      		.word	105
+ 1034 005a 6800      		.word	104
+ 1035 005c 195D      		.word	23833
+ 1036 005e 1050      		.word	20496
+ 1037 0060 2900      		.word	41
+ 1038 0062 1A5D      		.word	23834
+ 1039 0064 C95C      		.word	23753
+ 1040 0066 C25C      		.word	23746
+ 1041 0068 2B00      		.word	43
+ 1042 006a 1B5D      		.word	23835
+ 1043 006c CA5C      		.word	23754
+ 1044 006e C35C      		.word	23747
+ 1045 0070 1C5D      		.word	23836
+ 1046 0072 0100      		.word	1
+ 1047 0074 1D5D      		.word	23837
+ 1048 0076 005C      		.word	23552
+ 1049 0078 1E5D      		.word	23838
+ 1050 007a 1F5D      		.word	23839
+ 1051 007c 0100      		.word	1
+ 1052 007e 1050      		.word	20496
+ 1053               		.text
+ 1054               	.Letext0:
+ 1055               		.file 2 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/avr/include/stdint.h"
+ 1056               		.file 3 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/lib/avr-gcc/8/gcc/avr/8.3.0/include/stddef.h"
+ 1057               		.file 4 "tmk_core/common/keyboard.h"
+ 1058               		.file 5 "tmk_core/common/keycode.h"
+ 1059               		.file 6 "tmk_core/common/action_code.h"
+ 1060               		.file 7 "tmk_core/common/action.h"
+ 1061               		.file 8 "lib/lufa/LUFA/Drivers/USB/Core/AVR8/../StdRequestType.h"
+ 1062               		.file 9 "lib/lufa/LUFA/Drivers/USB/Core/AVR8/../DeviceStandardReq.h"
+ 1063               		.file 10 "lib/lufa/LUFA/Drivers/USB/Core/USBTask.h"
+ 1064               		.file 11 "lib/lufa/LUFA/Drivers/USB/Core/HostStandardReq.h"
+ 1065               		.file 12 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/avr/include/stdio.h"
+ 1066               		.file 13 "tmk_core/common/report.h"
+ 1067               		.file 14 "tmk_core/common/host.h"
+ 1068               		.file 15 "tmk_core/common/debug.h"
+ 1069               		.file 16 "quantum/keycode_config.h"
+ 1070               		.file 17 "quantum/quantum_keycodes.h"
+ 1071               		.file 18 "quantum/keymap.h"
+ 1072               		.file 19 "quantum/rgblight.h"
+ 1073               		.file 20 "./quantum/color.h"
+ 1074               		.file 21 "tmk_core/common/action_layer.h"
+ 1075               		.file 22 "tmk_core/common/timer.h"
+ 1076               		.file 23 "tmk_core/common/action_util.h"
+ 1077               		.file 24 "/usr/local/Cellar/avr-gcc@8/8.3.0_1/avr/include/stdlib.h"
+ 1078               		.file 25 "quantum/quantum.h"
+ 1079               		.file 26 "tmk_core/common/util.h"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 keymap.c
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:13     .text.process_record_user:0000000000000000 process_record_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:982    .progmem.data.__c.6230:0000000000000000 __c.6230
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:977    .progmem.data.__c.6232:0000000000000000 __c.6232
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:972    .progmem.data.__c.6236:0000000000000000 __c.6236
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:967    .progmem.data.__c.6238:0000000000000000 __c.6238
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:962    .progmem.data.__c.6241:0000000000000000 __c.6241
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:957    .progmem.data.__c.6243:0000000000000000 __c.6243
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:952    .progmem.data.__c.6246:0000000000000000 __c.6246
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:947    .progmem.data.__c.6248:0000000000000000 __c.6248
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:942    .progmem.data.__c.6251:0000000000000000 __c.6251
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:937    .progmem.data.__c.6253:0000000000000000 __c.6253
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:932    .progmem.data.__c.6256:0000000000000000 __c.6256
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:927    .progmem.data.__c.6258:0000000000000000 __c.6258
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:922    .progmem.data.__c.6261:0000000000000000 __c.6261
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:917    .progmem.data.__c.6263:0000000000000000 __c.6263
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:912    .progmem.data.__c.6266:0000000000000000 __c.6266
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:907    .progmem.data.__c.6268:0000000000000000 __c.6268
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:902    .progmem.data.__c.6271:0000000000000000 __c.6271
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:897    .progmem.data.__c.6273:0000000000000000 __c.6273
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:892    .progmem.data.__c.6276:0000000000000000 __c.6276
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:887    .progmem.data.__c.6278:0000000000000000 __c.6278
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:882    .progmem.data.__c.6281:0000000000000000 __c.6281
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:877    .progmem.data.__c.6283:0000000000000000 __c.6283
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:872    .progmem.data.__c.6286:0000000000000000 __c.6286
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:867    .progmem.data.__c.6288:0000000000000000 __c.6288
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:862    .progmem.data.__c.6291:0000000000000000 __c.6291
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:857    .progmem.data.__c.6293:0000000000000000 __c.6293
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:852    .progmem.data.__c.6296:0000000000000000 __c.6296
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:847    .progmem.data.__c.6298:0000000000000000 __c.6298
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:842    .progmem.data.__c.6301:0000000000000000 __c.6301
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:837    .progmem.data.__c.6303:0000000000000000 __c.6303
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:832    .progmem.data.__c.6306:0000000000000000 __c.6306
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:827    .progmem.data.__c.6308:0000000000000000 __c.6308
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:822    .progmem.data.__c.6311:0000000000000000 __c.6311
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:817    .progmem.data.__c.6313:0000000000000000 __c.6313
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:812    .progmem.data.__c.6316:0000000000000000 __c.6316
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:807    .progmem.data.__c.6318:0000000000000000 __c.6318
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:802    .progmem.data.__c.6321:0000000000000000 __c.6321
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:797    .progmem.data.__c.6323:0000000000000000 __c.6323
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:792    .progmem.data.__c.6326:0000000000000000 __c.6326
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:787    .progmem.data.__c.6328:0000000000000000 __c.6328
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:782    .progmem.data.__c.6331:0000000000000000 __c.6331
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:777    .progmem.data.__c.6333:0000000000000000 __c.6333
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:772    .progmem.data.__c.6336:0000000000000000 __c.6336
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:767    .progmem.data.__c.6338:0000000000000000 __c.6338
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:762    .progmem.data.__c.6341:0000000000000000 __c.6341
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:757    .progmem.data.__c.6343:0000000000000000 __c.6343
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:752    .progmem.data.__c.6346:0000000000000000 __c.6346
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:747    .progmem.data.__c.6348:0000000000000000 __c.6348
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:611    .text.eeconfig_init_user:0000000000000000 eeconfig_init_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:638    .text.layer_state_set_user:0000000000000000 layer_state_set_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:988    .progmem.data.keymaps:0000000000000000 keymaps
+
+UNDEFINED SYMBOLS
+__tablejump2__
+send_string_P
+rgblight_enable
+rgblight_sethsv
+rgblight_mode
+biton32
+rgblight_enable_noeeprom
+rgblight_sethsv_noeeprom
+eeconfig_read_rgblight
+rgblight_disable_noeeprom
