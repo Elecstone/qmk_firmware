@@ -248,19 +248,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[3] = LAYOUT_ortho_4x4(
 		KC_ESC, NEW_WINDOW, RGB_VAI, RGB_TOG, 
 		KC_TAB, NEW_TAB, RGB_VAD, RGB_MOD, 
-		SAVE_AS, KC_TRNS, QUIT, RESET,   
+		SAVE_AS, KC_TRNS, KC_TRNS, QUIT,   
 		PRINT, FIND, KC_TRNS, TO(0)
 	),
 };
 
-void eeconfig_init_user(void)	{
-	 
-	// EEPROM reset
-	// Using deprecated versions to stop overloading EEPROM
+void eeconfig_init_user(void)	{ // EEPROM reset
+	
+	// Use the non noeeprom versions, to write these values to EEPROM too
 
 	rgblight_enable(); // Enable RGB by default
-	rgblight_sethsv_white(); // Set it to white by default
-	rgblight_mode(RGBLIGHT_MODE_BREATHING); // Set to breating by default
+	rgblight_sethsv_white(); // Set it to WHITE by default
+	rgblight_mode(RGBLIGHT_MODE_BREATHING); // Set to breathing by default
 }
 
 layer_state_t layer_state_set_user(layer_state_t state)	{
