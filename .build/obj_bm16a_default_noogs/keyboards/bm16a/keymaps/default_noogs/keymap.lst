@@ -1044,35 +1044,34 @@
  248:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	[3] = LAYOUT_ortho_4x4(
  249:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		KC_ESC, NEW_WINDOW, RGB_VAI, RGB_TOG, 
  250:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		KC_TAB, NEW_TAB, RGB_VAD, RGB_MOD, 
- 251:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		SAVE_AS, KC_TRNS, QUIT, RESET,   
+ 251:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		SAVE_AS, KC_TRNS, KC_TRNS, QUIT,   
  252:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		PRINT, FIND, KC_TRNS, TO(0)
  253:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	),
  254:keyboards/bm16a/keymaps/default_noogs/keymap.c **** };
  255:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 
- 256:keyboards/bm16a/keymaps/default_noogs/keymap.c **** void eeconfig_init_user(void)	{
+ 256:keyboards/bm16a/keymaps/default_noogs/keymap.c **** void eeconfig_init_user(void)	{ // EEPROM reset
  613               		.loc 1 256 31 view -0
  614               		.cfi_startproc
  615               	/* prologue: function */
  616               	/* frame size = 0 */
  617               	/* stack size = 0 */
  618               	.L__stack_usage = 0
- 257:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	 
- 258:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	// EEPROM reset
- 259:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	// Using deprecated versions to stop overloading EEPROM
- 260:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 
- 261:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	rgblight_enable(); // Enable RGB by default
- 619               		.loc 1 261 2 view .LVU199
+ 257:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	
+ 258:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	// Use the non noeeprom versions, to write these values to EEPROM too
+ 259:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 
+ 260:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	rgblight_enable(); // Enable RGB by default
+ 619               		.loc 1 260 2 view .LVU199
  620 0000 0E94 0000 		call rgblight_enable
  621               	.LVL5:
- 262:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	rgblight_sethsv_white(); // Set it to white by default
- 622               		.loc 1 262 2 view .LVU200
+ 261:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	rgblight_sethsv_white(); // Set it to WHITE by default
+ 622               		.loc 1 261 2 view .LVU200
  623 0004 4FEF      		ldi r20,lo8(-1)
  624 0006 60E0      		ldi r22,0
  625 0008 80E0      		ldi r24,0
  626 000a 0E94 0000 		call rgblight_sethsv
  627               	.LVL6:
- 263:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	rgblight_mode(RGBLIGHT_MODE_BREATHING); // Set to breating by default
- 628               		.loc 1 263 2 view .LVU201
+ 262:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	rgblight_mode(RGBLIGHT_MODE_BREATHING); // Set to breathing by default
+ 628               		.loc 1 262 2 view .LVU201
  629 000e 82E0      		ldi r24,lo8(2)
  630 0010 0C94 0000 		jmp rgblight_mode
  631               	.LVL7:
@@ -1083,12 +1082,12 @@
  638               	layer_state_set_user:
  639               	.LVL8:
  640               	.LFB114:
- 264:keyboards/bm16a/keymaps/default_noogs/keymap.c **** }
- 265:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 
- 266:keyboards/bm16a/keymaps/default_noogs/keymap.c **** layer_state_t layer_state_set_user(layer_state_t state)	{
- 641               		.loc 1 266 57 view -0
+ 263:keyboards/bm16a/keymaps/default_noogs/keymap.c **** }
+ 264:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 
+ 265:keyboards/bm16a/keymaps/default_noogs/keymap.c **** layer_state_t layer_state_set_user(layer_state_t state)	{
+ 641               		.loc 1 265 57 view -0
  642               		.cfi_startproc
- 643               		.loc 1 266 57 is_stmt 0 view .LVU203
+ 643               		.loc 1 265 57 is_stmt 0 view .LVU203
  644 0000 CF92      		push r12
  645               	.LCFI0:
  646               		.cfi_def_cfa_offset 3
@@ -1111,59 +1110,59 @@
  663               	.L__stack_usage = 4
  664 0008 6B01      		movw r12,r22
  665 000a 7C01      		movw r14,r24
- 267:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	rgblight_config_t rgblight_config;
- 666               		.loc 1 267 2 is_stmt 1 view .LVU204
- 268:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		switch(biton32(state))	{
- 667               		.loc 1 268 3 view .LVU205
- 668               		.loc 1 268 10 is_stmt 0 view .LVU206
+ 266:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	rgblight_config_t rgblight_config;
+ 666               		.loc 1 266 2 is_stmt 1 view .LVU204
+ 267:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		switch(biton32(state))	{
+ 667               		.loc 1 267 3 view .LVU205
+ 668               		.loc 1 267 10 is_stmt 0 view .LVU206
  669 000c 0E94 0000 		call biton32
  670               	.LVL9:
- 671               		.loc 1 268 3 view .LVU207
+ 671               		.loc 1 267 3 view .LVU207
  672 0010 8230      		cpi r24,lo8(2)
  673 0012 01F0      		breq .L55
  674 0014 8330      		cpi r24,lo8(3)
  675 0016 01F0      		breq .L56
  676 0018 8130      		cpi r24,lo8(1)
  677 001a 01F4      		brne .L57
- 269:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			case 1:
- 270:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				// Teal
- 271:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
- 678               		.loc 1 271 5 is_stmt 1 view .LVU208
+ 268:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			case 1:
+ 269:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				// Teal
+ 270:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
+ 678               		.loc 1 270 5 is_stmt 1 view .LVU208
  679 001c 0E94 0000 		call rgblight_enable_noeeprom
  680               	.LVL10:
- 272:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_TEAL);
- 681               		.loc 1 272 5 view .LVU209
+ 271:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_TEAL);
+ 681               		.loc 1 271 5 view .LVU209
  682 0020 40E8      		ldi r20,lo8(-128)
  683 0022 6FEF      		ldi r22,lo8(-1)
  684 0024 80E8      		ldi r24,lo8(-128)
  685               	.L60:
- 273:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				break;
- 274:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			case 2:
- 275:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				// Purple
- 276:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
- 277:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_PURPLE);
- 278:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				break;
- 279:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			case 3: // Chartreuse
- 280:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
- 281:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_CHARTREUSE);
- 282:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				break;
- 283:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			default: // White
- 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
- 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
- 286:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
- 686               		.loc 1 286 6 is_stmt 0 view .LVU210
+ 272:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				break;
+ 273:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			case 2:
+ 274:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				// Purple
+ 275:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
+ 276:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_PURPLE);
+ 277:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				break;
+ 278:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			case 3: // Chartreuse
+ 279:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
+ 280:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_CHARTREUSE);
+ 281:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				break;
+ 282:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			default: // White
+ 283:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
+ 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
+ 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
+ 686               		.loc 1 285 6 is_stmt 0 view .LVU210
  687 0026 0E94 0000 		call rgblight_sethsv_noeeprom
  688               	.LVL11:
  689               	.L58:
- 287:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				} else {
- 288:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_disable_noeeprom(); // Otherwise returns to disabled state
- 289:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				}
- 290:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
- 291:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		}
- 292:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	return state;
- 690               		.loc 1 292 2 is_stmt 1 view .LVU211
- 293:keyboards/bm16a/keymaps/default_noogs/keymap.c **** }...
- 691               		.loc 1 293 1 is_stmt 0 view .LVU212
+ 286:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				} else {
+ 287:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_disable_noeeprom(); // Otherwise returns to disabled state
+ 288:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				}
+ 289:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 			break;
+ 290:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 		}
+ 291:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 	return state;
+ 690               		.loc 1 291 2 is_stmt 1 view .LVU211
+ 292:keyboards/bm16a/keymaps/default_noogs/keymap.c **** }...
+ 691               		.loc 1 292 1 is_stmt 0 view .LVU212
  692 002a C701      		movw r24,r14
  693 002c B601      		movw r22,r12
  694               	/* epilogue start */
@@ -1173,57 +1172,57 @@
  698 0034 CF90      		pop r12
  699 0036 0895      		ret
  700               	.L55:
- 276:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
- 701               		.loc 1 276 5 is_stmt 1 view .LVU213
+ 275:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
+ 701               		.loc 1 275 5 is_stmt 1 view .LVU213
  702 0038 0E94 0000 		call rgblight_enable_noeeprom
  703               	.LVL12:
- 277:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_PURPLE);
- 704               		.loc 1 277 5 view .LVU214
+ 276:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_PURPLE);
+ 704               		.loc 1 276 5 view .LVU214
  705 003c 4FEF      		ldi r20,lo8(-1)
  706 003e 6FEF      		ldi r22,lo8(-1)
  707 0040 8FEB      		ldi r24,lo8(-65)
  708 0042 00C0      		rjmp .L60
  709               	.L56:
- 280:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
- 710               		.loc 1 280 5 view .LVU215
+ 279:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_enable_noeeprom();
+ 710               		.loc 1 279 5 view .LVU215
  711 0044 0E94 0000 		call rgblight_enable_noeeprom
  712               	.LVL13:
- 281:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_CHARTREUSE);
- 713               		.loc 1 281 5 view .LVU216
+ 280:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_sethsv_noeeprom(HSV_CHARTREUSE);
+ 713               		.loc 1 280 5 view .LVU216
  714 0048 4FEF      		ldi r20,lo8(-1)
  715 004a 6FEF      		ldi r22,lo8(-1)
  716 004c 80E4      		ldi r24,lo8(64)
  717 004e 00C0      		rjmp .L60
  718               	.L57:
- 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
- 719               		.loc 1 284 5 view .LVU217
- 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
- 720               		.loc 1 284 27 is_stmt 0 view .LVU218
+ 283:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
+ 719               		.loc 1 283 5 view .LVU217
+ 283:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				rgblight_config.raw = eeconfig_read_rgblight(); // Read RGB light state
+ 720               		.loc 1 283 27 is_stmt 0 view .LVU218
  721 0050 0E94 0000 		call eeconfig_read_rgblight
  722               	.LVL14:
- 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
- 723               		.loc 1 285 5 is_stmt 1 view .LVU219
- 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
- 724               		.loc 1 285 8 is_stmt 0 view .LVU220
+ 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
+ 723               		.loc 1 284 5 is_stmt 1 view .LVU219
+ 284:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 				if (rgblight_config.enable) {
+ 724               		.loc 1 284 8 is_stmt 0 view .LVU220
  725 0054 60FF      		sbrs r22,0
  726 0056 00C0      		rjmp .L59
- 286:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
- 727               		.loc 1 286 6 is_stmt 1 view .LVU221
+ 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
+ 727               		.loc 1 285 6 is_stmt 1 view .LVU221
  728 0058 4FEF      		ldi r20,lo8(-1)
  729 005a 60E0      		ldi r22,0
  730               	.LVL15:
- 286:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
- 731               		.loc 1 286 6 is_stmt 0 view .LVU222
+ 285:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_sethsv_noeeprom(HSV_WHITE);
+ 731               		.loc 1 285 6 is_stmt 0 view .LVU222
  732 005c 80E0      		ldi r24,0
  733 005e 00C0      		rjmp .L60
  734               	.LVL16:
  735               	.L59:
- 288:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_disable_noeeprom(); // Otherwise returns to disabled state
- 736               		.loc 1 288 6 is_stmt 1 view .LVU223
+ 287:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_disable_noeeprom(); // Otherwise returns to disabled state
+ 736               		.loc 1 287 6 is_stmt 1 view .LVU223
  737 0060 0E94 0000 		call rgblight_disable_noeeprom
  738               	.LVL17:
- 288:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_disable_noeeprom(); // Otherwise returns to disabled state
- 739               		.loc 1 288 6 is_stmt 0 view .LVU224
+ 287:keyboards/bm16a/keymaps/default_noogs/keymap.c **** 					rgblight_disable_noeeprom(); // Otherwise returns to disabled state
+ 739               		.loc 1 287 6 is_stmt 0 view .LVU224
  740 0064 00C0      		rjmp .L58
  741               		.cfi_endproc
  742               	.LFE114:
@@ -1484,8 +1483,8 @@
  1044 006e C35C      		.word	23747
  1045 0070 1C5D      		.word	23836
  1046 0072 0100      		.word	1
- 1047 0074 1D5D      		.word	23837
- 1048 0076 005C      		.word	23552
+ 1047 0074 0100      		.word	1
+ 1048 0076 1D5D      		.word	23837
  1049 0078 1E5D      		.word	23838
  1050 007a 1F5D      		.word	23839
  1051 007c 0100      		.word	1
@@ -1519,63 +1518,63 @@
  1079               		.file 26 "tmk_core/common/util.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 keymap.c
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:2      *ABS*:000000000000003e __SP_H__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:3      *ABS*:000000000000003d __SP_L__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:4      *ABS*:000000000000003f __SREG__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:5      *ABS*:0000000000000000 __tmp_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:6      *ABS*:0000000000000001 __zero_reg__
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:13     .text.process_record_user:0000000000000000 process_record_user
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:982    .progmem.data.__c.6230:0000000000000000 __c.6230
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:977    .progmem.data.__c.6232:0000000000000000 __c.6232
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:972    .progmem.data.__c.6236:0000000000000000 __c.6236
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:967    .progmem.data.__c.6238:0000000000000000 __c.6238
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:962    .progmem.data.__c.6241:0000000000000000 __c.6241
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:957    .progmem.data.__c.6243:0000000000000000 __c.6243
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:952    .progmem.data.__c.6246:0000000000000000 __c.6246
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:947    .progmem.data.__c.6248:0000000000000000 __c.6248
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:942    .progmem.data.__c.6251:0000000000000000 __c.6251
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:937    .progmem.data.__c.6253:0000000000000000 __c.6253
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:932    .progmem.data.__c.6256:0000000000000000 __c.6256
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:927    .progmem.data.__c.6258:0000000000000000 __c.6258
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:922    .progmem.data.__c.6261:0000000000000000 __c.6261
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:917    .progmem.data.__c.6263:0000000000000000 __c.6263
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:912    .progmem.data.__c.6266:0000000000000000 __c.6266
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:907    .progmem.data.__c.6268:0000000000000000 __c.6268
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:902    .progmem.data.__c.6271:0000000000000000 __c.6271
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:897    .progmem.data.__c.6273:0000000000000000 __c.6273
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:892    .progmem.data.__c.6276:0000000000000000 __c.6276
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:887    .progmem.data.__c.6278:0000000000000000 __c.6278
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:882    .progmem.data.__c.6281:0000000000000000 __c.6281
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:877    .progmem.data.__c.6283:0000000000000000 __c.6283
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:872    .progmem.data.__c.6286:0000000000000000 __c.6286
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:867    .progmem.data.__c.6288:0000000000000000 __c.6288
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:862    .progmem.data.__c.6291:0000000000000000 __c.6291
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:857    .progmem.data.__c.6293:0000000000000000 __c.6293
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:852    .progmem.data.__c.6296:0000000000000000 __c.6296
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:847    .progmem.data.__c.6298:0000000000000000 __c.6298
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:842    .progmem.data.__c.6301:0000000000000000 __c.6301
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:837    .progmem.data.__c.6303:0000000000000000 __c.6303
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:832    .progmem.data.__c.6306:0000000000000000 __c.6306
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:827    .progmem.data.__c.6308:0000000000000000 __c.6308
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:822    .progmem.data.__c.6311:0000000000000000 __c.6311
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:817    .progmem.data.__c.6313:0000000000000000 __c.6313
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:812    .progmem.data.__c.6316:0000000000000000 __c.6316
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:807    .progmem.data.__c.6318:0000000000000000 __c.6318
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:802    .progmem.data.__c.6321:0000000000000000 __c.6321
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:797    .progmem.data.__c.6323:0000000000000000 __c.6323
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:792    .progmem.data.__c.6326:0000000000000000 __c.6326
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:787    .progmem.data.__c.6328:0000000000000000 __c.6328
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:782    .progmem.data.__c.6331:0000000000000000 __c.6331
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:777    .progmem.data.__c.6333:0000000000000000 __c.6333
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:772    .progmem.data.__c.6336:0000000000000000 __c.6336
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:767    .progmem.data.__c.6338:0000000000000000 __c.6338
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:762    .progmem.data.__c.6341:0000000000000000 __c.6341
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:757    .progmem.data.__c.6343:0000000000000000 __c.6343
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:752    .progmem.data.__c.6346:0000000000000000 __c.6346
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:747    .progmem.data.__c.6348:0000000000000000 __c.6348
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:611    .text.eeconfig_init_user:0000000000000000 eeconfig_init_user
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:638    .text.layer_state_set_user:0000000000000000 layer_state_set_user
-/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//ccPo7lou.s:988    .progmem.data.keymaps:0000000000000000 keymaps
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:2      *ABS*:000000000000003e __SP_H__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:3      *ABS*:000000000000003d __SP_L__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:4      *ABS*:000000000000003f __SREG__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:5      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:6      *ABS*:0000000000000001 __zero_reg__
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:13     .text.process_record_user:0000000000000000 process_record_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:982    .progmem.data.__c.6230:0000000000000000 __c.6230
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:977    .progmem.data.__c.6232:0000000000000000 __c.6232
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:972    .progmem.data.__c.6236:0000000000000000 __c.6236
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:967    .progmem.data.__c.6238:0000000000000000 __c.6238
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:962    .progmem.data.__c.6241:0000000000000000 __c.6241
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:957    .progmem.data.__c.6243:0000000000000000 __c.6243
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:952    .progmem.data.__c.6246:0000000000000000 __c.6246
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:947    .progmem.data.__c.6248:0000000000000000 __c.6248
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:942    .progmem.data.__c.6251:0000000000000000 __c.6251
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:937    .progmem.data.__c.6253:0000000000000000 __c.6253
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:932    .progmem.data.__c.6256:0000000000000000 __c.6256
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:927    .progmem.data.__c.6258:0000000000000000 __c.6258
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:922    .progmem.data.__c.6261:0000000000000000 __c.6261
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:917    .progmem.data.__c.6263:0000000000000000 __c.6263
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:912    .progmem.data.__c.6266:0000000000000000 __c.6266
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:907    .progmem.data.__c.6268:0000000000000000 __c.6268
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:902    .progmem.data.__c.6271:0000000000000000 __c.6271
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:897    .progmem.data.__c.6273:0000000000000000 __c.6273
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:892    .progmem.data.__c.6276:0000000000000000 __c.6276
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:887    .progmem.data.__c.6278:0000000000000000 __c.6278
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:882    .progmem.data.__c.6281:0000000000000000 __c.6281
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:877    .progmem.data.__c.6283:0000000000000000 __c.6283
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:872    .progmem.data.__c.6286:0000000000000000 __c.6286
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:867    .progmem.data.__c.6288:0000000000000000 __c.6288
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:862    .progmem.data.__c.6291:0000000000000000 __c.6291
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:857    .progmem.data.__c.6293:0000000000000000 __c.6293
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:852    .progmem.data.__c.6296:0000000000000000 __c.6296
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:847    .progmem.data.__c.6298:0000000000000000 __c.6298
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:842    .progmem.data.__c.6301:0000000000000000 __c.6301
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:837    .progmem.data.__c.6303:0000000000000000 __c.6303
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:832    .progmem.data.__c.6306:0000000000000000 __c.6306
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:827    .progmem.data.__c.6308:0000000000000000 __c.6308
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:822    .progmem.data.__c.6311:0000000000000000 __c.6311
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:817    .progmem.data.__c.6313:0000000000000000 __c.6313
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:812    .progmem.data.__c.6316:0000000000000000 __c.6316
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:807    .progmem.data.__c.6318:0000000000000000 __c.6318
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:802    .progmem.data.__c.6321:0000000000000000 __c.6321
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:797    .progmem.data.__c.6323:0000000000000000 __c.6323
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:792    .progmem.data.__c.6326:0000000000000000 __c.6326
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:787    .progmem.data.__c.6328:0000000000000000 __c.6328
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:782    .progmem.data.__c.6331:0000000000000000 __c.6331
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:777    .progmem.data.__c.6333:0000000000000000 __c.6333
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:772    .progmem.data.__c.6336:0000000000000000 __c.6336
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:767    .progmem.data.__c.6338:0000000000000000 __c.6338
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:762    .progmem.data.__c.6341:0000000000000000 __c.6341
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:757    .progmem.data.__c.6343:0000000000000000 __c.6343
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:752    .progmem.data.__c.6346:0000000000000000 __c.6346
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:747    .progmem.data.__c.6348:0000000000000000 __c.6348
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:611    .text.eeconfig_init_user:0000000000000000 eeconfig_init_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:638    .text.layer_state_set_user:0000000000000000 layer_state_set_user
+/var/folders/q5/h5z_knjn13j9zmrblvrgn32h0000gp/T//cc7jRIxS.s:988    .progmem.data.keymaps:0000000000000000 keymaps
 
 UNDEFINED SYMBOLS
 __tablejump2__
