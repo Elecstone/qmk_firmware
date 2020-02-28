@@ -255,8 +255,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 void eeconfig_init_user(void)	{ // EEPROM reset
 	
-	// Use the non noeeprom versions, to write these values to EEPROM too
-
 	rgblight_enable(); // Enable RGB by default
 	rgblight_sethsv_white(); // Set it to WHITE by default
 	rgblight_mode(RGBLIGHT_MODE_BREATHING); // Set to breathing by default
